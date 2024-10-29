@@ -1,4 +1,4 @@
 class Activity < ApplicationRecord
-    enum :day, %i[monday tuesday wednesday thursday friday]
+    enum :day, %i[Monday Tuesday Wednesday Thursday Friday]
 
 end
