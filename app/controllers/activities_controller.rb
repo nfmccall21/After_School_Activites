@@ -8,6 +8,7 @@ class ActivitiesController < ApplicationController
       @activity = Activity.find(params[:id])
     end
 
+
     def new
       @activity = Activity.new()
     end
@@ -27,5 +28,12 @@ class ActivitiesController < ApplicationController
     private
     def create_params
       params.require(:activity).permit(:title, :description, :spots, :chaperone, :approval_status, :day, :time_start, :time_end)
+
+    def destroy #this should probably have permissions attached to it in some way eventually
+      @activity = Activity.find(params[:id])
+      @activity.destroy
+      flash[:notice] = "activity removed"
+      redirect_to activities_path
+
     end
 end

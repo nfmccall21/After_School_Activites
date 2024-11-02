@@ -13,3 +13,66 @@
  *= require_tree .
  *= require_self
  */
+
+ body{
+    font-family: 'Palatino','Gill Sans', helvetica, arial, sans-serif;
+    line-height: 1.3em;
+    
+}
+
+.activitiesview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20%, 1fr)); /* Show 4 attractions per row */
+    gap: 1px; 
+    margin: 10px;
+}
+
+.activity {
+    text-align: center;
+    border: 1px solid rgb(108, 42, 183);
+    border-radius: 20px;
+    padding: 20px 10px;
+    margin: 5px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    width: 96%;
+    display: flex; 
+    flex-direction: column;
+    justify-content: space-between; 
+    height: 95%;   
+}
+
+.description {
+    align-self: flex-end; /* Anchor button to the bottom */
+    padding: 8px;
+    position: relative;
+    z-index: 3;
+}
+
+
+.weekday {
+    font-style: italic;
+    font-weight: bold;
+}
+
+.activity .btn {
+    align-self: flex-end;
+    width: 95%
+}
+
+
+
+
+
+@media only screen and (max-width: 768px) {
+    body, .card_title{
+        font-size: 70%;
+
+    }
+    
+    @media only screen and (max-width: 865px) {
+        .activitiesview {
+          grid-template-columns: repeat(auto-fit, minmax(30%, 1fr)); /* Show 3 attractions per row on smaller screens */
+        }
+    }
+   
+}

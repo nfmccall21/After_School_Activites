@@ -3,5 +3,7 @@
 <h3 class="hero"><%= @activity.title %></h3>
 
 <%= link_to "Back to index", activities_path, class: "btn btn-secondary" %>
+<%= button_to "Delete", @activity, method: :delete, class: "btn btn-danger", form: { data: { turbo_confirm: "Are you sure?" } } %>
+
 
 </div>
