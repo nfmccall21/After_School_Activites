@@ -3,6 +3,16 @@
         <h1>Activities</h1>
     </div>
 
+    <div class="row">
+    <%= form_with url: activities_path, method: :get do |form| %>
+      <%= form.label :query, "Search for: " %>
+      <%= form.text_field :query %>
+      <%= form.check_box :opennow %>
+      <%= form.label :opennow, "Open now" %>
+      <%= form.submit "Filter Sights" %>
+    <% end %>
+    </div>
+
     <%# FROM index.html.erb FROM LAB 6 %>
     <div class="row row-cols-4 activitiesview">
       <% @activities.each_with_index do |activity| %>
