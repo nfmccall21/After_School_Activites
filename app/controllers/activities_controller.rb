@@ -1,9 +1,31 @@
 class ActivitiesController < ApplicationController
     def index
       @activities = Activity.all.order(:title)
+      #@activities = @activities.where(:approval_status = "Approved") this syntax very likely wrong
     end
 
     def show
       @activity = Activity.find(params[:id])
+    end
+
+    def new
+      @activity = Activity.new()
+    end
+
+    def create
+      @activity = Activity.new(create_params)
+      @activity.approval_status = 1
+      if @activity.save
+        flash[:notice] = "Activity #{@activity.title} proposed!"
+        redirect_to activities_path
+      else
+        flash[:alert] = "Cannot propose activity :("
+        render :new, status: :unprocessable_content
+      end
+    end
+
+    private
+    def create_params
+      params.require(:activity).permit(:title, :description, :spots, :chaperone, :approval_status, :day, :time_start, :time_end)
     end
 end
