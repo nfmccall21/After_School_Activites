@@ -31,7 +31,7 @@
 
     <div class="form-group">
       <%= f.label :time_start %>
-      <%= f.time_select :time_Start, include_seconds: false %>
+      <%= f.time_select :time_start, include_seconds: false %>
     </div>
 
     <div class="form-group">
@@ -39,6 +39,6 @@
       <%= f.time_select :time_end, include_seconds: false %>
     </div>
 
-    <%= f.submit class: 'btn btn-primary' %>
+    <%= f.submit "Propose Activity", class: 'btn btn-primary' %>
   <% end %>
 </div>
