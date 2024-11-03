@@ -36,4 +36,27 @@ RSpec.describe "new", type: :system do
             expect(page).to have_content('test act') # will need to change this since it won't be visible due to status
         end
     end
+
+
+    describe 'delete an activity' do
+        before (:each) do
+            Activity.create!(title: 'test',
+                          description: 'test description',
+                          spots: 10,
+                          chaperone: 'm',
+                          day: 'monday',
+                          time_start: DateTime.parse('3 pm').to_time,
+                          time_end: DateTime.parse('4 pm').to_time)
+        end
+
+        it 'should delete an activity' do
+            visit activities_path
+            click_on 'test'
+            expect(page).to have_content('Back to index')
+            click_on 'Delete'
+            click_on 'Delete'
+            expect(page).to have_content('Sight deleted successfully')
+            expect(page).not_to have_content('Test Sight')
+        end
+    end
 end
