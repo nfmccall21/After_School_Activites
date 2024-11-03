@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_21_191449) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_03_005344) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -44,7 +44,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_21_191449) do
     t.text "description"
     t.integer "spots"
     t.string "chaperone"
-    t.boolean "approval_status"
+    t.integer "approval_status"
     t.integer "day"
     t.time "time_start"
     t.time "time_end"

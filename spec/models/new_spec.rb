@@ -30,7 +30,7 @@ RSpec.describe "new", type: :system do
             click_on 'Create Sight'
             expect(page).to have_content('Activity test act proposed')
             expect(page.current_path).to eq(activities_path)
-            expect(page).to have_content('test act') #will need to change this since it won't be visible due to status
+            expect(page).to have_content('test act') # will need to change this since it won't be visible due to status
         end
     end
 end
