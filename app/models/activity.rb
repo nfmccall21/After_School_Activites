@@ -1,12 +1,12 @@
 class Activity < ApplicationRecord
 
-    validates :title, :approval_status, presence: true
+    validates :title, presence: true # i took out aproval status bc it automatically does it in create
     validates :description, presence: true
-    validates :spots, presence: true, numericality: {greater_than_or_equal_to: 1, less_than_or_equal_to: 35}
+    validates :spots, presence: true, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 35 }
     validates :chaperone, presence: true
     validates :time_start, presence: true
     validates :time_end, presence: true
-    validates :time_end, comparison: {greater_than: :time_start}
+    validates :time_end, comparison: { greater_than: :time_start }
 
 
     enum :day, %i[Monday Tuesday Wednesday Thursday Friday]

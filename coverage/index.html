@@ -13,7 +13,7 @@
       <img src="./assets/0.13.1/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2024-11-02T21:00:33-04:00">2024-11-02T21:00:33-04:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2024-11-03T14:59:49-05:00">2024-11-03T14:59:49-05:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -924,7 +924,7 @@
 
             
 
-            <code class="ruby">      params.require(:activity).permit(:title, :description, :spots, :chaperone, :day, :time_start, :time_end)</code>
+            <code class="ruby">      params.require(:activity).permit(:title, :description, :spots, :chaperone, :approval_status, :day, :time_start, :time_end)</code>
           </li>
         </div>
       
@@ -1213,7 +1213,7 @@
 
             
 
-            <code class="ruby">    validates :title, :approval_status, presence: true</code>
+            <code class="ruby">    validates :title, presence: true # i took out aproval status bc it automatically does it in create</code>
           </li>
         </div>
       
@@ -1237,7 +1237,7 @@
 
             
 
-            <code class="ruby">    validates :spots, presence: true, numericality: {greater_than_or_equal_to: 1, less_than_or_equal_to: 35}</code>
+            <code class="ruby">    validates :spots, presence: true, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 35 }</code>
           </li>
         </div>
       
@@ -1285,7 +1285,7 @@
 
             
 
-            <code class="ruby">    validates :time_end, comparison: {greater_than: :time_start}</code>
+            <code class="ruby">    validates :time_end, comparison: { greater_than: :time_start }</code>
           </li>
         </div>
       
