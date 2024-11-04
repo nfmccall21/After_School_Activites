@@ -29,10 +29,10 @@
     </div>
     
 
-    <div class="third row">
-      <%= form_with url: activities_path, method: :get do |form| %>
+     <div class="third row">
+       <%= form_with url: activities_path, method: :get do |form| %>
         <%= form.check_box :avail %>
-        <%= form.label :avail, "Available? " %>
+        <%= form.label :avail, "Available? (Will Implemented After Student Model is Created) " %>
         <%= form.submit "Filter Availability" %>
       <% end %>
     </div>
