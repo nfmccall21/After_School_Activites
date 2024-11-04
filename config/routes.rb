@@ -12,5 +12,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   root "activities#index"
-  resources :activities
+
+  # Allowing custom action for unapproved 
+  resources :activities do # Changed this to a block
+    get 'unapproved'
+  end
 end

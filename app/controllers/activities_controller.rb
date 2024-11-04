@@ -1,7 +1,7 @@
 class ActivitiesController < ApplicationController
     def index
       @activities = Activity.all.order(:title)
-      #@activities = @activities.where(:approval_status = "Approved") this syntax very likely wrong
+      @activities = @activities.where(:approval_status = false) # Put this in and set to false...may be incorrect
     end
 
     def show
@@ -37,4 +37,8 @@ class ActivitiesController < ApplicationController
       redirect_to activities_path
     end
     
+    def unapproved
+      @unapproved_activites = Activity.where(approved: false)
+    end
+
 end

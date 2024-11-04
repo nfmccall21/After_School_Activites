@@ -20,6 +20,7 @@ a1 = Activity.new(title: 'Clay Club',
                day: 2,
                time_start: DateTime.parse('3 pm').to_time,
                time_end: DateTime.parse('4 pm').to_time)
+               approved: true
 a1.save!
 
 a2 = Activity.new(title: 'Gardening Club',
@@ -30,6 +31,7 @@ a2 = Activity.new(title: 'Gardening Club',
                day: 4,
                time_start: DateTime.parse('3 pm').to_time,
                time_end: DateTime.parse('5 pm').to_time)
+               approved: false
 a2.save!
 
 a3 = Activity.new(title: 'Spanish Club',
@@ -40,6 +42,7 @@ a3 = Activity.new(title: 'Spanish Club',
                day: 3,
                time_start: DateTime.parse('4 pm').to_time,
                time_end: DateTime.parse('5 pm').to_time)
+               approved: false
 a3.save!
 
 
@@ -51,6 +54,7 @@ a4 = Activity.new(title: 'Baking Club',
                day: 1,
                time_start: DateTime.parse('3 pm').to_time,
                time_end: DateTime.parse('5 pm').to_time)
+               approved: true
 a4.save!
 
 a5 = Activity.new(title: 'Games Club',
@@ -61,6 +65,7 @@ a5 = Activity.new(title: 'Games Club',
                day: 0,
                time_start: DateTime.parse('3 pm').to_time,
                time_end: DateTime.parse('5 pm').to_time)
+               approved: true
 a5.save!
 
 a6 = Activity.new(title: 'Meditation Club',
@@ -71,4 +76,5 @@ a6 = Activity.new(title: 'Meditation Club',
                day: 3,
                time_start: DateTime.parse('3 pm').to_time,
                time_end: DateTime.parse('3:30 pm').to_time)
+               approved: true
 a6.save!
