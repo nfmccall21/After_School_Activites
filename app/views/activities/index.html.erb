@@ -48,13 +48,17 @@
                 <span class="weekday"><%= activity.day %></span>
               </div>
               <span class="description"><%= activity.description %></span>
-              <span class="btn btn-info"><%= link_to "More...", activity%></span>
+              <%= link_to "More...", activity, class: "btn btn-info"%>
               
             </div>
           <%# </div> %>
         <%# </div> %>
       <% end %>
     </div>
+
+    
+    <%= link_to "Propose an Activity!", new_activity_path, class: "btn btn-info" %>
+    
 
 
 </div>
