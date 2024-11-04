@@ -53,3 +53,5 @@ group :development do
   gem "web-console"
 end
 
+
+gem "litestack", "~> 0.4.3"

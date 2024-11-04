@@ -64,3 +64,7 @@ coverage/.last_run.json
 coverage/.resultset.json
 coverage/assets/0.13.1/application.js
 coverage/.resultset.json.lock
+
+# Ignore default Litestack SQLite databases.
+/db/**/*.sqlite3
+/db/**/*.sqlite3-*
