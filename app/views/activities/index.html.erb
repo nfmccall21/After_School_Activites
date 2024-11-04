@@ -4,13 +4,37 @@
     </div>
 
     <div class="row">
-    <%= form_with url: activities_path, method: :get do |form| %>
+      <%= form_with url: activities_path, method: :get do |form| %>
       <%= form.label :query, "Search for: " %>
       <%= form.text_field :query %>
-      <%= form.check_box :opennow %>
-      <%= form.label :opennow, "Open now" %>
       <%= form.submit "Filter Activities" %>
-    <% end %>
+      <% end %>
+    </div>
+
+    <div class="next row">
+      <%= form_with url: activities_path, method: :get do |form| %>
+      <%= form.label :days, "Day of the week:" %>
+      <%= form.check_box :days %>
+      <%= form.label :days, "Monday " %>
+      <%= form.check_box :days %>
+      <%= form.label :days, "Tuesday " %>
+      <%= form.check_box :days %>
+      <%= form.label :days, "Wednesday " %>
+      <%= form.check_box :days %>
+      <%= form.label :days, "Thursday " %>
+      <%= form.check_box :days %>
+      <%= form.label :days, "Friday " %>
+      <%= form.submit "Filter Days" %>
+      <% end %>
+    </div>
+    
+    
+    <div class="third row">
+      <%= form_with url: activities_path, method: :get do |form| %>
+        <%= form.check_box :avail %>
+        <%= form.label :avail, "Available? " %>
+        <%= form.submit "Filter Availability" %>
+      <% end %>
     </div>
 
     <%# FROM index.html.erb FROM LAB 6 %>

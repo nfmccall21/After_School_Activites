@@ -5,7 +5,7 @@ class ActivitiesController < ApplicationController
         @activities = @activities.by_search_string(params[:query])
       end
       if params[:days].present? && params[:days] != nil
-        @activities = @activities.filter_by_day
+        @activities = @activities.filter_by_day(params[:days])
       end
     end
 
