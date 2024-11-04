@@ -55,3 +55,7 @@ end
 
 
 gem "litestack", "~> 0.4.3"
+
+gem "dockerfile-rails", ">= 1.6", :group => :development
+
+gem "aws-sdk-s3", "~> 1.169", :require => false
