@@ -4,8 +4,12 @@ class ActivitiesController < ApplicationController
       if params[:query].present? && params[:query].length > 2
         @activities = @activities.by_search_string(params[:query])
       end
-      if params[:days].present? && params[:days] != nil
-        @activities = @activities.filter_by_day(params[:days])
+      Activity.days.keys.each do |key_str|
+        sym_day = key_str
+        if params[sym_day] != nil && params[sym_day] != "0"
+          debugger
+          @activities = @activities.filter_by_day(sym_day)
+        end
       end
     end
 

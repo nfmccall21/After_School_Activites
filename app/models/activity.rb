@@ -5,7 +5,9 @@ class Activity < ApplicationRecord
         Activity.where("description LIKE ?", "%#{search}%").or(Activity.where("title LIKE ?", "%#{search}%")).order(:day)
     end
 
-    def self.filter_by_day(day)
-        Activity.where("description LIKE ?", "%#{day}%").or(Activity.where("title LIKE ?", "%#{day}%")).order(:day)
+    def self.filter_by_day(dow)
+        puts(dow)
+        debugger
+        Activity.where("day= :day", {day: Activity.days[dow]})
     end
 end
