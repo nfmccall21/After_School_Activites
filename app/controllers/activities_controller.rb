@@ -11,7 +11,6 @@ class ActivitiesController < ApplicationController
         sym_day = key_str
         if params[sym_day] != nil && params[sym_day] != "0"
           if_clicked = true
-          debugger
           multi_day.append(@activities.filter_by_day(sym_day))
         end
       end
