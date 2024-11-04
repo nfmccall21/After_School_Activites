@@ -5,7 +5,7 @@ class CreateActivities < ActiveRecord::Migration[7.2]
       t.text :description
       t.integer :spots
       t.string :chaperone
-      t.boolean :approval_status
+      t.integer :approval_status
       t.integer :day
       t.time :time_start
       t.time :time_end
