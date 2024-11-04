@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "new", type: :system do
+RSpec.describe "new/delete", type: :system do
     before do
       driven_by(:rack_test)
     end
@@ -44,7 +44,7 @@ RSpec.describe "new", type: :system do
                           description: 'test description',
                           spots: 10,
                           chaperone: 'm',
-                          day: 'monday',
+                          day: 'Monday',
                           time_start: DateTime.parse('3 pm').to_time,
                           time_end: DateTime.parse('4 pm').to_time)
         end
@@ -54,9 +54,8 @@ RSpec.describe "new", type: :system do
             click_on 'test'
             expect(page).to have_content('Back to index')
             click_on 'Delete'
-            click_on 'Delete'
-            expect(page).to have_content('Sight deleted successfully')
-            expect(page).not_to have_content('Test Sight')
+            expect(page).to have_content('activity removed')
+            expect(page).not_to have_content('test')
         end
     end
 end
