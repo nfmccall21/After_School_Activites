@@ -17,7 +17,6 @@ class Activity < ApplicationRecord
     end
 
     def self.filter_by_day(dow)
-        puts(dow)
         Activity.where("day= :day", {day: Activity.days[dow]})
     end
 end

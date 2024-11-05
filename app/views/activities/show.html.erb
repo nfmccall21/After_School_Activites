@@ -5,7 +5,7 @@
         <p><strong>Description:</strong> <%= @activity.description %></p>
         <p><strong>Spots Available:</strong> <%= @activity.spots %></p>
         <p><strong>Chaperone:</strong> <%= @activity.chaperone %></p>
-        <p><strong>Day:</strong> <%= Activity.days.keys[@activity.day] %></p> <!-- Assuming day is an index corresponding to days array -->
+        <p><strong>Day:</strong> <%= @activity.day %></p>
         <p><strong>Time:</strong> <%= @activity.time_start.strftime("%I:%M %p") %> - <%= @activity.time_end.strftime("%I:%M %p") %></p>
     </div>
 
