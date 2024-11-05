@@ -1,5 +1,6 @@
 class ActivitiesController < ApplicationController
     def index
+      @unapproved_activities = Activity.where(approval_status: 1)
       if_clicked = false
       @activities = Activity.all.order(:title)
       if params[:query].present? && params[:query].length > 2
@@ -48,11 +49,6 @@ class ActivitiesController < ApplicationController
     private
     def create_params
       params.require(:activity).permit(:title, :description, :spots, :chaperone, :approval_status, :day, :time_start, :time_end)
-    end
-
-    
-    def unapproved
-      @unapproved_activites = Activity.where(approved: false)
     end
 
 end
