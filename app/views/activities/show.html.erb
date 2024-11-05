@@ -1,9 +1,14 @@
 <div class="container">
+    <h3 class="hero"><%= @activity.title %></h3>
 
-<h3 class="hero"><%= @activity.title %></h3>
+    <div class="activity-details">
+        <p><strong>Description:</strong> <%= @activity.description %></p>
+        <p><strong>Spots Available:</strong> <%= @activity.spots %></p>
+        <p><strong>Chaperone:</strong> <%= @activity.chaperone %></p>
+        <p><strong>Day:</strong> <%= Activity.days.keys[@activity.day.to_i] %></p> <!-- Assuming day is an index corresponding to days array -->
+        <p><strong>Time:</strong> <%= @activity.time_start.strftime("%I:%M %p") %> - <%= @activity.time_end.strftime("%I:%M %p") %></p>
+    </div>
 
-<%= link_to "Back to index", activities_path, class: "btn btn-secondary" %>
-<%= button_to "Delete", @activity, method: :delete, class: "btn btn-danger", form: { data: { turbo_confirm: "Are you sure?" } } %>
-
-
+    <%= link_to "Back to index", activities_path, class: "btn btn-secondary" %>
+    <%= button_to "Delete", @activity, method: :delete, class: "btn btn-danger", form: { data: { turbo_confirm: "Are you sure?" } } %>
 </div>
