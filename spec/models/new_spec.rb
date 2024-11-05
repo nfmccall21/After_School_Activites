@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "new", type: :system do
+RSpec.describe "new/delete", type: :system do
     before do
       driven_by(:rack_test)
     end
@@ -34,6 +34,28 @@ RSpec.describe "new", type: :system do
             expect(page).to have_content('Activity test act proposed')
             expect(page.current_path).to eq(activities_path)
             expect(page).to have_content('test act') # will need to change this since it won't be visible due to status
+        end
+    end
+
+
+    describe 'delete an activity' do
+        before (:each) do
+            Activity.create!(title: 'test',
+                          description: 'test description',
+                          spots: 10,
+                          chaperone: 'm',
+                          day: 'Monday',
+                          time_start: DateTime.parse('3 pm').to_time,
+                          time_end: DateTime.parse('4 pm').to_time)
+        end
+
+        it 'should delete an activity' do
+            visit activities_path
+            click_on 'test'
+            expect(page).to have_content('Back to index')
+            click_on 'Delete'
+            expect(page).to have_content('activity removed')
+            expect(page).not_to have_content('test')
         end
     end
 end
