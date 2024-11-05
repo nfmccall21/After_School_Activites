@@ -37,7 +37,7 @@
       <% end %>
     </div>
 
-    # FROM index.html.erb FROM LAB 6
+    <!--FROM index.html.erb FROM LAB 6-->
     <div class="row row-cols-4 activitiesview">
       <% @activities.each_with_index do |activity| %>
         <%# <div class="col"> %>
@@ -45,7 +45,7 @@
             <div class="activity">
               <div class="group">
                 <h5 class="card-title">
-                  # routing to show path now
+                  <!--routing to show path now-->
                   <%= link_to activity.title, activity_path(activity) %> 
                 </h5>
                 <span class="weekday"><%= activity.day %></span>
