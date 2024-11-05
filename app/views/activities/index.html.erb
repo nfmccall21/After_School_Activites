@@ -61,4 +61,16 @@
     
     <%= link_to "Propose an Activity!", new_activity_path, class: "btn btn-info" %>
     
+    <h2>Unapproved Activities</h2>
+      <% @unapproved_activities.each do |activity| %>
+        <div>
+          <h3><%= activity.title %></h3>
+          <p><%= activity.description %></p>
+          <p><strong>Chaperone:</strong> <%= activity.chaperone %></p>
+          <p><strong>Day:</strong> <%= activity.day %></p>
+          <p><strong>Time:</strong> <%= activity.time_start.strftime('%l:%M %p') %> - <%= activity.time_end.strftime('%l:%M %p') %></p>
+          <p><strong>Status:</strong> Unapproved</p>
+        </div>
+      <% end %>
+
 </div>
