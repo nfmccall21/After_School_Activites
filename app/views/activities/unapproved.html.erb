@@ -5,9 +5,6 @@
             <li>
                 <h3><%= activity.title %></h3>
                 <p><%= activity.description %></p>
-                # Without the approval process in place this will be problematic...?
-                # I think that it will assign the present time to created at, ie. they will all have
-                #   been created at the same time, without specifying it as a field
                 <p><strong><Created at: </strong> <%= activity.created_at.strftime("%B %d, %Y")%></p> 
             </li>
         <% end %>
