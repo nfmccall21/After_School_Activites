@@ -1,5 +1,8 @@
 class Activity < ApplicationRecord
 
+    has_many :registrations
+    has_many :students, through: :registrations
+
     validates :title, presence: true # i took out aproval status bc it automatically does it in create
     validates :description, presence: true
     validates :spots, presence: true, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 35 }
