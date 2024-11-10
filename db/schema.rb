@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_03_005344) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_09_183142) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -52,6 +52,29 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_03_005344) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "registrations", force: :cascade do |t|
+    t.integer "student_id", null: false
+    t.integer "activity_id", null: false
+    t.integer "status"
+    t.datetime "requested_registration_at"
+    t.datetime "registration_update_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_id"], name: "index_registrations_on_activity_id"
+    t.index ["student_id"], name: "index_registrations_on_student_id"
+  end
+
+  create_table "students", force: :cascade do |t|
+    t.string "firstname"
+    t.string "lastname"
+    t.integer "grade"
+    t.string "homeroom"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "registrations", "activities"
+  add_foreign_key "registrations", "students"
 end
