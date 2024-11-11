@@ -10,5 +10,6 @@
     </div>
 
     <%= link_to "Back to index", activities_path, class: "btn btn-secondary" %>
+    <%= link_to "Edit", edit_activity_path(@activity), class: "btn btn-info" %>
     <%= button_to "Delete", @activity, method: :delete, class: "btn btn-danger", form: { data: { turbo_confirm: "Are you sure?" } } %>
 </div>

@@ -1,0 +1,52 @@
+
+
+  <div class="row">
+    <h1>Edit Activity</h1>
+  </div>
+
+  <%= form_with model: @activity, method: :put do |f| %>
+    <div class="form-group">
+      <%= f.label :title %>
+      <%= f.text_field :title, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :description %>
+      <%= f.text_area :description, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :spots %>
+      <%= f.number_field :spots, min: 0, max: 35, step: 1 %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :chaperone %>
+      <%= f.text_field :chaperone, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :approval_status %>
+      <%= f.select :approval_status, Activity.approval_statuses.keys.map { |w| [w.humanize, w] }, {}, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+    <%= f.label :day %>
+    <%= f.select :day, Activity.days.keys.map { |w| [w.humanize, w] }, {}, class: 'form-control' %>
+  </div>
+
+    <div class="form-group">
+      <%= f.label :time_start %>
+      <%= f.time_select :time_start, include_seconds: false %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :time_end %>
+      <%= f.time_select :time_end, include_seconds: false %>
+    </div>
+    
+    <%= f.submit class: 'btn btn-primary' %>
+  <% end %>
+
+
+</div>
