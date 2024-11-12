@@ -1,6 +1,5 @@
 class Activity < ApplicationRecord
 
-    before_action :authenticate_user!, only: %i[new create edit update destroy]
 
     has_many :registrations
     has_many :students, through: :registrations
