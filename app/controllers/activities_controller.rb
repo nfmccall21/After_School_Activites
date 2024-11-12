@@ -1,6 +1,8 @@
 class ActivitiesController < ApplicationController
-    
-  def index
+  
+  before_action :authenticate_user!, only: %i[show]
+
+    def index
       @unapproved_activities = Activity.where(approval_status: 1)
       if_clicked = false
       @activities = Activity.all.order(:title)
