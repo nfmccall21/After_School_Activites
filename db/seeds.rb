@@ -8,6 +8,10 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+Registration.all.each do |registration|
+  registration.destroy!
+end
+
 Activity.all.each do |activity|
   activity.destroy!
 end
@@ -19,6 +23,8 @@ end
 Student.all.each do |student|
   student.destroy!
 end
+
+
 
 a1 = Activity.new(title: 'Clay Club',
                description: 'Come join us for an hour to learn and play with clay! Students will learn to use a pottery wheel and sculpture techniques',
@@ -86,6 +92,7 @@ User.create!(email: 'admin@colgate.edu', password: 'testing', role: :admin)
 User.create!(email: 'teacher@colgate.edu', password: 'testing', role: :teacher)
 User.create!(email: 'parent@colgate.edu', password: 'testing', role: :parent)
 
+# STUDENTS
 s1 = Student.new(firstname: 'Anna', lastname: 'Lieb', grade: 2, homeroom: "homeroom1")
 s1.save!
 s2 = Student.new(firstname: 'Julia', lastname: 'Goosay', grade: 6, homeroom: "homeroom2")
@@ -94,6 +101,12 @@ s3 = Student.new(firstname: 'Greta', lastname: 'Hoogstra', grade: 1, homeroom: "
 s3.save!
 s4 = Student.new(firstname: 'Natalie', lastname: 'Mccall', grade: 3, homeroom: "homeroom4")
 s4.save!
+
+
+# REGISTRATIONS
+r1 = Registration.new(student: s1, activity: a1, status: 1,requested_registration_at: Time.now ,registration_update_at: Time.now )
+r1.save!
+
 
 
 
