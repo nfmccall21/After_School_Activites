@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   # root "posts#index"
   root "activities#index"
 
+  resources :students
+
   # Allowing custom action for unapproved 
   resources :activities do # Changed this to a block
     get 'unapproved'
