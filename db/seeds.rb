@@ -72,3 +72,13 @@ a6 = Activity.new(title: 'Meditation Club',
                time_start: DateTime.parse('3 pm').to_time,
                time_end: DateTime.parse('3:30 pm').to_time)
 a6.save!
+
+# USERS
+User.create!(email: 'admin@colgate.edu', password: 'testing', role: :admin)
+User.create!(email: 'teacher@colgate.edu', password: 'testing', role: :teacher)
+User.create!(email: 'parent@colgate.edu', password: 'testing', role: :parent)
+
+
+
+
+
