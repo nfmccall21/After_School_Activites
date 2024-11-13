@@ -104,9 +104,20 @@ s4.save!
 
 
 # REGISTRATIONS
-r1 = Registration.new(student: s1, activity: a1, status: 1,requested_registration_at: Time.now ,registration_update_at: Time.now )
+r1 = Registration.new(student: s1, activity: a1, status: :Enrolled,requested_registration_at: Time.now ,registration_update_at: Time.now )
 r1.save!
 
+r2 = Registration.new(student: s2, activity: a4, status: :Enrolled,requested_registration_at: Time.now ,registration_update_at: Time.now )
+r2.save!
+
+r3 = Registration.new(student: s2, activity: a1, status: :Waitlist,requested_registration_at: Time.now ,registration_update_at: Time.now )
+r3.save!
+
+r4 = Registration.new(student: s3, activity: a1, status: :Enrolled,requested_registration_at: Time.now ,registration_update_at: Time.now )
+r4.save!
+
+r5 = Registration.new(student: s4, activity: a3, status: :Enrolled,requested_registration_at: Time.now ,registration_update_at: Time.now )
+r5.save!
 
 
 
