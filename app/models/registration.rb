@@ -3,6 +3,6 @@ class Registration < ApplicationRecord
   belongs_to :activity
 
 
-  enum :status, %i[Pending, Enrolled, Waitlist, Denied]
+  enum :status, %i[Pending Enrolled Waitlist Denied]
   
 end
