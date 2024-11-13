@@ -44,7 +44,7 @@
 
     <!--FROM index.html.erb FROM LAB 6-->
     <div class="row row-cols-4 activitiesview">
-      <% @activities.each_with_index do |activity| %>
+      <% @activities.where(approval_status: :Approved).each_with_index do |activity| %>
         <%# <div class="col"> %>
           <%# <div class="card mb-1 p-2 h-100"> %>
             <div class="activity">
