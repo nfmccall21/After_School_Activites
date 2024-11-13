@@ -87,6 +87,74 @@ a6 = Activity.new(title: 'Meditation Club',
                time_end: DateTime.parse('3:30 pm').to_time)
 a6.save!
 
+# MORE ACTIVITIES
+
+# APPROVED activities
+aa1 = Activity.new()
+aa2 = Activity.new()
+aa3 = Activity.new()
+aa4 = Activity.new()
+aa5 = Activity.new()
+aa6 = Activity.new()
+approvedactssarr = [aa1, aa2, aa3, aa4, aa5, aa6]
+1.upto(6) do |i|
+  puts "Creating Approved Club #{i}"
+  approvedactssarr[i-1] = Activity.create!(title: "Approved Club #{i} ",
+        description: "This is the description for Approved Club #{i}. There would normally be more text and words here but I dont know what to write. Basically just know that this actvity is super cool! And its approved!",
+        spots: 5,
+        chaperone: 'testchap',
+        approval_status: :Approved,
+        day: rand(0..4),
+        time_start: DateTime.parse('3 pm').to_time,
+        time_end: DateTime.parse('3:30 pm').to_time)
+end
+
+# PENDING activities
+ap1 = Activity.new()
+ap2 = Activity.new()
+ap3 = Activity.new()
+ap4 = Activity.new()
+ap5 = Activity.new()
+ap6 = Activity.new()
+pendingactssarr = [ap1, ap2, ap3, ap4, ap5, ap6]
+1.upto(6) do |i|
+  puts "Creating Pending Club #{i}"
+  pendingactssarr[i-1] = Activity.create!(title: "Pending Club #{i} ",
+        description: "This is the description for Pending Club #{i}. There would normally be more text and words here but I dont know what to write. Basically just know that this actvity is super cool! But it is not approved!",
+        spots: 5,
+        chaperone: 'testchap',
+        approval_status: :Pending,
+        day: rand(0..4),
+        time_start: DateTime.parse('3 pm').to_time,
+        time_end: DateTime.parse('3:30 pm').to_time)
+end
+
+# DENIED activities
+ad1 = Activity.new()
+ad2 = Activity.new()
+ad3 = Activity.new()
+ad4 = Activity.new()
+ad5 = Activity.new()
+ad6 = Activity.new()
+deniedactssarr = [ad1, ad2, ad3, ad4, ad5, ad6]
+1.upto(6) do |i|
+  puts "Creating Denied Club #{i}"
+  deniedactssarr[i-1] = Activity.create!(title: "Denied Club #{i} ",
+        description: "This is the description for Denied Club #{i}. There would normally be more text and words here but I dont know what to write. Basically just know that this club got denied for a reason so booohoooo you cant join go cry about it.",
+        spots: 5,
+        chaperone: 'testchap',
+        approval_status: :Pending,
+        day: rand(0..4),
+        time_start: DateTime.parse('3 pm').to_time,
+        time_end: DateTime.parse('3:30 pm').to_time)
+end
+
+
+
+
+
+
+
 # USERS
 User.create!(email: 'admin@colgate.edu', password: 'testing', role: :admin)
 User.create!(email: 'teacher@colgate.edu', password: 'testing', role: :teacher)
