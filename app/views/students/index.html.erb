@@ -21,11 +21,10 @@
                 <% student.enrolled_activities.each do |act| %>
                     <div> <%= link_to act.activity.title, activity_path(act.activity) %>  </div> 
                 <% end %>
+            <% else %>
+                <br>
             <% end %>
 
-
-
-            <br>
             <br>
         </div>
       <% end %>

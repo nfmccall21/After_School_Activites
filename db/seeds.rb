@@ -8,6 +8,7 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+
 Registration.all.each do |registration|
   registration.destroy!
 end
@@ -149,26 +150,38 @@ deniedactssarr = [ad1, ad2, ad3, ad4, ad5, ad6]
         time_end: DateTime.parse('3:30 pm').to_time)
 end
 
-
-
-
-
-
-
 # USERS
 User.create!(email: 'admin@colgate.edu', password: 'testing', role: :admin)
 User.create!(email: 'teacher@colgate.edu', password: 'testing', role: :teacher)
 User.create!(email: 'parent@colgate.edu', password: 'testing', role: :parent)
 
 # STUDENTS
-s1 = Student.new(firstname: 'Anna', lastname: 'Lieb', grade: 2, homeroom: "homeroom1")
+s1 = Student.new(firstname: 'Anna', lastname: 'Lieb', grade: 2, homeroom: "homeroom 1")
 s1.save!
-s2 = Student.new(firstname: 'Julia', lastname: 'Goosay', grade: 6, homeroom: "homeroom2")
+s2 = Student.new(firstname: 'Julia', lastname: 'Goosay', grade: 6, homeroom: "homeroom 2")
 s2.save!
-s3 = Student.new(firstname: 'Greta', lastname: 'Hoogstra', grade: 1, homeroom: "homeroom3")
+s3 = Student.new(firstname: 'Greta', lastname: 'Hoogstra', grade: 1, homeroom: "homeroom 3")
 s3.save!
-s4 = Student.new(firstname: 'Natalie', lastname: 'Mccall', grade: 3, homeroom: "homeroom4")
+s4 = Student.new(firstname: 'Natalie', lastname: 'McCall', grade: 3, homeroom: "homeroom 4")
 s4.save!
+
+homerooms = ["homeroom 1", "homeroom 2", "homeroom 3", "homeroom 4", "homeroom 5", "homeroom 6"]
+s5 = Student.new()
+s6 = Student.new()
+s7 = Student.new()
+s8 = Student.new()
+s9 = Student.new()
+s10 = Student.new()
+s11 = Student.new()
+s12 = Student.new()
+s13 = Student.new()
+s14 = Student.new()
+s15 = Student.new()
+studentarr = [s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15]
+1.upto(11) do |i|
+  puts "Creating Student #{i}"
+  studentarr[i-1] = Student.create!(firstname: FFaker::Name.first_name, lastname: FFaker::Name.last_name, grade: rand(1..10), homeroom: homerooms[rand(0..5)])
+end
 
 
 # REGISTRATIONS
