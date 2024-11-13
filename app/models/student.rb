@@ -7,6 +7,10 @@ class Student < ApplicationRecord
         Registration.where(student_id: id).where(status: :Enrolled)
     end
 
+    def waitlisted_activities
+        Registration.where(student_id: id).where(status: :Waitlist)
+    end
+
 
 
 end

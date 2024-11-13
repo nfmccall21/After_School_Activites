@@ -15,22 +15,26 @@
                 </h5>
             </div>
             <span class="homeroom"><%= "Homeroom: #{student.homeroom}" %></span>
-            <% if !student.enrolled_activities.empty? %>
+            <% if student.enrolled_activities.empty? && student.waitlisted_activities.empty? %>
                 <br>
-                <div class="bold"> <%= "Enrolled in:" %> </div>
-                <% student.enrolled_activities.each do |act| %>
-                    <div> <%= link_to act.activity.title, activity_path(act.activity) %>  </div> 
-                <% end %>
             <% else %>
-                <br>
+                <% if !student.enrolled_activities.empty?%>
+                    <br>
+                    <div class="bold"> <%= "Enrolled in:" %> </div>
+                    <% student.enrolled_activities.each do |act| %>
+                        <div> <%= link_to act.activity.title, activity_path(act.activity) %>  </div> 
+                    <% end %>
+                <% end %>
+                <% if !student.waitlisted_activities.empty? %> 
+                    
+                    <div class="bold"> <%= "Waitlisted for:" %> </div>
+                    <% student.waitlisted_activities.each do |act| %>
+                        <div> <%= link_to act.activity.title, activity_path(act.activity) %>  </div> 
+                    <% end %>
+                <% end %>
             <% end %>
-
             <br>
         </div>
       <% end %>
     </div>
-
-
-
-
 </div>
