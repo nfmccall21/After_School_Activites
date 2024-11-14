@@ -4,7 +4,11 @@ class Student < ApplicationRecord
     has_many :activities, through: :registrations
 
     def enrolled_activities
-        Registration.where(student_id: id).where(status: 1)
+        Registration.where(student_id: id).where(status: :Enrolled)
+    end
+
+    def waitlisted_activities
+        Registration.where(student_id: id).where(status: :Waitlist)
     end
 
 
