@@ -3,7 +3,6 @@ class ActivitiesController < ApplicationController
   before_action :authenticate_user!, only: %i[show]
 
     def index
-      @unapproved_activities = Activity.where(approval_status: 1)
       if_clicked = false
       @activities = Activity.all.order(:title)
       if params[:query].present? && params[:query].length > 2
@@ -22,13 +21,13 @@ class ActivitiesController < ApplicationController
     end
 
     def unapproved
-      @activities = Activity.where(approval_status: 1)
+      @unapproved_activities = Activity.where(approval_status: 1)
+      render :unapproved
     end
 
     def show
       @activity = Activity.find(params[:id])
     end
-
 
     def new
       @activity = Activity.new()
