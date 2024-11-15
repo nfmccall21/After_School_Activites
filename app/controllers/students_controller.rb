@@ -1,7 +1,10 @@
 class StudentsController < ApplicationController
+
+  # before_action :authenticate_user!, only: %i[show index]
     
     def index
         @students = Student.all.order(:lastname)
+        @students = current_user.students
       end
   
       def show

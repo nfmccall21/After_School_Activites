@@ -151,9 +151,9 @@ deniedactssarr = [ad1, ad2, ad3, ad4, ad5, ad6]
 end
 
 # USERS
-User.create!(email: 'admin@colgate.edu', password: 'testing', role: :admin)
-User.create!(email: 'teacher@colgate.edu', password: 'testing', role: :teacher)
-User.create!(email: 'parent@colgate.edu', password: 'testing', role: :parent)
+u1 = User.create!(email: 'admin@colgate.edu', password: 'testing', role: :admin)
+u2 = User.create!(email: 'teacher@colgate.edu', password: 'testing', role: :teacher)
+u3 = User.create!(email: 'parent@colgate.edu', password: 'testing', role: :parent)
 
 # STUDENTS
 s1 = Student.new(firstname: 'Anna', lastname: 'Lieb', grade: 2, homeroom: "homeroom 1")
@@ -164,6 +164,12 @@ s3 = Student.new(firstname: 'Greta', lastname: 'Hoogstra', grade: 1, homeroom: "
 s3.save!
 s4 = Student.new(firstname: 'Natalie', lastname: 'McCall', grade: 3, homeroom: "homeroom 4")
 s4.save!
+
+u1.students << s1
+u1.students << s2
+
+u2.students << s3
+u2.students << s4
 
 homerooms = ["homeroom 1", "homeroom 2", "homeroom 3", "homeroom 4", "homeroom 5", "homeroom 6"]
 s5 = Student.new()
