@@ -1,7 +1,13 @@
 class StudentsController < ApplicationController
+
+  before_action :authenticate_user!, only: %i[show index]
     
       def index
         @students = Student.all.order(:lastname)
+        # puts current_user.role
+        if current_user.role != "admin"
+          @students = current_user.students 
+
         if params[:query].present? && params[:query].length > 2
           @students = @students.by_search_string(params[:query])
         end
@@ -18,6 +24,7 @@ class StudentsController < ApplicationController
       def create
         @student = Student.new(create_params)
         if @student.save
+          @student.users << current_user # CHECK IF THIS WORKS ONCE HAVE A PAGE FOR NEW STUDENT
           flash[:notice] = "#{@student.first} #{@student.last} added!"
           redirect_to students_path
         else
