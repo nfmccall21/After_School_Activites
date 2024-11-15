@@ -1,7 +1,10 @@
 class StudentsController < ApplicationController
     
-    def index
+      def index
         @students = Student.all.order(:lastname)
+        if params[:query].present? && params[:query].length > 2
+          @students = @students.by_search_string(params[:query])
+        end
       end
   
       def show
