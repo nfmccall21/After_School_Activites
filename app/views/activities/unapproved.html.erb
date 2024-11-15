@@ -10,6 +10,12 @@
                 <p><strong>Day:</strong> <%= activity.day %></p>
                 <p><strong>Time:</strong> <%= activity.time_start.strftime('%l:%M %p') %> - <%= activity.time_end.strftime('%l:%M %p') %></p>
                 <p><strong>Status:</strong> Unapproved</p>
+            
+                <!-- Linking approve/deny -->
+                <%= link_to "Approve", accept_activity_path(activity), method: :patch, class: "btn btn-success" %>
+                <%= link_to "Deny", decline_activity_path(activity), method: :patch, class: "btn btn-danger" %>
+
+
             </div>
             <br>
         <% end %>

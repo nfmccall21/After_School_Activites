@@ -21,5 +21,10 @@ Rails.application.routes.draw do
     collection do
       get 'unapproved'
     end
+
+    member do
+      patch 'accept'
+      patch 'decline'
+    end
   end
 end
