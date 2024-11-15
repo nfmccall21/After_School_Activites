@@ -1,7 +1,11 @@
+<%= link_to "Back to index", activities_path, class: "btn btn-secondary" %>
+<br>
+<br>
 <h1>Unapproved Activities</h1>
-<% if @unapproved_activites.any? %>
+
+<% if !(Activity.where(approval_status: 1).empty?) %>
     <ul>
-        <% @unapproved_activites.each do |activity| %>
+        <% Activity.where(approval_status: 1).each do |activity| %>
             <li>
                 <h3><%= activity.title %></h3>
                 <p><%= activity.description %></p>
