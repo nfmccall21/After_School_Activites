@@ -3,7 +3,6 @@ class ActivitiesController < ApplicationController
   before_action :authenticate_user!, only: %i[show]
 
     def index
-      @unapproved_activities = Activity.where(approval_status: 1)
       if_clicked = false
       @activities = Activity.all.order(:title)
       if params[:query].present? && params[:query].length > 2
@@ -22,13 +21,13 @@ class ActivitiesController < ApplicationController
     end
 
     def unapproved
-      @activities = Activity.where(approval_status: 1)
+      @unapproved_activities = Activity.where(approval_status: 1)
+      render :unapproved
     end
 
     def show
       @activity = Activity.find(params[:id])
     end
-
 
     def new
       @activity = Activity.new()
@@ -51,6 +50,20 @@ class ActivitiesController < ApplicationController
       @activity.destroy
       flash[:notice] = "activity removed"
       redirect_to activities_path
+    end
+
+    def edit
+      @activity  = Activity.find(params[:id])
+    end
+
+    def update
+      @activity = Activity.find(params[:id])
+      if @activity.update(create_params)
+        redirect_to activity_path(@activity), notice: 'activity details updated successfully'
+      else
+        flash[:alert] = 'Activity could not be edited'
+        render :edit, status: :unprocessable_content
+      end
     end
 
     private

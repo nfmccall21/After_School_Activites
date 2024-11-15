@@ -1,15 +1,19 @@
-<h1>Unapproved Activities</h1>
-<% if @unapproved_activites.any? %>
-    <ul>
-        <% @unapproved_activites.each do |activity| %>
-            <li>
+<h1>Unapproved Activities</h1><br>
+
+<% if @unapproved_activities.any? %>
+    <div id="unapproved-activities">
+        <% @unapproved_activities.each do |activity| %>
+            <div>
                 <h3><%= activity.title %></h3>
                 <p><%= activity.description %></p>
-                <p><strong><Created at: </strong> <%= activity.created_at.strftime("%B %d, %Y")%></p> 
-            </li>
+                <p><strong>Chaperone:</strong> <%= activity.chaperone %></p>
+                <p><strong>Day:</strong> <%= activity.day %></p>
+                <p><strong>Time:</strong> <%= activity.time_start.strftime('%l:%M %p') %> - <%= activity.time_end.strftime('%l:%M %p') %></p>
+                <p><strong>Status:</strong> Unapproved</p>
+            </div>
+            <br>
         <% end %>
-    </ul>
+    </div>
 <% else %>
-    <p> No unapproved activities found. </p>
+    <p>No unapproved activities found.</p>
 <% end %>
-            
