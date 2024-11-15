@@ -49,8 +49,11 @@ RSpec.describe "new/delete", type: :system do
                           time_end: DateTime.parse('4 pm').to_time)
         end
 
+        # IT ISNT APPROVED YET
+
         it 'should delete an activity' do
             visit activities_path
+            debugger
             click_on 'test'
             sign_in
             expect(page).to have_content('Back to index')
