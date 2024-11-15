@@ -47,6 +47,7 @@ class ActivitiesController < ApplicationController
     end
 
     def update
+      debugger
       @activity = Activity.find(params[:id])
       if @activity.update(create_params)
         redirect_to activity_path(@activity), notice: 'activity details updated successfully'
