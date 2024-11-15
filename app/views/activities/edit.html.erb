@@ -1,14 +1,5 @@
 <div class="container">
-  <% if @activity.errors.any? %>
-    <div class="row text-bg-warning" id="error_explanation">
-      <h2><%= pluralize(@activity.errors.count, "error") %> prevented this activity from being saved:</h2>
-    </div>
-    <% @activity.errors.each do |error| %>
-      <div class="row text-bg-warning">
-        <div class="col-2"></div><div class="col-8"><%= error.full_message %></div>
-      </div>
-    <% end %>
-  <% end %>
+
 
   <div class="row">
     <h1>Edit Activity</h1>
