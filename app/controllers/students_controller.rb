@@ -2,11 +2,14 @@ class StudentsController < ApplicationController
 
   before_action :authenticate_user!, only: %i[show index]
     
-    def index
+      def index
         @students = Student.all.order(:lastname)
         # puts current_user.role
         if current_user.role != "admin"
           @students = current_user.students 
+
+        if params[:query].present? && params[:query].length > 2
+          @students = @students.by_search_string(params[:query])
         end
       end
   

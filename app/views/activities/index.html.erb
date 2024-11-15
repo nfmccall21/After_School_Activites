@@ -9,7 +9,7 @@
     </div>
 
     <div class="row">
-      <%= form_with url: activities_path, method: :get do |form| %>
+       <%= form_with url: activities_path, method: :get do |form| %>
       <%= form.label :query, "Search for: " %>
       <%= form.text_field :query %>
       <%= form.submit "Filter Activities" %>
