@@ -4,7 +4,7 @@ class StudentsController < ApplicationController
     
     def index
         @students = Student.all.order(:lastname)
-        puts current_user.role
+        # puts current_user.role
         if current_user.role != "admin"
           @students = current_user.students 
         end
@@ -21,6 +21,7 @@ class StudentsController < ApplicationController
       def create
         @student = Student.new(create_params)
         if @student.save
+          @student.users << current_user # CHECK IF THIS WORKS ONCE HAVE A PAGE FOR NEW STUDENT
           flash[:notice] = "#{@student.first} #{@student.last} added!"
           redirect_to students_path
         else
