@@ -53,6 +53,20 @@ class ActivitiesController < ApplicationController
       redirect_to activities_path
     end
 
+    def edit
+      @activity  = Activity.find(params[:id])
+    end
+
+    def update
+      @activity = Activity.find(params[:id])
+      if @activity.update(create_params)
+        redirect_to activity_path(@activity), notice: 'activity details updated successfully'
+      else
+        flash[:alert] = 'Activity could not be edited'
+        render :edit, status: :unprocessable_content
+      end
+    end
+
     private
     def create_params
       params.require(:activity).permit(:title, :description, :spots, :chaperone, :approval_status, :day, :time_start, :time_end)
