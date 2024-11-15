@@ -9,6 +9,18 @@
         <p><strong>Time:</strong> <%= @activity.time_start.strftime("%I:%M %p") %> - <%= @activity.time_end.strftime("%I:%M %p") %></p>
     </div>
 
+    <div class="student-list">
+        <% if !@activity.enrolled_students.empty? %>
+            <br>
+            <div class="bold"> <%= "Student(s) Enrolled:" %> </div>
+            <% @activity.enrolled_students.each do |s| %>
+                <%= "#{s.student.firstname} #{s.student.lastname}" %>
+                <!-- CAN SWITCH TO LINKTO ONCE HAVE SHOW PAGE-->
+                <div> <%## link_to "#{s.student.firstname} #{s.student.lastname}", student_path(s.student) %>  </div> 
+            <% end %>
+        <% end %>
+    </div>
+
     <%= link_to "Back to index", activities_path, class: "btn btn-secondary" %>
     <%= link_to "Edit", edit_activity_path(@activity), class: "btn btn-info" %>
     <%= button_to "Delete", @activity, method: :delete, class: "btn btn-danger", form: { data: { turbo_confirm: "Are you sure?" } } %>

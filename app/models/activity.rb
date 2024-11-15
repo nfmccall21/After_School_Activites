@@ -23,4 +23,13 @@ class Activity < ApplicationRecord
     def self.filter_by_day(dow)
         Activity.where("day= :day", {day: Activity.days[dow]})
     end
+
+    def enrolled_students
+        Registration.where(activity_id: id).where(status: :Enrolled)
+    end
+
+    def waitlist_students
+        Registration.where(activity_id: id).where(status: :Waitlist)
+    end
+
 end

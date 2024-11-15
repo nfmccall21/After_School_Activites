@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -13,8 +14,11 @@ Rails.application.routes.draw do
   # root "posts#index"
   root "activities#index"
 
+  resources :students
+
   # Allowing custom action for unapproved 
   resources :activities do # Changed this to a block
+    # might need to do collection here
     get 'unapproved'
   end
 end

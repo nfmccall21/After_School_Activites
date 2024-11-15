@@ -1,4 +1,7 @@
 class ActivitiesController < ApplicationController
+  
+  before_action :authenticate_user!, only: %i[show]
+
     def index
       @unapproved_activities = Activity.where(approval_status: 1)
       if_clicked = false
@@ -16,6 +19,10 @@ class ActivitiesController < ApplicationController
         end
       end
       @activities = multi_day.flatten if if_clicked == true
+    end
+
+    def unapproved
+      @activities = Activity.where(approval_status: 1)
     end
 
     def show

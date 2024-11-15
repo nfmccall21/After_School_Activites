@@ -53,3 +53,16 @@ group :development do
   gem "web-console"
 end
 
+
+gem "devise", "~> 4.9"
+
+gem "omniauth-google-oauth2", "~> 1.2"
+
+gem "omniauth-rails_csrf_protection", "~> 1.0"
+
+# for random name generation
+gem "ffaker"
+
+gem "dockerfile-rails", ">= 1.6", :group => :development
+
+gem "aws-sdk-s3", "~> 1.171", :require => false
