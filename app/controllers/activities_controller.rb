@@ -63,13 +63,12 @@ class ActivitiesController < ApplicationController
     end
 
     def unapproved
-      @unapproved_activities = Activity.where(approval_status: :Pending) #enum query is 0, 1, 2 for a, p, d
-      render :unapproved
+      @unapproved_activities = Activity.where(approval_status: 'Pending') #enum query is 0, 1, 2 for a, p, d
     end
 
     def accept
-      if @activity.approval_status == "Pending"
-        @activity.update(approval_status: :Approved)
+      if @activity.approval_status == 'Pending'
+        @activity.update(approval_status: 'Approved')
         redirect_to activities_path, notice: 'Activity was successfully approved.'
       else
         redirect_to activities_path, alert: 'Activity cannot be approved.'
@@ -77,8 +76,8 @@ class ActivitiesController < ApplicationController
     end
   
     def decline
-      if @activity.approval_status == "Pending"
-        @activity.update(approval_status: :Denied)
+      if @activity.approval_status == 'Pending'
+        @activity.update(approval_status: 'Denied')
         redirect_to activities_path, notice: 'Activity was successfully denied.'
       else
         redirect_to activities_path, alert: 'Activity cannot be denied.'
