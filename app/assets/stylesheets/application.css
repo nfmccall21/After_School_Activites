@@ -17,8 +17,56 @@
  body{
     font-family: 'Palatino','Gill Sans', helvetica, arial, sans-serif;
     line-height: 1.3em;
-    
 }
+
+
+
+
+.usercontrol{
+    display: flex;
+    background-color: silver;
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 5px 10px;   
+    width: 100%
+}
+
+.user{
+    font-weight: bold;
+}
+
+.loginout {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-grow: 1; 
+}
+
+.loginout button{
+    background-color:rgb(108, 42, 183);
+    color: white;
+    white-space: nowrap;
+    align-self: flex-end;
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+.loginout button:hover{
+    background-color: rgb(68, 28, 113);
+}
+
+input[type="submit"] {
+    margin: 5px; 
+    border-radius: 6px;
+    border: 1px solid rgb(54, 54, 54);
+    background-color:rgb(240, 240, 240);
+}
+
+input[type="submit"]:hover {
+    background-color:rgb(203, 203, 203);
+}
+
 
 .activitiesview {
     display: grid;

@@ -51,7 +51,6 @@ RSpec.describe "new/delete", type: :system do
             a.update!(approval_status: :Approved)
             @user = User.create!(email: 'admin@colgate.edu', password: 'testing', role: :admin)
             sign_in @user
-                   
         end
 
         # IT ISNT APPROVED YET
@@ -59,7 +58,6 @@ RSpec.describe "new/delete", type: :system do
         it 'should delete an activity' do
             visit activities_path
             click_on 'test'
-            
             expect(page).to have_content('Back to index')
             click_on 'Delete'
             expect(page).to have_content('activity removed')
