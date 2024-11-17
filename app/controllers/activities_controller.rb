@@ -67,6 +67,7 @@ class ActivitiesController < ApplicationController
     end
 
     def accept
+      @activity = Activity.find(params[:id])
       if @activity.approval_status == 'Pending'
         @activity.update(approval_status: 'Approved')
         redirect_to activities_path, notice: 'Activity was successfully approved.'
@@ -76,6 +77,7 @@ class ActivitiesController < ApplicationController
     end
   
     def decline
+      @activity = Activity.find(params[:id])
       if @activity.approval_status == 'Pending'
         @activity.update(approval_status: 'Denied')
         redirect_to activities_path, notice: 'Activity was successfully denied.'
