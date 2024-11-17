@@ -1,9 +1,12 @@
 class User < ApplicationRecord
-  devise :omniauthable, omniauth_providers: [:google_oauth2]
+  has_and_belongs_to_many :students
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :omniauthable, omniauth_providers: [:google_oauth2]
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  
   enum :role, %i[admin teacher parent]
 
   def self.from_omniauth(access_token)

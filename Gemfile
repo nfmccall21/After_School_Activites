@@ -62,3 +62,7 @@ gem "omniauth-rails_csrf_protection", "~> 1.0"
 
 # for random name generation
 gem "ffaker"
+
+gem "dockerfile-rails", ">= 1.6", :group => :development
+
+gem "aws-sdk-s3", "~> 1.171", :require => false

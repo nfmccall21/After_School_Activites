@@ -3,6 +3,14 @@
         <h1>Students</h1>
     </div>
 
+    <div class="row">
+        <%= form_with url: students_path, method: :get do |form| %>
+        <%= form.label :query, "Search for: " %>
+        <%= form.text_field :query %>
+        <%= form.submit "Filter Students" %>
+        <% end %>
+    </div>
+
     <%= link_to "Back to Activities", activities_path, class: "btn btn-secondary" %>
 
     <!--FROM index.html.erb FROM LAB 6-->

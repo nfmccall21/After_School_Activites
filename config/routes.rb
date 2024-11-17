@@ -18,7 +18,15 @@ Rails.application.routes.draw do
 
   # Allowing custom action for unapproved 
   resources :activities do # Changed this to a block
-    # might need to do collection here
-    get 'unapproved'
+    collection do
+      get 'unapproved'
+    end
+
+    member do
+      patch 'accept'
+      patch 'decline'
+      get 'accept'
+      get 'decline'
+    end
   end
 end
