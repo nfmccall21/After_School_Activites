@@ -1,18 +1,18 @@
 class RegistrationsController < ApplicationController
     before_action :set_activity
+    before_action :ensure_parent, only: [:new, :create]
   
     def new
       @registration = Registration.new
-      @students = Student.all # Adjust based on logged-in parent or user role
+      @students = current_user.students # Adjust based on parent call?
     end
   
     def create
       @registration = @activity.registrations.build(registration_params)
-  
-      # Logic for determining status
+
       if @activity.enrolled_students.count < @activity.spots
         @registration.status = :Enrolled
-      elsif @activity.waitlist_students.count < 10 # Optional cap for waitlist
+      elsif @activity.waitlist_students.count < 35 # I can't rmember what the cap actually is
         @registration.status = :Waitlist
       else
         @registration.status = :Denied
@@ -22,7 +22,7 @@ class RegistrationsController < ApplicationController
         flash[:notice] = "Successfully registered with status: #{@registration.status}!"
         redirect_to activity_path(@activity)
       else
-        flash[:alert] = @registration.errors.full_messages.to_sentence
+        flash[:alert] = "There was an error with your registration."
         render :new
       end
     end
@@ -36,5 +36,13 @@ class RegistrationsController < ApplicationController
     def registration_params
       params.require(:registration).permit(:student_id)
     end
+
+    def ensure_parent
+      unless current_user&.role == 'parent'
+        flash[:alert] = "You are not authorized to register for activities."
+        redirect_to root_path # Or another appropriate path
+      end
+    end
+
   end
   
