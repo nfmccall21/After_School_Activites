@@ -19,6 +19,16 @@
   </head>
 
   <body>
+    <div>
+      <% unless controller_name == 'sessions' %>
+        <% if current_user == nil %>
+          <%= button_to "Log In", "/users/sign_in" %>
+        <% else %>
+          <%= "#{current_user.email}" %>
+          <%= button_to "Log Out", "/users/sign_out", method: :delete %>
+        <% end %>
+      <% end %>
+    </div>
     <%# FROM ASSIGNMENT 5 START %>
      <% if flash[:notice] %>
       <div class="alert alert-primary">
