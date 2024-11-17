@@ -56,6 +56,17 @@
     background-color: rgb(68, 28, 113);
 }
 
+input[type="submit"] {
+    margin: 5px; 
+    border-radius: 6px;
+    border: 1px solid rgb(54, 54, 54);
+    background-color:rgb(240, 240, 240);
+}
+
+input[type="submit"]:hover {
+    background-color:rgb(203, 203, 203);
+}
+
 
 .activitiesview {
     display: grid;
