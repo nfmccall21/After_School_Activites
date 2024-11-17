@@ -3,8 +3,14 @@ class RegistrationsController < ApplicationController
     before_action :ensure_parent, only: [:new, :create]
   
     def new
-      @registration = Registration.new
-      @students = current_user.students # Adjust based on parent call?
+      Rails.logger.debug "Current User: #{current_user.inspect}"
+      
+      if current_user && current_user.role == "parent"
+        @registration = Registration.new
+        @students = current_user.students
+      else
+        redirect_to root_path, alert: "You are not authorized to register students."
+      end
     end
   
     def create
