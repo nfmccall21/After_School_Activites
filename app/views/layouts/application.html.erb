@@ -19,28 +19,29 @@
   </head>
 
   <body>
-    <div>
+    <div class="usercontrol">
       <% unless controller_name == 'sessions' %>
         <% if current_user == nil %>
-          <%= button_to "Log In", "/users/sign_in" %>
+          <div class="loginout"><%= button_to "Log In", "/users/sign_in" %></div>
         <% else %>
-          <%= "#{current_user.email}" %>
-          <%= button_to "Log Out", "/users/sign_out", method: :delete %>
+          <div class="user"><%= "Current User: #{current_user.email}" %></div>
+          <div class="loginout"><%= button_to "Log Out", "/users/sign_out", method: :delete %> </div>
         <% end %>
       <% end %>
     </div>
-    <%# FROM ASSIGNMENT 5 START %>
-     <% if flash[:notice] %>
+    <% if flash[:notice] %>
       <div class="alert alert-primary">
         <%= "#{flash[:notice]}" %> 
       </div>
     <% end %>
-
     <% if flash[:alert] %>
       <div class="alert alert-warning">
         <%= "#{flash[:alert]}" %>
       </div>
     <% end %>
+    
+    
+    
     <%# FROM ASSIGNMENT 5 END %>
     <br>
     <%= yield %>
