@@ -1,19 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe "edit", type: :system do
+    include Devise::Test::IntegrationHelpers
     before do
       driven_by(:rack_test)
     end
-  
+
     describe 'edit an activity' do
         before (:each) do
-            Activity.create!(title: 'origTitle',
+            a = Activity.create!(title: 'origTitle',
                           description: 'test description',
                           spots: 10,
                           chaperone: 'm',
                           day: 'Monday',
                           time_start: DateTime.parse('3 pm').to_time,
                           time_end: DateTime.parse('4 pm').to_time)
+            a.update!(approval_status: :Approved)
+            @user = User.create!(email: 'admin@colgate.edu', password: 'testing', role: :admin)
+            sign_in @user
         end
 
         it "should edit an activity" do
