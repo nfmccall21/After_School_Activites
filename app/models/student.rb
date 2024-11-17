@@ -4,6 +4,8 @@ class Student < ApplicationRecord
     has_many :activities, through: :registrations
     has_and_belongs_to_many :users
 
+    # Do we want to add validations?
+
     def enrolled_activities
         #Registration.where(student_id: id).where(status: :Enrolled)
         activities.joins(:registrations).merge(Registration.enrolled)
@@ -28,5 +30,9 @@ class Student < ApplicationRecord
         end
     end
 
+    def full_name
+        "#{firstname} #{lastname}"
+    end
+      
 
 end
