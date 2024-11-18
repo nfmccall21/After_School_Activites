@@ -16,6 +16,8 @@ Rails.application.routes.draw do
 
   resources :students
 
+  resources :registrations
+  
   # Allowing custom action for unapproved 
   resources :activities do # Changed this to a block
     collection do

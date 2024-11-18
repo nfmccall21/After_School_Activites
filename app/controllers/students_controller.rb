@@ -25,7 +25,7 @@ class StudentsController < ApplicationController
         @student = Student.new(create_params)
         if @student.save
           @student.users << current_user # CHECK IF THIS WORKS ONCE HAVE A PAGE FOR NEW STUDENT
-          flash[:notice] = "#{@student.first} #{@student.last} added!"
+          flash[:notice] = "#{@student.firstname} #{@student.lastname} added!"
           redirect_to students_path
         else
           flash[:alert] = "Cannot add student :("
@@ -34,15 +34,15 @@ class StudentsController < ApplicationController
       end
   
       def destroy #this should probably have permissions attached to it in some way eventually
-        @student = Activity.find(params[:id])
+        @student = Student.find(params[:id])
         @student.destroy
-        flash[:notice] = "activity removed"
-        redirect_to activities_path
+        flash[:notice] = "Student removed"
+        redirect_to students_path
       end
   
       private
       def create_params
-        params.require(:activity).permit(:firstname, :lastname, :grade, :homeroom)
+        params.require(:student).permit(:firstname, :lastname, :grade, :homeroom)
       end
   
   end

@@ -1,0 +1,25 @@
+<div class="container">
+    <h3 class="hero"><%= "#{@student.firstname} #{@student.lastname}" %></h3>
+
+    <div class="student-list">
+    
+            <%if @student.enrolled_activities != nil%>
+                <div class="bold"> <%= "Enrolled Activties:" %> </div>
+                <% @student.enrolled_activities.each do |a| %>
+                    <div> <%= link_to a.activity.title, activity_path(a.activity) %>  </div> 
+                <% end %>
+            <% end %>
+            <%if @student.waitlisted_activities != nil %>
+                <div class="bold"> <%= "Waitlisted Activties:" %> </div>
+                <% @student.waitlisted_activities.each do |a| %>
+                    <div> <%= link_to a.activity.title, activity_path(a.activity) %>  </div> 
+                <% end %>
+            <% end %>
+        
+    </div>
+
+    <%= link_to "Back to index", students_path, class: "btn btn-secondary" %>
+    <%= button_to "Delete Student", @student, method: :delete, class: "btn btn-danger" %>
+    
+    
+</div>
