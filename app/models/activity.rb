@@ -21,9 +21,9 @@ class Activity < ApplicationRecord
         Activity.where("description LIKE ?", "%#{search}%").or(Activity.where("title LIKE ?", "%#{search}%")).order(:day)
     end
 
-    def self.filter_by_day(dow)
-        Activity.where("day= :day", {day: Activity.days[dow]})
-    end
+    # def self.filter_by_day(dow)
+    #     Activity.where("day= :day", {day: Activity.days[dow]})
+    # end
 
     def enrolled_students
         Registration.where(activity_id: id).where(status: :Enrolled)
