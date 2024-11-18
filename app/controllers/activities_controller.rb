@@ -23,6 +23,7 @@ class ActivitiesController < ApplicationController
 
     def show
       @activity = Activity.find(params[:id])
+      @students = Student.all
     end
 
     def new
