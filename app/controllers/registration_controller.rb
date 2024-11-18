@@ -1,6 +1,6 @@
 class RegistrationsController < ApplicationController
     before_action :set_activity
-    before_action :ensure_parent, only: [:new, :create]
+    #before_action :ensure_parent, only: [:new, :create]
   
     def new
       Rails.logger.debug "Current User: #{current_user.inspect}"
