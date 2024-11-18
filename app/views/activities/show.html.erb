@@ -21,6 +21,23 @@
         <% end %>
     </div>
 
+    <div class="register-student">
+        <h4>Register a Student</h4>
+        <%= form_with url: activity_registrations_path(@activity), method: :post, local: true do |f| %> <!-- Use specific URL path -->
+            <div class="form-group">
+                <%= label_tag :student_id, "Select a Student:" %>
+                <!-- ADDED THIS -->
+                <%if @students != nil%>
+                    <%= select_tag :student_id, options_from_collection_for_select(@students, :id, :full_name), class: "form-control" %>
+                <%end%>
+            </div>
+            <div class="form-group">
+                <%= hidden_field_tag :activity_id, @activity.id %>
+                <%= submit_tag "Register", class: "btn btn-primary" %>
+            </div>
+        <% end %>
+    </div>
+
     <%= link_to "Back to index", activities_path, class: "btn btn-secondary" %>
     <%= link_to "Edit", edit_activity_path(@activity), class: "btn btn-info" %>
     <%= button_to "Delete", @activity, method: :delete, class: "btn btn-danger", form: { data: { turbo_confirm: "Are you sure?" } } %>

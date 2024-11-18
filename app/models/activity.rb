@@ -33,4 +33,8 @@ class Activity < ApplicationRecord
         Registration.where(activity_id: id).where(status: :Waitlist)
     end
 
+    def denied_students
+        registrations.denied.includes(:student) # ANNA CHECK
+    end
+
 end
