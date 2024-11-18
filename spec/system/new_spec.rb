@@ -64,4 +64,26 @@ RSpec.describe "new/delete", type: :system do
             expect(page).not_to have_content('test')
         end
     end
+
+    describe "create new student" do
+        before (:each) do
+            @user = User.create!(email: 'parent@colgate.edu', password: 'testing', role: :parent)
+            sign_in @user
+        end
+        it "should create a new student with valid input" do
+            @student = Student.create(firstname: "test", lastname: "test", grade: 20, homeroom: "test")
+            @user.students << @student
+            visit students_path
+            expect(page).to have_content('test')
+        end
+        it "should show correct error message if save fails" do
+            s = Student.new
+            expect(Student).to receive(:create).and_return(s)
+            expect(s).to receive(:save).and_return(false)
+            visit students_path
+            s.save
+            expect(page).to have_content("Cannot add student :(")
+        end
+        
+    end
 end
