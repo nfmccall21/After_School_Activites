@@ -109,6 +109,7 @@ RSpec.describe "User System Tests", type: :system do
         sign_in @parent
         expect(page).not_to have_content('Unapproved Activities')
       end
+
       it "admin can approve unapproved activities" do
         sign_in @admin
         visit activities_path
@@ -120,7 +121,49 @@ RSpec.describe "User System Tests", type: :system do
         expect(page).to have_content('Activity was successfully approved.')
         expect(page).to have_content('I am an unapproved activity')
       end
+
+      it "admin can decline unapproved activities" do
+        sign_in @admin
+        visit activities_path
+        click_on 'Unapproved Activities'
+        expect(page.current_path).to eq(unapproved_activities_path)
+        expect(page).to have_content('I am an unapproved activity')
+        click_on 'Deny'
+        expect(page.current_path).to eq(activities_path)
+        expect(page).to have_content('Activity was successfully denied.')
+        expect(page).not_to have_content('I am an unapproved activity')
+      end
+
+      it "cannot approve activity (sad path)" do
+        sign_in @admin
+        a = Activity.new
+        allow(Activity).to receive(:find).and_return(a)
+        expect(a).to receive(:approval_status).and_return('Accepted')
+        visit activities_path
+        click_on 'Unapproved Activities'
+        expect(page.current_path).to eq(unapproved_activities_path)
+        expect(page).to have_content('I am an unapproved activity')
+        click_on 'Approve'
+        expect(page.current_path).to eq(activities_path)
+        expect(page).to have_content('Activity cannot be approved.')
+      end
+
+      it "cannot deny activity (sad path)" do
+        sign_in @admin
+        a = Activity.new
+        allow(Activity).to receive(:find).and_return(a)
+        expect(a).to receive(:approval_status).and_return('Accepted')
+        visit activities_path
+        click_on 'Unapproved Activities'
+        expect(page.current_path).to eq(unapproved_activities_path)
+        expect(page).to have_content('I am an unapproved activity')
+        click_on 'Deny'
+        expect(page.current_path).to eq(activities_path)
+        expect(page).to have_content('Activity cannot be denied.')
+      end
     end
+
+    
 
 
 end

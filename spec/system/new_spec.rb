@@ -78,11 +78,54 @@ RSpec.describe "new/delete", type: :system do
         end
         it "should show correct error message if save fails" do
             s = Student.new
-            expect(Student).to receive(:create).and_return(s)
+            allow(Student).to receive(:new).and_return(s)
             expect(s).to receive(:save).and_return(false)
-            visit students_path
-            s.save
+            visit new_student_path
+            click_on "Create Student"
             expect(page).to have_content("Cannot add student :(")
+        end
+        it "should create a new student successfully" do
+            visit new_student_path
+            fill_in 'Firstname', with: 'testfn'
+            fill_in 'Lastname', with: 'testln'
+            fill_in 'Grade', with: 2
+            fill_in 'Homeroom', with: 'testhr'
+            click_on "Create Student"
+            expect(page.current_path).to eq(students_path)
+            expect(page).to have_content("added!")
+        end
+        it "should show the new student on the index page" do
+            @student = Student.create(firstname: "testfn2", lastname: "testln2", grade: 4, homeroom: "test")
+            @user.students << @student
+            visit students_path
+            click_on "#{@student[:firstname]} #{@student[:lastname]}"
+            expect(page).to have_content('testfn2')
+            expect(page.current_path).to eq(student_path(@student))
+        end
+        it "should successfully delete a student" do
+            @student = Student.create(firstname: "testfn3", lastname: "testln3", grade: 4, homeroom: "test")
+            @user.students << @student
+            visit students_path
+            click_on 'testfn3 testln3'
+            click_on 'Delete Student'
+            expect(page).to have_content('Student removed')
+            expect(page.current_path).to eq(students_path)
+            expect(page).not_to have_content('testfn3')
+        end
+    end
+
+    describe "waitlisting students" do
+        it "should correctly show students on the waitlist" do
+            @student = Student.create!(firstname: "testfn2", lastname: "testln2", grade: 4, homeroom: "test")
+            activity = Activity.create!(title: 'testact', description: 'test description', spots: 1, chaperone: 'm', day: :Monday, time_start: DateTime.parse('3 pm').to_time, time_end: DateTime.parse('4 pm').to_time)
+            activity.update!(approval_status: :Approved)
+            @registration = Registration.create!(student: @student, activity: activity, status: :Waitlist, requested_registration_at: Time.now, registration_update_at: Time.now)
+            @user = User.create!(email: 'admin@colgate.edu', password: 'testing', role: :admin)
+            sign_in @user
+            visit students_path
+            expect(page).to have_content('Waitlisted for:')
+            expect(activity.waitlist_students[0].student_id).to eq(@student.id)
+            expect(page).to have_content('testfn2 testln2')
         end
         
     end
