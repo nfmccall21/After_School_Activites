@@ -69,9 +69,10 @@ RSpec.describe "Index route", type: :system do
 
   describe "Student Index" do
     before(:each) do
-      @s1 = Student.create!(firstname: "fn12", lastname: "ln1", grade: 20, homeroom: "hr1")
-      @s2 = Student.create!(firstname: "fn12", lastname: "ln2", grade: 20, homeroom: "hr2")
-      @s3 = Student.create!(firstname: "fn3", lastname: "ln3", grade: 20, homeroom: "hr3")
+      @parent = User.create!(email: 'parent@colgate.edu', password: 'testing', role: :parent)
+      @s1 = Student.create!(firstname: "fn12", lastname: "ln1", grade: 20, homeroom: "hr1", user: @parent)
+      @s2 = Student.create!(firstname: "fn12", lastname: "ln2", grade: 20, homeroom: "hr2", user: @parent)
+      @s3 = Student.create!(firstname: "fn3", lastname: "ln3", grade: 20, homeroom: "hr3", user: @parent)
       @admin = User.create!(email: 'admin@colgate.edu', password: 'testing', role: :admin)
       sign_in @admin
     end
