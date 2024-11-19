@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   
   # Allowing custom action for unapproved 
   resources :activities do # Changed this to a block
+    resources :registrations, only: [:new, :create]
     collection do
       get 'unapproved'
     end

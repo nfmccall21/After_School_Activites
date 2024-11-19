@@ -23,5 +23,28 @@
 
     <%= link_to "Back to index", activities_path, class: "btn btn-secondary" %>
     <%= link_to "Edit", edit_activity_path(@activity), class: "btn btn-info" %>
+    <%# link_to "Register a student" , new_registration_path(@activity), class: "btn btn-primary" %>
+    <% if !current_user.nil? && current_user.role == 'parent' %>
+    <div class="row">
+      <h1>Register for Activity: <%= @activity.title %></h1>
+    </div>
+
+    <%= form_with model: @registration, url: activity_registrations_path(@activity), method: :post, local: true do |f| %>
+      <div class="form-group">
+        <%= f.label :student_id, "Select a Student:" %>
+        <%= f.collection_select :student_id, @students, :id, ->(student) { "#{student.firstname} #{student.lastname}" }, prompt: "Select a student", class: "form-control" %>
+      </div>
+
+      <%= f.hidden_field :activity_id, value: @activity.id %>
+
+      <div class="form-group">
+        <%= f.submit "Register", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="container">
+      <p>You are not authorized to register students for activities.</p>
+    </div>
+  <% end %>
     <%= button_to "Delete", @activity, method: :delete, class: "btn btn-danger", form: { data: { turbo_confirm: "Are you sure?" } } %>
 </div>
