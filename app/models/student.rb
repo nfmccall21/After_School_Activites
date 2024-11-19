@@ -2,16 +2,14 @@ class Student < ApplicationRecord
 
     has_many :registrations
     has_many :activities, through: :registrations
-    belongs_to :user
+    has_and_belongs_to_many :users
 
     def enrolled_activities
-        #Registration.where(student_id: id).where(status: :Enrolled)
-        activities.joins(:registrations).merge(Registration.enrolled)
+        Registration.where(student_id: id).where(status: :Enrolled)
     end
 
     def waitlisted_activities
-        #Registration.where(student_id: id).where(status: :Waitlist)
-        activities.joins(:registrations).merge(Registration.waitlist)
+        Registration.where(student_id: id).where(status: :Waitlist)
     end
 
     def self.by_search_string(search)
@@ -22,6 +20,6 @@ class Student < ApplicationRecord
             Student.where("firstname LIKE ?", "%#{search_terms[0]}%").and(Student.where("lastname LIKE ?", "%#{search_terms[1]}%"))
         end
     end
-      
+
 
 end
