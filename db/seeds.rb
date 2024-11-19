@@ -156,13 +156,13 @@ u2 = User.create!(email: 'teacher@colgate.edu', password: 'testing', role: :teac
 u3 = User.create!(email: 'parent@colgate.edu', password: 'testing', role: :parent)
 
 # STUDENTS
-s1 = Student.new(firstname: 'Anna', lastname: 'Lieb', grade: 2, homeroom: "homeroom 1", user: u3)
+s1 = Student.new(firstname: 'Anna', lastname: 'Lieb', grade: 2, homeroom: "homeroom 1")
 s1.save!
-s2 = Student.new(firstname: 'Julia', lastname: 'Goosay', grade: 6, homeroom: "homeroom 2", user: u3)
+s2 = Student.new(firstname: 'Julia', lastname: 'Goosay', grade: 6, homeroom: "homeroom 2")
 s2.save!
-s3 = Student.new(firstname: 'Greta', lastname: 'Hoogstra', grade: 1, homeroom: "homeroom 3", user: u3)
+s3 = Student.new(firstname: 'Greta', lastname: 'Hoogstra', grade: 1, homeroom: "homeroom 3")
 s3.save!
-s4 = Student.new(firstname: 'Natalie', lastname: 'McCall', grade: 3, homeroom: "homeroom 4", user: u3)
+s4 = Student.new(firstname: 'Natalie', lastname: 'McCall', grade: 3, homeroom: "homeroom 4")
 s4.save!
 
 u1.students << s1
@@ -220,7 +220,7 @@ re10 = Registration.new()
 
 enrolledregarray = [re1,re2,re3,re4,re5,re6,re7,re8,re9,re10]
 # registered within the last year
-1.upto(3) do |i|
+1.upto(10) do |i|
   puts "Creating Enrolled Registratio #{i}"
   enrolledregarray[i-1] = Registration.create!(student: studentarr[rand(0..10)], activity: approvedactssarr[rand(0..5)], status: :Enrolled, requested_registration_at: FFaker::Time.between(Date.today - 365, Date.today), registration_update_at: Time.now )
 end
@@ -239,7 +239,7 @@ rp10 = Registration.new()
 
 pendingregarray = [rp1,rp2,rp3,rp4,rp5,rp6,rp7,rp8,rp9,rp10]
 # registered within the last year
-1.upto(3) do |i|
+1.upto(10) do |i|
   puts "Creating Pending Registratio #{i}"
   pendingregarray[i-1] = Registration.create!(student: studentarr[rand(0..10)], activity: approvedactssarr[rand(0..5)], status: :Pending, requested_registration_at: FFaker::Time.between(Date.today - 365, Date.today), registration_update_at: Time.now )
 end
@@ -258,7 +258,7 @@ rw10 = Registration.new()
 
 waitlistregarray = [rw1,rw2,rw3,rw4,rw5,rw6,rw7,rw8,rw9,rw10]
 # registered within the last year
-1.upto(3) do |i|
+1.upto(10) do |i|
   puts "Creating Waitlist Registratio #{i}"
   waitlistregarray[i-1] = Registration.create!(student: studentarr[rand(0..10)], activity: approvedactssarr[rand(0..5)], status: :Waitlist, requested_registration_at: FFaker::Time.between(Date.today - 365, Date.today), registration_update_at: Time.now )
 end
