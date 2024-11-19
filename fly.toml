@@ -1,20 +1,13 @@
-# fly.toml app configuration file generated for after-school-activites on 2024-11-15T13:21:29-05:00
+# fly.toml app configuration file generated for after-school-activites on 2024-11-19T17:38:41-05:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
 app = 'after-school-activites'
-primary_region = 'bos'
+primary_region = 'ewr'
 console_command = '/rails/bin/rails console'
 
 [build]
-
-[env]
-  DATABASE_URL = 'sqlite3:///data/production.sqlite3'
-
-[[mounts]]
-  source = 'data'
-  destination = '/data'
 
 [http_service]
   internal_port = 3000
@@ -24,26 +17,7 @@ console_command = '/rails/bin/rails console'
   min_machines_running = 0
   processes = ['app']
 
-[checks]
-  [checks.status]
-    port = 3000
-    type = 'http'
-    interval = '10s'
-    timeout = '2s'
-    grace_period = '5s'
-    method = 'GET'
-    path = '/up'
-    protocol = 'http'
-    tls_skip_verify = false
-
-    [checks.status.headers]
-      X-Forwarded-Proto = 'https'
-
 [[vm]]
   memory = '1gb'
   cpu_kind = 'shared'
   cpus = 1
-
-[[statics]]
-  guest_path = '/rails/public'
-  url_prefix = '/'
