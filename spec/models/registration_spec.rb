@@ -1,12 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Registration, type: :model do
-  before do # do i need to do this if i have seeds?
-    @parent = User.create!(email: 'parent@colgate.edu', password: 'testing', role: :parent)
-    
-    @student = Student.create!(firstname: 'Natalie', lastname: 'McCall', grade: 3, homeroom: "homeroom 4", user: @parent)
-
-    @activity = Activity.create!(title: 'Games Club', description: 'Come play! Each week we will alternate between board games and video games', spots: 25, chaperone: 'ms. V', approval_status: :Pending, day: :Monday, time_start: DateTime.parse('3 pm').to_time, time_end: DateTime.parse('5 pm').to_time)
+  let(:parent) { User.create!(email: 'parent@colgate.edu', password: 'testing', role: :parent) }
+  let(:student) { Student.create!(firstname: 'Natalie', lastname: 'McCall', grade: 3, homeroom: "homeroom 4", user: @parent) }
+  let(:activity) { Activity.create!(title: 'Games Club', description: 'Come play! Each week we will alternate between board games and video games', spots: 25, chaperone: 'ms. V', approval_status: :Pending, day: :Monday, time_start: DateTime.parse('3 pm').to_time, time_end: DateTime.parse('5 pm').to_time) }
   end
   
   describe "model attributes" do

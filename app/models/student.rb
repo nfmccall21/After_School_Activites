@@ -17,8 +17,6 @@ class Student < ApplicationRecord
     end
 
     def self.by_search_string(search)
-        # search_terms = search.split
-        # Student.where("firstname LIKE ?", "%#{search[0]}%").or(Student.where("lastname LIKE ?", "%#{search[1]}%"))
         search_terms = search.split
         if search_terms.length == 1
             Student.where("firstname LIKE ?", "%#{search}%").or(Student.where("lastname LIKE ?", "%#{search}%"))
