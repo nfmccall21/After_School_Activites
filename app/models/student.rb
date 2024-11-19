@@ -2,7 +2,7 @@ class Student < ApplicationRecord
 
     has_many :registrations
     has_many :activities, through: :registrations
-    has_and_belongs_to_many :users
+    belongs_to :user
 
     # Do we want to add validations?
 

@@ -3,7 +3,7 @@
     <h1>Propose Activity</h1>
   </div>
 
-  <% if current_user.role == 'parent' %>
+  <% if !current_user.nil? && current_user.role == 'parent' %>
     <div class="row">
       <h1>Register for Activity: <%= @activity.title %></h1>
     </div>
@@ -11,7 +11,7 @@
     <%= form_with model: @registration, url: activity_registrations_path(@activity), method: :post, local: true do |f| %>
       <div class="form-group">
         <%= f.label :student_id, "Select a Student:" %>
-        <%= f.collection_select :student_id, @students, :id, :full_name, prompt: "Select a student", class: "form-control" %>
+        <%= f.collection_select :student_id, @students, :id, ->(student) { "#{student.firstname} #{student.lastname}" }, prompt: "Select a student", class: "form-control" %>
       </div>
 
       <%= f.hidden_field :activity_id, value: @activity.id %>

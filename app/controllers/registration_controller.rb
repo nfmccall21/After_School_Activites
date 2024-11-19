@@ -1,10 +1,7 @@
 class RegistrationsController < ApplicationController
     before_action :set_activity
-    #before_action :ensure_parent, only: [:new, :create]
   
     def new
-      Rails.logger.debug "Current User: #{current_user.inspect}"
-      
       if current_user && current_user.role == "parent"
         @registration = Registration.new
         @students = current_user.students
@@ -41,13 +38,6 @@ class RegistrationsController < ApplicationController
   
     def registration_params
       params.require(:registration).permit(:student_id)
-    end
-
-    def ensure_parent
-      unless current_user&.role == 'parent'
-        flash[:alert] = "You are not authorized to register for activities."
-        redirect_to root_path # Or another appropriate path
-      end
     end
 
   end

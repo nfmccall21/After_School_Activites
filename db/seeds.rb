@@ -156,13 +156,13 @@ u2 = User.create!(email: 'teacher@colgate.edu', password: 'testing', role: :teac
 u3 = User.create!(email: 'parent@colgate.edu', password: 'testing', role: :parent)
 
 # STUDENTS
-s1 = Student.new(firstname: 'Anna', lastname: 'Lieb', grade: 2, homeroom: "homeroom 1")
+s1 = Student.new(firstname: 'Anna', lastname: 'Lieb', grade: 2, homeroom: "homeroom 1", user: u3)
 s1.save!
-s2 = Student.new(firstname: 'Julia', lastname: 'Goosay', grade: 6, homeroom: "homeroom 2")
+s2 = Student.new(firstname: 'Julia', lastname: 'Goosay', grade: 6, homeroom: "homeroom 2", user: u3)
 s2.save!
-s3 = Student.new(firstname: 'Greta', lastname: 'Hoogstra', grade: 1, homeroom: "homeroom 3")
+s3 = Student.new(firstname: 'Greta', lastname: 'Hoogstra', grade: 1, homeroom: "homeroom 3", user: u3)
 s3.save!
-s4 = Student.new(firstname: 'Natalie', lastname: 'McCall', grade: 3, homeroom: "homeroom 4")
+s4 = Student.new(firstname: 'Natalie', lastname: 'McCall', grade: 3, homeroom: "homeroom 4", user: u3)
 s4.save!
 
 u1.students << s1

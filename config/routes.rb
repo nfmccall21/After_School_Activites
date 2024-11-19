@@ -30,6 +30,7 @@ Rails.application.routes.draw do
       patch 'decline'
       get 'accept'
       get 'decline'
+      post 'register'
     end
   end
 end
