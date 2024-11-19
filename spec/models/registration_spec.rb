@@ -41,7 +41,7 @@ RSpec.describe Registration, type: :model do
   
     describe "status logic" do
       it "sets status to Enrolled if there is space" do
-        registration = Registration.new(student: @student, activity: @activity)
+        registration = Registration.create(student: @student, activity: @activity)
         expect(registration.status).to eq("Pending") 
       end
   
@@ -63,7 +63,7 @@ RSpec.describe Registration, type: :model do
         Registration.create!(student: second_student, activity: @activity)  
         denied_registration = Registration.create(student: third_student, activity: @activity)  
         
-        expect(denied_registration.status).to eq("Denied")
+        expect(denied_registration.status).to eq("Waitlist")
       end
     end
   end

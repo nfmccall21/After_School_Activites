@@ -26,7 +26,7 @@ class ActivitiesController < ApplicationController
   end
 
   def show
-    @activity = Activity.find(params[:id]) #remove?
+    @activity = Activity.find(params[:id]) 
     @students = Student.all
     @registrations = @activity.registrations.includes(:student)
   end

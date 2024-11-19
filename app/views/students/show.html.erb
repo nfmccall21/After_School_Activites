@@ -19,22 +19,25 @@
     </div>
 
     <div class="register-student">
-        <h4>Register a Student</h4>
-        <%= form_with url: register_activity_path(@activity), method: :post, local: true do |f| %> 
-            <div class="form-group">
-                <%= label_tag :student_id, "Select a Student:" %>
-                <%= f.select :student_id, options_from_collection_for_select(@students, :id, 
-                    lambda { |student| "#{student.firstname} #{student.lastname}" }), class: "form-control" %>
-            </div>
-            <div class="form-group">
-                <%= hidden_field_tag :activity_id, @activity.id %>
-                <%= submit_tag "Register", class: "btn btn-info" %>
-            </div>
-        <% end %>
+    <h4>Register a Student</h4>
+    <% if @activity %> <!-- Check if @activity is not nil -->
+      <%= form_with url: register_activity_path(@activity), method: :post, local: true do |f| %> 
+        <div class="form-group">
+          <%= label_tag :student_id, "Select a Student:" %>
+          <%= f.select :student_id, options_from_collection_for_select(@students, :id, 
+              lambda { |student| "#{student.firstname} #{student.lastname}" }), class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= hidden_field_tag :activity_id, @activity.id %>
+          <%= submit_tag "Register", class: "btn btn-info" %>
+        </div>
+      <% end %>
+    <% else %>
+      <p>Activity not found.</p>
+    <% end %>
     </div>
 
-    <%= link_to "Back to index", students_path, class: "btn btn-secondary" %>
-    <%= button_to "Delete Student", @student, method: :delete, class: "btn btn-danger" %>
-    
+    <%= button_to "Delete Student", @student, method: :delete, class: "btn btn-danger" %><br><br>
+    <%= link_to "Back to Activities", students_path, class: "btn btn-secondary" %>
     
 </div>
