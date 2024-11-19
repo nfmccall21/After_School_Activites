@@ -56,8 +56,8 @@ RSpec.describe Registration, type: :model do
   
       it "sets status to Denied if waitlist is full" do
         @activity.update!(spots: 1)
-        second_student = Student.create!(:student, user: @parent, firstname: 'John', lastname: 'Doe', grade: 4)
-        third_student = Student.create!(:student, user: @parent, firstname: 'Sally', lastname: 'Johnson', grade: 5)
+        second_student = Student.create!(user: @parent, firstname: 'John', lastname: 'Doe', grade: 4)
+        third_student = Student.create!(user: @parent, firstname: 'Sally', lastname: 'Johnson', grade: 5)
         
         Registration.create!(student: @student, activity: @activity) 
         Registration.create!(student: second_student, activity: @activity)  

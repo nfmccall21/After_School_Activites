@@ -12,7 +12,8 @@ RSpec.describe Student, type: :model do
     end
 
     it "should allow creation of model objects with all attributes" do
-      a = Student.new(firstname: "test", lastname: "test", grade: 20, homeroom: "test")
+      parent = User.create!(email: 'parent@colgate.edu', password: 'testing', role: :parent)
+      a = Student.new(firstname: "test", lastname: "test", grade: 20, homeroom: "test", user: parent)
       expect(a.save).to be true
       expect(Student.all.count).to eq(1)
     end
