@@ -58,7 +58,7 @@ RSpec.describe "new/delete", type: :system do
         it 'should delete an activity' do
             visit activities_path
             click_on 'test'
-            expect(page).to have_content('Back to index')
+            expect(page).to have_content('Back to Activities')
             click_on 'Delete'
             expect(page).to have_content('activity removed')
             expect(page).not_to have_content('test')

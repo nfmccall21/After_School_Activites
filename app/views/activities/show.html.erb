@@ -40,7 +40,7 @@
     <% end %>
   </div>
 
-    <%= link_to "Back to index", activities_path, class: "btn btn-secondary" %>
+    <%= link_to "Back to Activities", activities_path, class: "btn btn-secondary" %>
     <%= link_to "Edit", edit_activity_path(@activity), class: "btn btn-info" %>
     <!-- <% link_to "Register a student" , new_registration_path(@activity), class: "btn btn-primary" %> -->
     <%= button_to "Delete", @activity, method: :delete, class: "btn btn-danger", form: { data: { turbo_confirm: "Are you sure?" } } %>

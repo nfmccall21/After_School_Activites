@@ -165,8 +165,8 @@ s3.save!
 s4 = Student.new(firstname: 'Natalie', lastname: 'McCall', grade: 3, homeroom: "homeroom 4")
 s4.save!
 
-u1.students << s1
-u1.students << s2
+u3.students << s1
+u3.students << s2
 
 u2.students << s3
 u2.students << s4
