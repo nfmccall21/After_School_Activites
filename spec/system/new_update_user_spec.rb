@@ -53,8 +53,8 @@ RSpec.describe "User System Tests", type: :system do
 
     describe "Visibility of Students" do
       before (:each) do
-        @student = Student.create!(firstname: 'firstname', lastname: 'lastname', grade: 3, homeroom: 'test')
         @parent = User.create!(email: 'parent@colgate.edu', password: 'testing', role: :parent)
+        @student = Student.create!(firstname: 'firstname', lastname: 'lastname', grade: 3, homeroom: 'test', user: @parent)
         @admin = User.create!(email: 'admin@colgate.edu', password: 'testing', role: :admin)
       end
       it "parent see no if not theres when admin can" do

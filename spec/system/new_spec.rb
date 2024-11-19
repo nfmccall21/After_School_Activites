@@ -71,7 +71,7 @@ RSpec.describe "new/delete", type: :system do
             sign_in @user
         end
         it "should create a new student with valid input" do
-            @student = Student.create(firstname: "test", lastname: "test", grade: 20, homeroom: "test")
+            @student = Student.create(firstname: "test", lastname: "test", grade: 20, homeroom: "test", user: @user)
             @user.students << @student
             visit students_path
             expect(page).to have_content('test')
@@ -95,7 +95,7 @@ RSpec.describe "new/delete", type: :system do
             expect(page).to have_content("added!")
         end
         it "should show the new student on the index page" do
-            @student = Student.create(firstname: "testfn2", lastname: "testln2", grade: 4, homeroom: "test")
+            @student = Student.create(firstname: "testfn2", lastname: "testln2", grade: 4, homeroom: "test", user: @user)
             @user.students << @student
             visit students_path
             click_on "#{@student[:firstname]} #{@student[:lastname]}"
@@ -103,7 +103,7 @@ RSpec.describe "new/delete", type: :system do
             expect(page.current_path).to eq(student_path(@student))
         end
         it "should successfully delete a student" do
-            @student = Student.create(firstname: "testfn3", lastname: "testln3", grade: 4, homeroom: "test")
+            @student = Student.create(firstname: "testfn3", lastname: "testln3", grade: 4, homeroom: "test", user: @user)
             @user.students << @student
             visit students_path
             click_on 'testfn3 testln3'
@@ -116,7 +116,7 @@ RSpec.describe "new/delete", type: :system do
 
     describe "waitlisting students" do
         it "should correctly show students on the waitlist" do
-            @student = Student.create!(firstname: "testfn2", lastname: "testln2", grade: 4, homeroom: "test")
+            @student = Student.create!(firstname: "testfn2", lastname: "testln2", grade: 4, homeroom: "test", user: @user)
             activity = Activity.create!(title: 'testact', description: 'test description', spots: 1, chaperone: 'm', day: :Monday, time_start: DateTime.parse('3 pm').to_time, time_end: DateTime.parse('4 pm').to_time)
             activity.update!(approval_status: :Approved)
             @registration = Registration.create!(student: @student, activity: activity, status: :Waitlist, requested_registration_at: Time.now, registration_update_at: Time.now)
