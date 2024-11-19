@@ -1,67 +1,66 @@
 <div class="container">
-    <div class="row">
-        <h1>Activities</h1>
-    </div>
 
-    <div class="row">
-       <%= form_with url: activities_path, method: :get do |form| %>
-      <%= form.label :query, "Search for: " %>
-      <%= form.text_field :query %>
-      <%= form.submit "Filter Activities" %>
-      <% end %>
-    </div>
+  <div class="menu-item"><%= link_to "View Students", students_path, class: "btn btn-info" %></div><br><br>
+  <div class="row">
+      <h1>Activities</h1>
+  </div>
 
-    <div class="next row">
+  
+
+  <div class="row">
       <%= form_with url: activities_path, method: :get do |form| %>
-      <%= form.label :days, "Day of the week:" %>
-      <%= form.check_box :Monday %>
-      <%= form.label :Monday, "Monday " %>
-      <%= form.check_box :Tuesday %>
-      <%= form.label :Tuesday, "Tuesday " %>
-      <%= form.check_box :Wednesday %>
-      <%= form.label :Wednesday, "Wednesday " %>
-      <%= form.check_box :Thursday %>
-      <%= form.label :Thursday, "Thursday " %>
-      <%= form.check_box :Friday %>
-      <%= form.label :Friday, "Friday " %>
-      <%= form.submit "Filter Days" %>
-      <% end %>
-    </div>
-    
-
-     <div class="third row">
-       <%= form_with url: activities_path, method: :get do |form| %>
-        <%= form.check_box :avail %>
-        <%= form.label :avail, "Available? (Will Implemented After Student Model is Created) " %>
-        <%= form.submit "Filter Availability" %>
-      <% end %>
-    </div>
-
-    <!--FROM index.html.erb FROM LAB 6-->
-    <div class="row row-cols-4 activitiesview">
-      <% @activities.where(approval_status: :Approved).each_with_index do |activity| %>
-        <%# <div class="col"> %>
-          <%# <div class="card mb-1 p-2 h-100"> %>
-            <div class="activity">
-              <div class="group">
-                <h5 class="card-title">
-                  <!--routing to show path now-->
-                  <%= link_to activity.title, activity_path(activity) %> 
-                </h5>
-                <span class="weekday"><%= activity.day %></span>
-              </div>
-              <span class="description"><%= activity.description %></span>
-              <%= link_to "More...", activity_path(activity), class: "btn btn-info"%>
-            </div>
-          <%# </div> %>
-        <%# </div> %>
-      <% end %>
-    </div>
-
-    <% if current_user != nil && (current_user.admin? || current_user.teacher?)%>
-      <div class="menu-item"><%= link_to "Unapproved Activities", unapproved_activities_path, class: "btn btn-info" %></div><br>
+    <%= form.label :query, "Search for: " %>
+    <%= form.text_field :query %>
+    <%= form.submit "Filter Activities" %>
     <% end %>
-    <%= link_to "Propose an Activity!", new_activity_path, class: "btn btn-info" %><br><br>
-    <div class="menu-item"><%= link_to "View Students", students_path, class: "btn btn-info" %></div><br><br>
+  </div>
+
+  <div class="next row">
+    <%= form_with url: activities_path, method: :get do |form| %>
+    <%= form.label :days, "Day of the week:" %>
+    <%= form.check_box :Monday %>
+    <%= form.label :Monday, "Monday " %>
+    <%= form.check_box :Tuesday %>
+    <%= form.label :Tuesday, "Tuesday " %>
+    <%= form.check_box :Wednesday %>
+    <%= form.label :Wednesday, "Wednesday " %>
+    <%= form.check_box :Thursday %>
+    <%= form.label :Thursday, "Thursday " %>
+    <%= form.check_box :Friday %>
+    <%= form.label :Friday, "Friday " %>
+    <%= form.submit "Filter Days" %>
+    <% end %>
+  </div>
+  
+
+    <div class="third row">
+      <%= form_with url: activities_path, method: :get do |form| %>
+      <%= form.check_box :avail %>
+      <%= form.label :avail, "Available? (Will Implemented Later) " %>
+      <%= form.submit "Filter Availability" %>
+    <% end %>
+  </div>
+
+  <div class="row row-cols-4 activitiesview">
+    <% @activities.where(approval_status: :Approved).each_with_index do |activity| %>
+      <div class="activity">
+        <div class="group">
+          <h5 class="card-title">
+            <!--routing to show path now-->
+            <%= link_to activity.title, activity_path(activity) %> 
+          </h5>
+          <span class="weekday"><%= activity.day %></span>
+        </div>
+        <span class="description"><%= activity.description %></span>
+        <%= link_to "More...", activity_path(activity), class: "btn btn-info"%>
+      </div>
+    <% end %>
+  </div>
+
+  <% if current_user != nil && (current_user.admin? || current_user.teacher?)%>
+    <div class="menu-item"><%= link_to "Unapproved Activities", unapproved_activities_path, class: "btn btn-info" %></div><br>
+  <% end %>
+  <%= link_to "Propose an Activity!", new_activity_path, class: "btn btn-info" %><br><br>
+    
     
 </div>

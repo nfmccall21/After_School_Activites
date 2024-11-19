@@ -1,43 +1,29 @@
 <div class="container">
-    <h3 class="hero"><%= "#{@student.firstname} #{@student.lastname}" %></h3>
+  <h3 class="hero"><%= "#{@student.firstname} #{@student.lastname}" %></h3>
 
-    <div class="student-list">
-    
-            <%if @student.enrolled_activities != nil%>
-                <div class="bold"> <%= "Enrolled Activties:" %> </div>
-                <% @student.enrolled_activities.each do |a| %>
-                    <div> <%= link_to a.activity.title, activity_path(a.activity) %>  </div> 
-                <% end %>
-            <% end %>
-            <%if @student.waitlisted_activities != nil %>
-                <div class="bold"> <%= "Waitlisted Activties:" %> </div>
-                <% @student.waitlisted_activities.each do |a| %>
-                    <div> <%= link_to a.activity.title, activity_path(a.activity) %>  </div> 
-                <% end %>
-            <% end %>
-        
-    </div>
+  <div class="student-info">
+    <div> <%= "Grade: #{@student.grade}"%> </div>
+    <div> <%= "Homeroom: #{@student.homeroom}" %> </div>
+    <br>
+  </div>
 
-    <div class="register-student">
-    <h4>Register a Student</h4>
-    <% if @activity %> <!-- Check if @activity is not nil -->
-      <%= form_with url: register_activity_path(@activity), method: :post, local: true do |f| %> 
-        <div class="form-group">
-          <%= label_tag :student_id, "Select a Student:" %>
-          <%= f.select :student_id, options_from_collection_for_select(@students, :id, 
-              lambda { |student| "#{student.firstname} #{student.lastname}" }), class: "form-control" %>
-        </div>
-        <div class="form-group">
-          <%= hidden_field_tag :activity_id, @activity.id %>
-          <%= submit_tag "Register", class: "btn btn-info" %>
-        </div>
+  <div class="student-list">
+    <%if @student.enrolled_activities != nil%>
+      <div class="bold"> <%= "Enrolled Activties:" %> </div>
+      <% @student.enrolled_activities.each do |a| %>
+        <div> <%= link_to a.activity.title, activity_path(a.activity) %>  </div> 
       <% end %>
-    <% else %>
-      <p>Activity not found.</p>
     <% end %>
-    </div>
+    <%if @student.waitlisted_activities != nil %>
+      <div class="bold"> <%= "Waitlisted Activties:" %> </div>
+      <% @student.waitlisted_activities.each do |a| %>
+        <div> <%= link_to a.activity.title, activity_path(a.activity) %>  </div> 
+      <% end %>
+    <% end %>
+  </div>
+  <br>
 
-    <%= button_to "Delete Student", @student, method: :delete, class: "btn btn-danger" %><br><br>
-    <%= link_to "Back to Activities", students_path, class: "btn btn-secondary" %>
+  <%= button_to "Delete Student", @student, method: :delete, class: "btn btn-danger" %><br><br>
+  <%= link_to "Back to Students", students_path, class: "btn btn-secondary" %>
     
 </div>
