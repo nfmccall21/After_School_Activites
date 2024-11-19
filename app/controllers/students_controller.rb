@@ -4,7 +4,6 @@ class StudentsController < ApplicationController
     
       def index
         @students = Student.all.order(:lastname)
-        # puts current_user.role
         if current_user.role != "admin"
           @students = current_user.students 
         end
