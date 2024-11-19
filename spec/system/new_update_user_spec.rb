@@ -57,7 +57,7 @@ RSpec.describe "User System Tests", type: :system do
         @student = Student.create!(firstname: 'firstname', lastname: 'lastname', grade: 3, homeroom: 'test', user: @parent)
         @admin = User.create!(email: 'admin@colgate.edu', password: 'testing', role: :admin)
       end
-      it "parent see no if not theres when admin can" do
+      it "parent should not see other student" do
         sign_in @parent
         visit students_path
         expect(page).not_to have_content('firstname')

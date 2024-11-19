@@ -116,7 +116,8 @@ RSpec.describe "new/delete", type: :system do
 
     describe "waitlisting students" do
         it "should correctly show students on the waitlist" do
-            @student = Student.create!(firstname: "testfn2", lastname: "testln2", grade: 4, homeroom: "test", user: @user)
+            @parent = User.create!(email: 'parent@colgate.edu', password: 'testing', role: :parent)
+            @student = Student.create!(firstname: "testfn2", lastname: "testln2", grade: 4, homeroom: "test", user: @parent)
             activity = Activity.create!(title: 'testact', description: 'test description', spots: 1, chaperone: 'm', day: :Monday, time_start: DateTime.parse('3 pm').to_time, time_end: DateTime.parse('4 pm').to_time)
             activity.update!(approval_status: :Approved)
             @registration = Registration.create!(student: @student, activity: activity, status: :Waitlist, requested_registration_at: Time.now, registration_update_at: Time.now)
