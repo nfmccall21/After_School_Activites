@@ -1,6 +1,6 @@
 class ActivitiesController < ApplicationController
   
-  before_action :authenticate_user!, only: %i[show]
+  before_action :authenticate_user!, only: %i[show register]
   before_action :set_activity, only: [:accept, :decline]
 
   def index
@@ -27,6 +27,7 @@ class ActivitiesController < ApplicationController
 
     def show
       @activity = Activity.find(params[:id])
+      @students = Student.all
     end
 
     def new
@@ -88,6 +89,26 @@ class ActivitiesController < ApplicationController
       else
         redirect_to activities_path, alert: 'Activity cannot be denied.'
       end
+    end
+
+    def register
+      @activity = Activity.find(params[:id])
+      @student = Student.find(params[:student_id])
+      existing_registration = @activity.registrations.find_by(student: @student)
+      if existing_registration
+        flash[:alert] = "#{@student.firstname} #{@student.lastname} is already registered for this activity."
+        redirect_to activity_path(@activity)
+        return
+      end
+      @registration = @activity.registrations.new(student: @student, status: :Pending)
+
+      if @registration.save
+        flash[:notice] = "#{@student.firstname} #{@student.lastname} has been successfully registered for #{@activity.title}. Registration status is 'Pending'."
+      else
+        flash[:alert] = "There was an issue with registering #{@student.firstname} #{@student.lastname} for this activity."
+      end
+
+      redirect_to activity_path(@activity)
     end
 
     private
