@@ -110,6 +110,23 @@ input[type="submit"]:hover {
     font-weight: bold;
 }
 
+.act-status-list {
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid rgb(108, 42, 183);
+    border-radius: 3px;
+}
+
+.todo {
+    background-color: rgb(227, 109, 109);
+    color: rgb(0, 0, 0);
+    border: 1px solid rgb(108, 42, 183);
+    border-radius: 5px;
+    padding: 5px;
+}
+
 
 
 
