@@ -18,10 +18,6 @@
     font-family: 'Palatino','Gill Sans', helvetica, arial, sans-serif;
     line-height: 1.3em;
 }
-
-
-
-
 .usercontrol{
     display: flex;
     background-color: silver;
@@ -67,7 +63,6 @@ input[type="submit"]:hover {
     background-color:rgb(203, 203, 203);
 }
 
-
 .activitiesview {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(20%, 1fr)); /* Show 4 attractions per row */
@@ -89,13 +84,17 @@ input[type="submit"]:hover {
     height: 95%;   
 }
 
+.activity:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    background-color: rgb(253, 236, 255);
+}
+
 .description {
-    align-self: flex-end; /* Anchor button to the bottom */
+    align-self: flex-end; 
     padding: 8px;
     position: relative;
     z-index: 3;
 }
-
 
 .weekday {
     font-style: italic;
