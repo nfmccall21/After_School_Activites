@@ -15,7 +15,8 @@
  */
 
  body{
-    font-family: 'Palatino','Gill Sans', helvetica, arial, sans-serif;
+    font-family: 'Inter', 'Gill Sans';
+    /* font-family: 'Palatino','Gill Sans', helvetica, arial, sans-serif; */
     line-height: 1.3em;
 }
 .usercontrol{
