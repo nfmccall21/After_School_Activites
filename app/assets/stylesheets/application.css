@@ -15,6 +15,7 @@
  */
 
  body{
+    background-color: rgba(129, 150, 205, 0.364);
     font-family: 'Inter', 'Gill Sans';
     /* font-family: 'Palatino','Gill Sans', helvetica, arial, sans-serif; */
     line-height: 1.3em;
@@ -83,6 +84,7 @@ input[type="submit"]:hover {
     flex-direction: column;
     justify-content: space-between; 
     height: 95%;   
+    background-color: rgb(238, 230, 230);
 }
 
 .activity:hover {
@@ -103,6 +105,7 @@ input[type="submit"]:hover {
 }
 
 .activity .btn {
+    background-color: rgba(68, 89, 252, 0.462);
     align-self: flex-end;
     width: 100%
 }
