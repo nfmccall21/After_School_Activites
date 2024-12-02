@@ -33,4 +33,6 @@ Rails.application.routes.draw do
       post 'register'
     end
   end
+  get '/favicon.png', to: redirect(ActionController::Base.helpers.asset_path('favicon.png'))
+
 end
