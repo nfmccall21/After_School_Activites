@@ -44,6 +44,14 @@
     
     <%# FROM ASSIGNMENT 5 END %>
     <br>
-    <%= yield %>
+    <div class="innerboddy"> 
+      <%= yield %>
+    </div>
+    <br>
+    <div class="footer">
+      <%= render "application/footer", locals: {current_user: current_user}%>
+    </div>
+
+
   </body>
 </html>
