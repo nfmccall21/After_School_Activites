@@ -33,13 +33,21 @@
   </div>
   
 
-    <div class="third row">
-      <%= form_with url: activities_path, method: :get do |form| %>
+  <div class="third row">
+    <%= form_with url: activities_path, method: :get do |form| %>
       <%= form.check_box :avail %>
       <%= form.label :avail, "Available? (Will Implemented Later) " %>
       <%= form.submit "Filter Availability" %>
     <% end %>
   </div>
+
+  <div class="fourth row">
+    <%= form_with url: activities_path, method: :get do |form| %>
+      <%= form.submit "Reset All Filters" %>
+    <% end %>
+  </div>
+
+
 
   <div class="row row-cols-4 activitiesview">
     <% @activities.where(approval_status: :Approved).each_with_index do |activity| %>
