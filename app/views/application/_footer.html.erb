@@ -1,0 +1,36 @@
+<div>
+    <% if current_user %>
+        <%= "Current User: #{current_user.email} | Role: #{current_user.role}" %>
+    <% end %>
+</div>
+<div class="footercontainer">
+    <div>
+        <% if current_user%> 
+            <% if current_user.admin? %> <%# IF NOT JUST PARENTAL BUTTONS %>
+                <div class="adminlinks">
+                    Admin Links: <br> <%# unapproved activities %>
+                    <%= link_to "Unapproved Activities", unapproved_activities_path, class: "link" %>
+                    
+                </div>
+            <% end %>
+            <div class="userlinks">
+                All Links: <br> <%# all activities, all students, propose an activity %>
+                <%= link_to "View Activities", activities_path, class: "link" %> <br>
+                <%= link_to "View Students", students_path, class: "link" %> <br>
+                <%= link_to "Propose an Activity", new_activity_path, class: "link" %> <br>
+            </div>
+        <% end %>
+    </div>
+    
+    <%# logo here%>
+    <div class="logo">
+        <%= image_tag("/icon.png" , alt:"Logo", class:"footerlogo") %>
+    </div>
+
+
+   
+
+
+
+
+</div>

@@ -20,6 +20,37 @@
     /* font-family: 'Palatino','Gill Sans', helvetica, arial, sans-serif; */
     line-height: 1.3em;
 }
+.innerboddy, .footercontainer .userlinks, .footercontainer .adminlinks {
+    margin: 10px;;
+}
+.user{
+    font-weight: bold;
+}
+
+.footer {
+    width: 100%;
+    background-color: silver;
+    padding: 5px;
+    font-weight:lighter;
+}
+
+.footercontainer{
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.footercontainer .link {
+    color:rgb(105, 105, 105);
+    font-weight:lighter;
+}
+
+
+.footerlogo {
+    max-height: 100px;
+}
+
+
 .usercontrol{
     display: flex;
     background-color: silver;
@@ -29,9 +60,7 @@
     width: 100%
 }
 
-.user{
-    font-weight: bold;
-}
+
 
 .loginout {
     display: flex;
@@ -107,7 +136,19 @@ input[type="submit"]:hover {
 .activity .btn {
     background-color: rgba(68, 89, 252, 0.462);
     align-self: flex-end;
-    width: 100%
+    width: 100%;
+}
+
+.activity .btn:hover {
+    background-color: rgba(68, 89, 252, 0.885);
+    color: white;
+    align-self: flex-end;
+    width: 100%;
+    
+}
+
+.btn-info{
+    background-color: rgba(55, 72, 200, 0.728);
 }
 
 .bold {
