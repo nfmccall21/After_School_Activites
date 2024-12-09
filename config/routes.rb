@@ -17,6 +17,10 @@ Rails.application.routes.draw do
   resources :students
 
   resources :registrations
+
+  #approve/deny routes for registration
+  put "/registrations/:id/approve", to: "registrations#approve", as: 'registration_approve'
+
   
   # Allowing custom action for unapproved 
   resources :activities do # Changed this to a block

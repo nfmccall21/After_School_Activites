@@ -1,6 +1,12 @@
 <div class="container">
+  <div>
+    <% if current_user != nil && (current_user.admin? || current_user.teacher?)%>
+      <%= link_to "View Students", students_path, class: "btn btn-info" %>
+      <%= link_to "Unapproved Activities", unapproved_activities_path, class: "btn btn-info" %> <br><br>
+    <% end %>
+    <%= link_to "Propose an Activity!", new_activity_path, class: "btn btn-info" %><br> <br>
+  </div>
 
-  <div class="menu-item"><%= link_to "View Students", students_path, class: "btn btn-info" %></div><br><br>
   <div class="row">
       <h1>Activities</h1>
   </div>
@@ -65,10 +71,7 @@
     <% end %>
   </div>
 
-  <% if current_user != nil && (current_user.admin? || current_user.teacher?)%>
-    <div class="menu-item"><%= link_to "Unapproved Activities", unapproved_activities_path, class: "btn btn-info" %></div><br>
-  <% end %>
-  <%= link_to "Propose an Activity!", new_activity_path, class: "btn btn-info" %><br><br>
+  
     
     
 </div>
