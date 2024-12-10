@@ -2,8 +2,16 @@
   <div class="row">
     <h1>Propose Activity</h1>
   </div>
+  <%= link_to "Back to Activities", activities_path, class: "btn btn-secondary backtoactivities" %> <br><br>
 
-  <% if !current_user.nil? && current_user.role == 'parent' %>
+  <div class="todo">
+      <%= 'I commented out the first if statement on this page. Not sure why we would have new registration stuff here (and was causing error)'%> 
+  </div> 
+  <br>
+
+
+  <%# if !current_user.nil? && current_user.role == 'parent' %>
+  <% if !current_user.nil? && current_user.nil? %>
     <div class="row">
       <h1>Register for Activity: <%= @activity.title %></h1>
     </div>
@@ -62,6 +70,6 @@
       <%= f.time_select :time_end, include_seconds: false %>
     </div>
 
-    <%= f.submit "Propose Activity", class: 'btn btn-primary' %>
+    <%= f.submit "Propose Activity"%>
   <% end %>
 </div>

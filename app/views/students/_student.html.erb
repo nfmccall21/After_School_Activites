@@ -1,0 +1,17 @@
+<tr id="<%= dom_id(student) %>">
+  <td><%= "#{student.firstname} #{student.lastname}"  %>
+  <td><%= "#{student.homeroom}"  %>
+  <td>
+    <% if student.enrolled_activities.empty? %>
+        <p>No activities</p>
+    <% else %>
+        <ul>
+            <% student.enrolled_activities.each do |act| %>
+                <li><%= link_to act.activity.title, activity_path(act.activity) %></li>
+            <% end %>
+        </ul>
+         <ul>
+            
+        </ul>
+    <% end %>
+</tr>
