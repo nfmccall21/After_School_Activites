@@ -18,10 +18,16 @@
     <%if @student.waitlisted_activities != nil && @student.waitlisted_activities.count != 0%>
       <div class="act-status-list"> <%= "Waitlisted Activties:" %> 
       <% @student.waitlisted_activities.each do |a| %>
-        <div class="listed-act">
+        <div class="listed-act" id="<%= dom_id(a) %>">
           <%= link_to a.activity.title, activity_path(a.activity) %> 
-          <div class="todo">
-            <%= '    TODO: BUTTON FOR ADMIN TO APPROVE/DECLINE & BUTTON FOR PARENT TO CANCEL'%> 
+          <div>
+            <% if !current_user.nil? && (current_user.admin? || current_user.teacher?)%>
+              <%= button_to "Deny", registration_path(a.id), method: :delete, class: "btn btn-danger" %> 
+              <%= button_to "Approve", registration_approve_path(a.id), method: :put, class: "btn btn-info"%> 
+            <%end%>
+            <% if !current_user.nil? && current_user.parent? %>
+              <%= button_to "Cancel", registration_path(a.id), method: :delete,class: "btn btn-danger" %> 
+            <% end %>
           </div> 
         </div>
       <% end %>

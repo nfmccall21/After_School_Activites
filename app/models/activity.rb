@@ -37,4 +37,5 @@ class Activity < ApplicationRecord
         Registration.where(activity_id: id).where(status: :Denied)
     end
 
+
 end
