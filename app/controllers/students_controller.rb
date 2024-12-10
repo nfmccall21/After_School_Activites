@@ -14,6 +14,7 @@ class StudentsController < ApplicationController
   
       def show
         @student = Student.find(params[:id])
+        @registrations = Registration.where(student_id: @student.id)
       end
   
       def new

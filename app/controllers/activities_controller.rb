@@ -101,7 +101,7 @@ class ActivitiesController < ApplicationController
       redirect_to activity_path(@activity) and return
     end
 
-    @registration = @activity.registrations.new(student: @student, status: :Pending)
+    @registration = @activity.registrations.new(student: @student, status: :Waitlist)
 
     if @registration.save
       flash[:notice] = "#{@student.firstname} #{@student.lastname} has been successfully registered for #{@activity.title}. Registration status is 'Pending'."

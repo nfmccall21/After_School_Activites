@@ -39,10 +39,29 @@
       <p>Activity not found.</p>
     <% end %>
   
-  <br>
-  <div class="todo">
-      <%= 'TODO: manage waitlist page?'%> 
-  </div> 
+ 
+
+  <div>
+  <%if @activity.waitlist_students != nil && @activity.waitlist_students.count != 0%>
+      <div class="act-status-list"> <%= "Waitlisted Students:" %> 
+      <% @activity.waitlist_students.each do |r| %>
+        <div class="listed-act" id="<%= dom_id(r) %>">
+          <%= link_to r.student.full_name, student_path(r.activity) %> 
+          <div>
+            <% if !current_user.nil? && (current_user.admin? || current_user.teacher?)%>
+              <%= button_to "Deny", registration_path(r.id), method: :delete, class: "btn btn-danger" %> 
+              <%= button_to "Approve", registration_approve_path(r.id), method: :put, class: "btn btn-info"%> 
+            <%end%>
+            <% if !current_user.nil? && current_user.parent? %>
+              <%= button_to "Cancel", registration_path(r.id), method: :delete,class: "btn btn-danger" %> 
+            <% end %>
+          </div> 
+        </div>
+      <% end %>
+      </div>
+    <% end %>
+  <div>
+
   <br>
   </div>
     <%= link_to "Edit", edit_activity_path(@activity), class: "btn btn-info" %>

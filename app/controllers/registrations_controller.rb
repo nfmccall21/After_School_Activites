@@ -31,7 +31,6 @@ class RegistrationsController < ApplicationController
   end
 
   def destroy
-    debugger
     @registration = Registration.find(params[:id])
     @registration.destroy
     respond_to do |format|
@@ -43,9 +42,8 @@ class RegistrationsController < ApplicationController
   end
 
 def approve
-  debugger
     @registration = Registration.find(params[:id])
-    if Activity.where(id: @registration.activity_id).enrolled_students.length < Activity.where(id: @registration.activity_id).spots
+    if @activity.enrolled_students.length < @activity.spots
       @registration.status = 'Enrolled'
       @registration.save
     else
@@ -62,7 +60,8 @@ end
   private
 
   def set_activity
-    @activity = Activity.find(params[:activity_id])
+    @registration = Registration.find(params[:id])
+    @activity = @registration.activity
   end
 
   def registration_params
