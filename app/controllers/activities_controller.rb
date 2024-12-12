@@ -13,16 +13,26 @@ class ActivitiesController < ApplicationController
     if selected_days.any?
       @activities = @activities.where(day: selected_days)
     end
-    # multi_day = Array.new
-    # i=0
-    # Activity.days.keys.each do |key_str|
-    #   sym_day = key_str
-    #   if params[sym_day] != nil && params[sym_day] != "0"
-    #     if_clicked = true
-    #     multi_day.append(@activities.filter_by_day(sym_day))
-    #   end
-    # end
-    # @activities = multi_day.flatten if if_clicked == true
+
+    # I'm not sure if there is a less repeditive way to do this but I'm following the way we did it in lab
+    if params[:Monday].present? && params[:Monday] == '1'
+     @filtermonday = true
+    end
+    if params[:Tuesday].present? && params[:Tuesday] == '1'
+      @filtertuesday = true
+    end
+    if params[:Wednesday].present? && params[:Wednesday] == '1'
+      @filterwednesday = true
+    end
+    if params[:Thursday].present? && params[:Thursday] == '1'
+      @filterthursday = true
+    end
+    if params[:Friday].present? && params[:Friday] == '1'
+      @filterfriday = true
+    end
+
+
+
   end
 
   def show

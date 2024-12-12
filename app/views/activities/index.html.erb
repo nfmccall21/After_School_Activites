@@ -24,15 +24,15 @@
   <div class="next row">
     <%= form_with url: activities_path, method: :get do |form| %>
     <%= form.label :days, "Day of the week:" %>
-    <%= form.check_box :Monday %>
+    <%= form.check_box :Monday, checked: @filtermonday %>
     <%= form.label :Monday, "Monday " %>
-    <%= form.check_box :Tuesday %>
+    <%= form.check_box :Tuesday, checked: @filtertuesday %>
     <%= form.label :Tuesday, "Tuesday " %>
-    <%= form.check_box :Wednesday %>
+    <%= form.check_box :Wednesday, checked: @filterwednesday %>
     <%= form.label :Wednesday, "Wednesday " %>
-    <%= form.check_box :Thursday %>
+    <%= form.check_box :Thursday, checked: @filterthursday %>
     <%= form.label :Thursday, "Thursday " %>
-    <%= form.check_box :Friday %>
+    <%= form.check_box :Friday, checked: @filterfriday %>
     <%= form.label :Friday, "Friday " %>
     <%= form.submit "Filter Days" %>
     <% end %>
