@@ -1,24 +1,24 @@
 <tr id="<%= dom_id(user) %>">
-  <td><%= "#{user.email}"  %>
+  <td><%= "#{user.email}"  %></td>
   <td> <% if user.students.empty? %>
-        <p>No associated students</p>
+        <span>No associated students</span>
     <% else %>
-        <ul>
+        
             <% user.students.each do |stu| %>
                 <li><%= link_to stu.full_name, student_path(stu) %></li>
             <% end %>
-        </ul>
-    <% end %>
-    <td><%= "#{user.role}"  %>
+        
+    <% end %></td>
+    <td><%= "#{user.role}"  %></td>
     
-        <% if user.role != 'admin' %>
-            <td><%=  button_to "Switch to Admin", user_make_admin_path(user.id) ,class: "btn btn-secondary"  %> 
-        <% end %>
-        <% if user.role != 'teacher' %>
-            <td><%= button_to "Switch to Teacher", user_make_teacher_path(user.id) ,class: "btn btn-secondary" %>
-        <% end %>
-        <% if user.role != 'parent' %>
-            <td><%= button_to "Switch to Parent", user_make_parent_path(user.id) ,class: "btn btn-secondary" %>
-        <% end %>
+    <% if user.role != 'admin' %>
+        <td class="lastcols"><%=  button_to "Switch to Admin", user_make_admin_path(user.id) , data: { turbo_stream: true }, class: "btn btn-secondary"  %> </td>
+    <% end %>
+    <% if user.role != 'teacher' %>
+        <td class="lastcols"><%= button_to "Switch to Teacher", user_make_teacher_path(user.id) , data: { turbo_stream: true }, class: "btn btn-secondary" %></td>
+    <% end %>
+    <% if user.role != 'parent' %>
+        <td class="lastcols"><%= button_to "Switch to Parent", user_make_parent_path(user.id) , data: { turbo_stream: true }, class: "btn btn-secondary" %></td>
+    <% end %>
     
 </tr>

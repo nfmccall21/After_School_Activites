@@ -1,16 +1,15 @@
 <%= link_to "Back to Activities", activities_path, class: "btn btn-secondary backtoactivities" %> <br><br>
-<table class="table usertable">
+<table id="usertableid" class="table">
     <thead>
         <th>Email</th>
         <th>Students</th>
         <th>Role</th>
-        <th>
-        <th>
-    
+        <th></th>
+        <th class="lastcols"></th>
     </thead>
-    <tbody id="usertablebody">
-    <% @users.each do |user| %>
-        <%= render partial: user %>
-    <% end %>
+    <tbody id="usertable">
+        <% @users.each do |user| %>
+            <%= render partial: user %>
+        <% end %>
     </tbody>
 </table>

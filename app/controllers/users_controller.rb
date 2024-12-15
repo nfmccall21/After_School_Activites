@@ -8,16 +8,25 @@ class UsersController < ApplicationController
   def make_admin
     @user = User.find(params[:id])
     @user.update(role: :admin)
+    respond_to do |format|
+      format.turbo_stream
+    end
   end
 
   def make_teacher
     @user = User.find(params[:id])
     @user.update(role: :teacher)
+    respond_to do |format|
+      format.turbo_stream
+    end
   end
 
   def make_parent
     @user = User.find(params[:id])
     @user.update(role: :parent)
+    respond_to do |format|
+      format.turbo_stream
+    end
   end
 
 
