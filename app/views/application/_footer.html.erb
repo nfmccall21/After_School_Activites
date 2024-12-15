@@ -9,7 +9,8 @@
             <% if current_user.admin? %> <%# IF NOT JUST PARENTAL BUTTONS %>
                 <div class="adminlinks">
                     Admin Links: <br> <%# unapproved activities %>
-                    <%= link_to "Unapproved Activities", unapproved_activities_path, class: "link" %>
+                    <%= link_to "Unapproved Activities", unapproved_activities_path, class: "link" %> <br>
+                    <%= link_to "Moderate Users", moderate_users_path, class: "link" %>
                     
                 </div>
             <% end %>
