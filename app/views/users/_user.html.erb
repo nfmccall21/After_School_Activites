@@ -1,0 +1,24 @@
+<tr id="<%= dom_id(user) %>">
+  <td><%= "#{user.email}"  %>
+  <td> <% if user.students.empty? %>
+        <p>No associated students</p>
+    <% else %>
+        <ul>
+            <% user.students.each do |stu| %>
+                <li><%= link_to stu.full_name, student_path(stu) %></li>
+            <% end %>
+        </ul>
+    <% end %>
+    <td><%= "#{user.role}"  %>
+    
+        <% if user.role != 'admin' %>
+            <td><%=  button_to "Switch to Admin", user_make_admin_path(user.id) ,class: "btn btn-secondary"  %> 
+        <% end %>
+        <% if user.role != 'teacher' %>
+            <td><%= button_to "Switch to Teacher", user_make_teacher_path(user.id) ,class: "btn btn-secondary" %>
+        <% end %>
+        <% if user.role != 'parent' %>
+            <td><%= button_to "Switch to Parent", user_make_parent_path(user.id) ,class: "btn btn-secondary" %>
+        <% end %>
+    
+</tr>
