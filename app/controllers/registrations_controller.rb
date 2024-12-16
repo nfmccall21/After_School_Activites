@@ -43,6 +43,8 @@ class RegistrationsController < ApplicationController
 
 def approve
     @registration = Registration.find(params[:id])
+    @activity = @registration.activity
+    
     if @activity.enrolled_students.length < @activity.spots
       @registration.status = 'Enrolled'
       @registration.save
