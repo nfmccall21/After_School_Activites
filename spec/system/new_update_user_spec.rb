@@ -7,7 +7,6 @@ RSpec.describe "User System Tests", type: :system do
     end
 
     describe "log in" do
-      
       before (:each) do
         @user = User.create!(email: 'admin@colgate.edu', password: 'testing', role: :admin)
       end
@@ -113,7 +112,7 @@ RSpec.describe "User System Tests", type: :system do
       it "admin can approve unapproved activities" do
         sign_in @admin
         visit activities_path
-        click_on 'Unapproved Activities'
+        first(:link, 'Unapproved Activities').click
         expect(page.current_path).to eq(unapproved_activities_path)
         expect(page).to have_content('I am an unapproved activity')
         click_on 'Approve'
@@ -125,7 +124,7 @@ RSpec.describe "User System Tests", type: :system do
       it "admin can decline unapproved activities" do
         sign_in @admin
         visit activities_path
-        click_on 'Unapproved Activities'
+        first(:link, 'Unapproved Activities').click
         expect(page.current_path).to eq(unapproved_activities_path)
         expect(page).to have_content('I am an unapproved activity')
         click_on 'Deny'
@@ -140,7 +139,7 @@ RSpec.describe "User System Tests", type: :system do
         allow(Activity).to receive(:find).and_return(a)
         expect(a).to receive(:approval_status).and_return('Accepted')
         visit activities_path
-        click_on 'Unapproved Activities'
+        first(:link, 'Unapproved Activities').click
         expect(page.current_path).to eq(unapproved_activities_path)
         expect(page).to have_content('I am an unapproved activity')
         click_on 'Approve'
@@ -154,7 +153,7 @@ RSpec.describe "User System Tests", type: :system do
         allow(Activity).to receive(:find).and_return(a)
         expect(a).to receive(:approval_status).and_return('Accepted')
         visit activities_path
-        click_on 'Unapproved Activities'
+        first(:link, 'Unapproved Activities').click
         expect(page.current_path).to eq(unapproved_activities_path)
         expect(page).to have_content('I am an unapproved activity')
         click_on 'Deny'
@@ -162,8 +161,4 @@ RSpec.describe "User System Tests", type: :system do
         expect(page).to have_content('Activity cannot be denied.')
       end
     end
-
-    
-
-
 end

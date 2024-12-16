@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -18,23 +18,27 @@ Rails.application.routes.draw do
 
   resources :registrations
 
-  #approve/deny routes for registration
-  put "/registrations/:id/approve", to: "registrations#approve", as: 'registration_approve'
+  # approve/deny routes for registration
+  put "/registrations/:id/approve", to: "registrations#approve", as: "registration_approve"
 
-  
-  # Allowing custom action for unapproved 
+
+  get "/moderateusers", to: "users#moderate", as: "moderate_users"
+  post "/users/:id/makeadmin", to: "users#make_admin", as: "user_make_admin"
+  post "/users/:id/maketeacher", to: "users#make_teacher", as: "user_make_teacher"
+  post "/users/:id/makeparent", to: "users#make_parent", as: "user_make_parent"
+  # Allowing custom action for unapproved
   resources :activities do # Changed this to a block
-    resources :registrations, only: [:new, :create, :delete]
+    resources :registrations, only: [ :new, :create, :delete ]
     collection do
-      get 'unapproved'
+      get "unapproved"
     end
 
     member do
-      patch 'accept'
-      patch 'decline'
+      patch "accept"
+      patch "decline"
       # get 'accept' #maybe put back???
       # get 'decline'
-      post 'register'
+      post "register"
     end
   end
 end

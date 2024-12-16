@@ -21,7 +21,7 @@
     line-height: 1.3em;
 }
 .innerboddy, .footercontainer .userlinks, .footercontainer .adminlinks {
-    margin: 10px;;
+    margin: 10px;
 }
 .user{
     font-weight: bold;
@@ -29,23 +29,19 @@
 
 .footer {
     width: 100%;
-    background-color: silver;
-    padding: 5px;
+    background-color: rgba(157,177,230,255);
+    padding: 5px 30px 5px 5px;
     font-weight:lighter;
 }
-
 .footercontainer{
     display: flex;
     justify-content: space-between; 
     align-items: center;
 }
-
 .footercontainer .link {
     color:rgb(105, 105, 105);
     font-weight:lighter;
 }
-
-
 .footerlogo {
     max-height: 100px;
 }
@@ -57,8 +53,42 @@
     justify-content: space-between; 
     align-items: center; 
     padding: 5px 10px;   
-    width: 100%
+    width: 100%;
 }
+
+
+
+table#usertableid {
+    width: 100%;
+    
+    vertical-align: middle;
+    /* last two columns only 10% */
+   
+
+}
+
+table#usertableid th{
+    background-color: rgb(226, 226, 226);
+    
+
+}
+
+table#usertableid .lastcols{
+    width: 15%;
+
+}
+table#usertableid .btn{
+    width: 90%;
+    background-color: rgb(227, 109, 109);
+}
+
+table#usertableid .btn:hover{
+    background-color: rgb(83, 37, 37);
+}
+
+
+
+
 
 
 
