@@ -50,13 +50,15 @@ class RegistrationsController < ApplicationController
     if @registration.save
       flash[:notice] = "Registration has been declined."
     else
-      flash[:alert] = "There was an error declining the registration."
+      @registration.destroy
+      flash[:notice] = 'This activity is full'
     end
   
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove(@registration) }
       format.html do
-        redirect_to activity_path(@activity)
+        redirect_to student_path(@registration.student_id)
+
       end
     end
   end  
