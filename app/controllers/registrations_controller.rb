@@ -41,22 +41,48 @@ class RegistrationsController < ApplicationController
     end
   end
 
-def approve
+  def decline
     @registration = Registration.find(params[:id])
-    if @activity.enrolled_students.length < @activity.spots
-      @registration.status = 'Enrolled'
-      @registration.save
+    @activity = @registration.activity
+  
+    @registration.status = 'Denied'
+    
+    if @registration.save
+      flash[:notice] = "Registration has been declined."
     else
       @registration.destroy
       flash[:notice] = 'This activity is full'
     end
+  
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove(@registration) }
       format.html do
         redirect_to student_path(@registration.student_id)
+
       end
     end
-end
+  end  
+
+  def approve
+    @registration = Registration.find(params[:id])
+    @activity = @registration.activity
+  
+    existing_enrollment = @activity.registrations.find_by(student_id: @registration.student.id, status: :Enrolled)
+  
+    if existing_enrollment
+      flash[:notice] = 'Student is already enrolled in this activity.'
+    elsif @activity.enrolled_students.count >= @activity.spots
+      flash[:notice] = 'This activity is full'
+    else
+      @registration.update!(status: :Enrolled)
+      flash[:notice] = 'Registration approved successfully.'
+    end 
+  
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@registration) }
+      format.html { redirect_to activity_path(@activity) }
+    end
+  end
 
   private
 
