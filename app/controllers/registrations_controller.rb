@@ -47,12 +47,13 @@ def approve
       @registration.status = 'Enrolled'
       @registration.save
     else
+      @registration.destroy
       flash[:notice] = 'This activity is full'
     end
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove(@registration) }
       format.html do
-          redirect_to reviews_moderate_path
+        redirect_to student_path(@registration.student_id)
       end
     end
 end
