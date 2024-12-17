@@ -14,6 +14,13 @@ class ActivitiesController < ApplicationController
       @activities = @activities.where(day: selected_days)
     end
 
+    # Filter activities based on availability
+    if params[:available].present? && params[:available] == '1'
+      @activities = @activities.where('spots > 0')
+    end
+
+    # Sort activities by availability
+    @activities = @activities.order(spots: :desc)
     # I'm not sure if there is a less repeditive way to do this but I'm following the way we did it in lab
     if params[:Monday].present? && params[:Monday] == '1'
      @filtermonday = true
