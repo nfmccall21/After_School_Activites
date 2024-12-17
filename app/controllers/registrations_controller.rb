@@ -74,7 +74,7 @@ class RegistrationsController < ApplicationController
     else
       @registration.update!(status: :Enrolled)
       flash[:notice] = 'Registration approved successfully.'
-    end
+    end 
   
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove(@registration) }
