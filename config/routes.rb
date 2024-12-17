@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
   # approve/deny routes for registration
   put "/registrations/:id/approve", to: "registrations#approve", as: "registration_approve"
-
+  put "/registrations/:id/decline", to: "registrations#decline", as: "registration_decline"
 
   get "/moderateusers", to: "users#moderate", as: "moderate_users"
   post "/users/:id/makeadmin", to: "users#make_admin", as: "user_make_admin"
@@ -36,8 +36,6 @@ Rails.application.routes.draw do
     member do
       patch "accept"
       patch "decline"
-      # get 'accept' #maybe put back???
-      # get 'decline'
       post "register"
     end
   end
