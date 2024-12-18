@@ -14,6 +14,8 @@ RSpec.describe "Index route", type: :system do
       @a2.update!(approval_status: :Pending)
       @a3 = Activity.create!(title: "test3", description: "test3", spots: 20, chaperone: "test3", time_start: DateTime.parse('3 am').to_time, time_end: DateTime.parse('4 am').to_time, day: "Tuesday")
       @a3.update!(approval_status: :Denied)
+      @user = User.create!(email: 'admin@colgate.edu', password: 'testing', role: :admin)
+      sign_in @user
     end
     it "should show approved activities" do
       visit activities_path
@@ -39,7 +41,8 @@ RSpec.describe "Index route", type: :system do
       @a3.update!(approval_status: :Approved)
       @a4 = Activity.create!(title: "full act", description: "test3", spots: 1, chaperone: "test3", time_start: DateTime.parse('3 am').to_time, time_end: DateTime.parse('4 am').to_time, day: "Wednesday")
       @a4.update!(approval_status: :Approved)
-      
+      @user = User.create!(email: 'admin@colgate.edu', password: 'testing', role: :admin)
+      sign_in @user
     end
     it "should show all activities if no day filter is applied" do
       visit activities_path

@@ -4,9 +4,12 @@ RSpec.describe "new/delete", type: :system do
     include Devise::Test::IntegrationHelpers
     before do
       driven_by(:rack_test)
+      @user = User.create!(email: 'admin@colgate.edu', password: 'testing', role: :admin)
+      sign_in @user
     end
 
     describe "create new activity" do
+        
         it "should show the new form from index page button" do
             visit activities_path
             expect(page.current_path).to eq(activities_path)
@@ -49,8 +52,6 @@ RSpec.describe "new/delete", type: :system do
                           time_start: DateTime.parse('3 pm').to_time,
                           time_end: DateTime.parse('4 pm').to_time)
             a.update!(approval_status: :Approved)
-            @user = User.create!(email: 'admin@colgate.edu', password: 'testing', role: :admin)
-            sign_in @user
         end
 
         # IT ISNT APPROVED YET
@@ -120,8 +121,6 @@ RSpec.describe "new/delete", type: :system do
             activity = Activity.create!(title: 'testact', description: 'test description', spots: 1, chaperone: 'm', day: :Monday, time_start: DateTime.parse('3 pm').to_time, time_end: DateTime.parse('4 pm').to_time)
             activity.update!(approval_status: :Approved)
             @registration = Registration.create!(student: @student, activity: activity, status: :Waitlist, requested_registration_at: Time.now, registration_update_at: Time.now)
-            @user = User.create!(email: 'admin@colgate.edu', password: 'testing', role: :admin)
-            sign_in @user
             visit students_path
             expect(page).to have_content('Waitlisted for:')
             expect(activity.waitlist_students[0].student_id).to eq(@student.id)

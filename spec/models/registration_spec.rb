@@ -41,7 +41,7 @@ RSpec.describe Registration, type: :model do
     describe "status logic" do
       it "sets status to Enrolled if there is space" do
         registration = Registration.create(student: @student, activity: @activity)
-        expect(registration.status).to eq("Pending") 
+        expect(registration.status).to eq("Enrolled") 
       end
   
       it "sets status to Waitlist if spots are full" do
