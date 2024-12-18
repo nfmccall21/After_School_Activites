@@ -97,7 +97,7 @@ aa3 = Activity.new()
 aa4 = Activity.new()
 aa5 = Activity.new()
 aa6 = Activity.new()
-approvedactssarr = [aa1, aa2, aa3, aa4, aa5, aa6]
+approvedactssarr = [ aa1, aa2, aa3, aa4, aa5, aa6 ]
 1.upto(6) do |i|
   puts "Creating Approved Club #{i}"
   approvedactssarr[i-1] = Activity.create!(title: "Approved Club #{i} ",
@@ -117,7 +117,7 @@ ap3 = Activity.new()
 ap4 = Activity.new()
 ap5 = Activity.new()
 ap6 = Activity.new()
-pendingactssarr = [ap1, ap2, ap3, ap4, ap5, ap6]
+pendingactssarr = [ ap1, ap2, ap3, ap4, ap5, ap6 ]
 1.upto(6) do |i|
   puts "Creating Pending Club #{i}"
   pendingactssarr[i-1] = Activity.create!(title: "Pending Club #{i} ",
@@ -137,7 +137,7 @@ ad3 = Activity.new()
 ad4 = Activity.new()
 ad5 = Activity.new()
 ad6 = Activity.new()
-deniedactssarr = [ad1, ad2, ad3, ad4, ad5, ad6]
+deniedactssarr = [ ad1, ad2, ad3, ad4, ad5, ad6 ]
 1.upto(6) do |i|
   puts "Creating Denied Club #{i}"
   deniedactssarr[i-1] = Activity.create!(title: "Denied Club #{i} ",
@@ -172,7 +172,7 @@ u3.students << s2
 u2.students << s3
 u2.students << s4
 
-homerooms = ["homeroom 1", "homeroom 2", "homeroom 3", "homeroom 4", "homeroom 5", "homeroom 6"]
+homerooms = [ "homeroom 1", "homeroom 2", "homeroom 3", "homeroom 4", "homeroom 5", "homeroom 6" ]
 s5 = Student.new()
 s6 = Student.new()
 s7 = Student.new()
@@ -184,7 +184,7 @@ s12 = Student.new()
 s13 = Student.new()
 s14 = Student.new()
 s15 = Student.new()
-studentarr = [s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15]
+studentarr = [ s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15 ]
 1.upto(11) do |i|
   puts "Creating Student #{i}"
   studentarr[i-1] = Student.create!(firstname: FFaker::Name.first_name, lastname: FFaker::Name.last_name, grade: rand(1..10), homeroom: homerooms[rand(0..5)])
@@ -192,19 +192,19 @@ end
 
 
 # REGISTRATIONS
-r1 = Registration.new(student: s1, activity: a1, status: :Enrolled,requested_registration_at: Time.now ,registration_update_at: Time.now )
+r1 = Registration.new(student: s1, activity: a1, status: :Enrolled, requested_registration_at: Time.now, registration_update_at: Time.now)
 r1.save!
 
-r2 = Registration.new(student: s2, activity: a4, status: :Enrolled,requested_registration_at: Time.now ,registration_update_at: Time.now )
+r2 = Registration.new(student: s2, activity: a4, status: :Enrolled, requested_registration_at: Time.now, registration_update_at: Time.now)
 r2.save!
 
-r3 = Registration.new(student: s2, activity: a1, status: :Waitlist,requested_registration_at: Time.now ,registration_update_at: Time.now )
+r3 = Registration.new(student: s2, activity: a1, status: :Waitlist, requested_registration_at: Time.now, registration_update_at: Time.now)
 r3.save!
 
-r4 = Registration.new(student: s3, activity: a1, status: :Enrolled,requested_registration_at: Time.now ,registration_update_at: Time.now )
+r4 = Registration.new(student: s3, activity: a1, status: :Enrolled, requested_registration_at: Time.now, registration_update_at: Time.now)
 r4.save!
 
-r5 = Registration.new(student: s4, activity: a3, status: :Enrolled,requested_registration_at: Time.now ,registration_update_at: Time.now )
+r5 = Registration.new(student: s4, activity: a3, status: :Enrolled, requested_registration_at: Time.now, registration_update_at: Time.now)
 r5.save!
 
 # ENROLLED registrations
@@ -219,11 +219,11 @@ re8 = Registration.new()
 re9 = Registration.new()
 re10 = Registration.new()
 
-enrolledregarray = [re1,re2,re3,re4,re5,re6,re7,re8,re9,re10]
+enrolledregarray = [ re1, re2, re3, re4, re5, re6, re7, re8, re9, re10 ]
 # registered within the last year
 1.upto(10) do |i|
   puts "Creating Enrolled Registratio #{i}"
-  enrolledregarray[i-1] = Registration.create(student: studentarr[rand(0..10)], activity: approvedactssarr[rand(0..5)], status: :Enrolled, requested_registration_at: FFaker::Time.between(Date.today - 365, Date.today), registration_update_at: Time.now )
+  enrolledregarray[i-1] = Registration.create(student: studentarr[rand(0..10)], activity: approvedactssarr[rand(0..5)], status: :Enrolled, requested_registration_at: FFaker::Time.between(Date.today - 365, Date.today), registration_update_at: Time.now)
 end
 
 # PENDING registrations
@@ -238,11 +238,11 @@ rp8 = Registration.new()
 rp9 = Registration.new()
 rp10 = Registration.new()
 
-pendingregarray = [rp1,rp2,rp3,rp4,rp5,rp6,rp7,rp8,rp9,rp10]
+pendingregarray = [ rp1, rp2, rp3, rp4, rp5, rp6, rp7, rp8, rp9, rp10 ]
 # registered within the last year
 1.upto(10) do |i|
   puts "Creating Pending Registratio #{i}"
-  pendingregarray[i-1] = Registration.create(student: studentarr[rand(0..10)], activity: approvedactssarr[rand(0..5)], status: :Pending, requested_registration_at: FFaker::Time.between(Date.today - 365, Date.today), registration_update_at: Time.now )
+  pendingregarray[i-1] = Registration.create(student: studentarr[rand(0..10)], activity: approvedactssarr[rand(0..5)], status: :Pending, requested_registration_at: FFaker::Time.between(Date.today - 365, Date.today), registration_update_at: Time.now)
 end
 
 # WAITLISTED registrations
@@ -257,18 +257,9 @@ rw8 = Registration.new()
 rw9 = Registration.new()
 rw10 = Registration.new()
 
-waitlistregarray = [rw1,rw2,rw3,rw4,rw5,rw6,rw7,rw8,rw9,rw10]
+waitlistregarray = [ rw1, rw2, rw3, rw4, rw5, rw6, rw7, rw8, rw9, rw10 ]
 # registered within the last year
 1.upto(10) do |i|
   puts "Creating Waitlist Registratio #{i}"
-  waitlistregarray[i-1] = Registration.create(student: studentarr[rand(0..10)], activity: approvedactssarr[rand(0..5)], status: :Waitlist, requested_registration_at: FFaker::Time.between(Date.today - 365, Date.today), registration_update_at: Time.now )
+  waitlistregarray[i-1] = Registration.create(student: studentarr[rand(0..10)], activity: approvedactssarr[rand(0..5)], status: :Waitlist, requested_registration_at: FFaker::Time.between(Date.today - 365, Date.today), registration_update_at: Time.now)
 end
-
-
-
-
-
-
-
-
-
