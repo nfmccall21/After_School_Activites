@@ -154,6 +154,7 @@ end
 u1 = User.create!(email: 'admin@colgate.edu', password: 'testing', role: :admin)
 u2 = User.create!(email: 'teacher@colgate.edu', password: 'testing', role: :teacher)
 u3 = User.create!(email: 'parent@colgate.edu', password: 'testing', role: :parent)
+u3 = User.create!(email: 'julia.goosay@gmail.com', password: 'testing', role: :parent)
 
 # STUDENTS
 s1 = Student.new(firstname: 'Anna', lastname: 'Lieb', grade: 2, homeroom: "homeroom 1")
