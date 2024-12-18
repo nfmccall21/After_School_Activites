@@ -1,7 +1,6 @@
 class ActivitiesController < ApplicationController
-  
   before_action :authenticate_user!, only: %i[show register]
-  before_action :set_activity, only: [:register, :accept, :decline]
+  before_action :set_activity, only: [ :register, :accept, :decline ]
 
   def index
     if_clicked = false
@@ -9,45 +8,41 @@ class ActivitiesController < ApplicationController
     if params[:query].present? && params[:query].length > 2
       @activities = @activities.by_search_string(params[:query])
     end
-    selected_days = Activity.days.keys.select { |day| params[day] == '1' }
+    selected_days = Activity.days.keys.select { |day| params[day] == "1" }
     if selected_days.any?
       @activities = @activities.where(day: selected_days)
     end
 
     # Filter activities based on availability
-    if params[:available].present? && params[:available] == '1'
-      @activities = @activities.where('spots > 0')
+    if params[:available].present? && params[:available] == "1"
+      @activities = @activities.where("spots > 0")
     end
 
     # Sort activities by availability
     @activities = @activities.order(spots: :desc)
     # I'm not sure if there is a less repeditive way to do this but I'm following the way we did it in lab
-    if params[:Monday].present? && params[:Monday] == '1'
+    if params[:Monday].present? && params[:Monday] == "1"
      @filtermonday = true
     end
-    if params[:Tuesday].present? && params[:Tuesday] == '1'
+    if params[:Tuesday].present? && params[:Tuesday] == "1"
       @filtertuesday = true
     end
-    if params[:Wednesday].present? && params[:Wednesday] == '1'
+    if params[:Wednesday].present? && params[:Wednesday] == "1"
       @filterwednesday = true
     end
-    if params[:Thursday].present? && params[:Thursday] == '1'
+    if params[:Thursday].present? && params[:Thursday] == "1"
       @filterthursday = true
     end
-    if params[:Friday].present? && params[:Friday] == '1'
+    if params[:Friday].present? && params[:Friday] == "1"
       @filterfriday = true
     end
-
-
-
   end
 
 
   def show
-    @activity = Activity.find(params[:id]) 
+    @activity = Activity.find(params[:id])
     @students = Student.all
     @registrations = @activity.registrations.includes(:student)
-  
   end
 
   def new
@@ -66,7 +61,7 @@ class ActivitiesController < ApplicationController
     end
   end
 
-  def destroy #this should probably have permissions attached to it in some way eventually
+  def destroy # this should probably have permissions attached to it in some way eventually
     @activity = Activity.find(params[:id])
     @activity.destroy
     flash[:notice] = "activity removed"
@@ -80,34 +75,34 @@ class ActivitiesController < ApplicationController
   def update
     @activity = Activity.find(params[:id])
     if @activity.update(create_params)
-      redirect_to activity_path(@activity), notice: 'activity details updated successfully'
+      redirect_to activity_path(@activity), notice: "activity details updated successfully"
     else
-      flash[:alert] = 'Activity could not be edited'
+      flash[:alert] = "Activity could not be edited"
       render :edit, status: :unprocessable_content
     end
   end
 
   def unapproved
-    @unapproved_activities = Activity.where(approval_status: 'Pending') #enum query is 0, 1, 2 for a, p, d
+    @unapproved_activities = Activity.where(approval_status: "Pending") # enum query is 0, 1, 2 for a, p, d
   end
 
   def accept
     @activity = Activity.find(params[:id])
-    if @activity.approval_status == 'Pending'
-      @activity.update(approval_status: 'Approved')
-      redirect_to activities_path, notice: 'Activity was successfully approved.'
+    if @activity.approval_status == "Pending"
+      @activity.update(approval_status: "Approved")
+      redirect_to activities_path, notice: "Activity was successfully approved."
     else
-      redirect_to activities_path, alert: 'Activity cannot be approved.'
+      redirect_to activities_path, alert: "Activity cannot be approved."
     end
   end
 
   def decline
     @activity = Activity.find(params[:id])
-    if @activity.approval_status == 'Pending'
-      @activity.update(approval_status: 'Denied')
-      redirect_to activities_path, notice: 'Activity was successfully denied.'
+    if @activity.approval_status == "Pending"
+      @activity.update(approval_status: "Denied")
+      redirect_to activities_path, notice: "Activity was successfully denied."
     else
-      redirect_to activities_path, alert: 'Activity cannot be denied.'
+      redirect_to activities_path, alert: "Activity cannot be denied."
     end
   end
 
@@ -115,11 +110,11 @@ class ActivitiesController < ApplicationController
     @student = Student.find(params[:student_id])
 
     existing_registration = @activity.registrations.find_by(student: @student)
-    if existing_registration && (existing_registration.status == 'Enrolled')
+    if existing_registration && (existing_registration.status == "Enrolled")
       flash[:alert] = "#{@student.firstname} #{@student.lastname} is already registered for this activity."
       redirect_to activity_path(@activity) and return
     end
-       
+
 
     @registration = @activity.registrations.new(student: @student, status: :Waitlist)
     if @activity.enrolled_students.count < @activity.spots
@@ -142,15 +137,10 @@ class ActivitiesController < ApplicationController
 
   private
   def create_params
-    params.require(:activity).permit(:title, :description, :spots, :chaperone, :approval_status, :day, :time_start, :time_end, :approval_status)
+    params.require(:activity).permit(:title, :description, :spots, :chaperone, :approval_status, :day, :time_start, :time_end)
   end
 
   def set_activity
     @activity = Activity.find(params[:id])
   end
-
-  def update_status_params
-    params.require(:activity).permit(:approval_status)
-  end
-
 end
