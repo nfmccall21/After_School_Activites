@@ -18,7 +18,7 @@ class Registration < ApplicationRecord
     if activity.registrations.count >= activity.spots
       self.status = "Waitlist"
     else
-      self.status ||= "Pending"
+      self.status ||= "Enrolled"
     end
   end
 

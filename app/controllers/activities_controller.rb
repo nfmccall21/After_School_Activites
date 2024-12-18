@@ -42,10 +42,12 @@ class ActivitiesController < ApplicationController
 
   end
 
+
   def show
     @activity = Activity.find(params[:id]) 
     @students = Student.all
     @registrations = @activity.registrations.includes(:student)
+  
   end
 
   def new
@@ -113,17 +115,26 @@ class ActivitiesController < ApplicationController
     @student = Student.find(params[:student_id])
 
     existing_registration = @activity.registrations.find_by(student: @student)
-    if existing_registration
+    if existing_registration && (existing_registration.status == 'Enrolled')
       flash[:alert] = "#{@student.firstname} #{@student.lastname} is already registered for this activity."
       redirect_to activity_path(@activity) and return
     end
+       
 
     @registration = @activity.registrations.new(student: @student, status: :Waitlist)
-
-    if @registration.save
-      flash[:notice] = "#{@student.firstname} #{@student.lastname} has been successfully registered for #{@activity.title}. Registration status is 'Pending'."
+    if @activity.enrolled_students.count < @activity.spots
+      @registration.update(status: :Enrolled)
+      if @registration.save
+        flash[:notice] = "#{@student.firstname} #{@student.lastname} has been successfully registered for #{@activity.title}. Registration status is 'Enrolled'."
+      else
+        flash[:alert] = "There was an issue with registering #{@student.firstname} #{@student.lastname} for this activity."
+      end
     else
-      flash[:alert] = "There was an issue with registering #{@student.firstname} #{@student.lastname} for this activity."
+      if @registration.save
+        flash[:notice] = "#{@student.firstname} #{@student.lastname} has been successfully added to the waitlist for #{@activity.title}."
+      else
+        flash[:alert] = "There was an issue with registering #{@student.firstname} #{@student.lastname} for this activity."
+      end
     end
 
     redirect_to activity_path(@activity)
@@ -131,11 +142,15 @@ class ActivitiesController < ApplicationController
 
   private
   def create_params
-    params.require(:activity).permit(:title, :description, :spots, :chaperone, :approval_status, :day, :time_start, :time_end)
+    params.require(:activity).permit(:title, :description, :spots, :chaperone, :approval_status, :day, :time_start, :time_end, :approval_status)
   end
 
   def set_activity
     @activity = Activity.find(params[:id])
+  end
+
+  def update_status_params
+    params.require(:activity).permit(:approval_status)
   end
 
 end
