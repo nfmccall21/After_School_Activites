@@ -13,10 +13,6 @@
                 <p><strong>Status:</strong> Unapproved</p>
             
                 <!-- Linking approve/deny -->
-                <!--<%= button_to "Approve", accept_activity_path(activity), method: :patch, class: "btn btn-success" %>
-                <br>
-                <%= button_to "Deny", decline_activity_path(activity), method: :patch, class: "btn btn-danger" %> -->
-
                 <div class="button-group">
                 <%= button_to "Approve", accept_activity_path(activity), method: :patch, class: "btn btn-success" %>
                 <%= button_to "Deny", decline_activity_path(activity), method: :patch, class: "btn btn-danger" %>
