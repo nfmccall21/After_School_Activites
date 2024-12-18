@@ -13,12 +13,10 @@
                 <p><strong>Status:</strong> Unapproved</p>
             
                 <!-- Linking approve/deny -->
-                <%= form_with url: accept_activity_path(activity), method: :patch, local: true do %>
-                    <%= submit_tag "Approve" %>
-                <% end %>
-                <%= form_with url: decline_activity_path(activity), method: :patch, local: true do %>
-                    <%= submit_tag "Deny" %>
-                <% end %>
+                <%= button_to "Approve", accept_activity_path(activity), method: :patch, class: "btn btn-success" %>
+                <br>
+                <%= button_to "Deny", decline_activity_path(activity), method: :patch, class: "btn btn-danger" %>
+
 
             </div>
             <br>
