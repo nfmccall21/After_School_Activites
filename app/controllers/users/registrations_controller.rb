@@ -10,13 +10,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-     Rails.logger.debug "RegistrationsController#create called"
     build_resource(sign_up_params)
-    if resource.save
-      Rails.logger.debug "User saved successfully: #{resource.inspect}"
-    else
-      Rails.logger.debug "User save failed: #{resource.errors.full_messages.join(', ')}"
-    end
     yield resource if block_given?
     if resource.persisted?
       if resource.active_for_authentication?
