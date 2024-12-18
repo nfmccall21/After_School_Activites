@@ -18,7 +18,7 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class="d-flex flex-column min-vh-100">
     <div class="usercontrol">
       <% unless controller_name == 'sessions' %>
         <% if current_user == nil %>
@@ -49,8 +49,9 @@
     </div>
     <br>
 
-    <footer class="footer">
+    
+  </body>
+  <footer class="footer mt-auto">
       <%= render "application/footer", locals: {current_user: current_user}%>
     </footer>
-  </body>
 </html>
