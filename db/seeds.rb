@@ -222,44 +222,44 @@ re10 = Registration.new()
 enrolledregarray = [ re1, re2, re3, re4, re5, re6, re7, re8, re9, re10 ]
 # registered within the last year
 1.upto(10) do |i|
-  puts "Creating Enrolled Registratio #{i}"
-  enrolledregarray[i-1] = Registration.create(student: studentarr[rand(0..10)], activity: approvedactssarr[rand(0..5)], status: :Enrolled, requested_registration_at: FFaker::Time.between(Date.today - 365, Date.today), registration_update_at: Time.now)
+  puts "Creating Registration #{i}"
+  enrolledregarray[i-1] = Registration.create(student: studentarr[rand(0..10)], activity: approvedactssarr[rand(0..5)],  requested_registration_at: FFaker::Time.between(Date.today - 365, Date.today), registration_update_at: Time.now)
 end
 
 # PENDING registrations
-rp1 = Registration.new()
-rp2 = Registration.new()
-rp3 = Registration.new()
-rp4 = Registration.new()
-rp5 = Registration.new()
-rp6 = Registration.new()
-rp7 = Registration.new()
-rp8 = Registration.new()
-rp9 = Registration.new()
-rp10 = Registration.new()
+# rp1 = Registration.new()
+# rp2 = Registration.new()
+# rp3 = Registration.new()
+# rp4 = Registration.new()
+# rp5 = Registration.new()
+# rp6 = Registration.new()
+# rp7 = Registration.new()
+# rp8 = Registration.new()
+# rp9 = Registration.new()
+# rp10 = Registration.new()
 
-pendingregarray = [ rp1, rp2, rp3, rp4, rp5, rp6, rp7, rp8, rp9, rp10 ]
-# registered within the last year
-1.upto(10) do |i|
-  puts "Creating Pending Registratio #{i}"
-  pendingregarray[i-1] = Registration.create(student: studentarr[rand(0..10)], activity: approvedactssarr[rand(0..5)], status: :Pending, requested_registration_at: FFaker::Time.between(Date.today - 365, Date.today), registration_update_at: Time.now)
-end
+# pendingregarray = [ rp1, rp2, rp3, rp4, rp5, rp6, rp7, rp8, rp9, rp10 ]
+# # registered within the last year
+# 1.upto(10) do |i|
+#   puts "Creating Pending Registratio #{i}"
+#   pendingregarray[i-1] = Registration.create(student: studentarr[rand(0..10)], activity: approvedactssarr[rand(0..5)], status: :Pending, requested_registration_at: FFaker::Time.between(Date.today - 365, Date.today), registration_update_at: Time.now)
+# end
 
-# WAITLISTED registrations
-rw1 = Registration.new()
-rw2 = Registration.new()
-rw3 = Registration.new()
-rw4 = Registration.new()
-rw5 = Registration.new()
-rw6 = Registration.new()
-rw7 = Registration.new()
-rw8 = Registration.new()
-rw9 = Registration.new()
-rw10 = Registration.new()
+# # WAITLISTED registrations
+# rw1 = Registration.new()
+# rw2 = Registration.new()
+# rw3 = Registration.new()
+# rw4 = Registration.new()
+# rw5 = Registration.new()
+# rw6 = Registration.new()
+# rw7 = Registration.new()
+# rw8 = Registration.new()
+# rw9 = Registration.new()
+# rw10 = Registration.new()
 
-waitlistregarray = [ rw1, rw2, rw3, rw4, rw5, rw6, rw7, rw8, rw9, rw10 ]
-# registered within the last year
-1.upto(10) do |i|
-  puts "Creating Waitlist Registratio #{i}"
-  waitlistregarray[i-1] = Registration.create(student: studentarr[rand(0..10)], activity: approvedactssarr[rand(0..5)], status: :Waitlist, requested_registration_at: FFaker::Time.between(Date.today - 365, Date.today), registration_update_at: Time.now)
-end
+# waitlistregarray = [ rw1, rw2, rw3, rw4, rw5, rw6, rw7, rw8, rw9, rw10 ]
+# # registered within the last year
+# 1.upto(10) do |i|
+#   puts "Creating Waitlist Registratio #{i}"
+#   waitlistregarray[i-1] = Registration.create(student: studentarr[rand(0..10)], activity: approvedactssarr[rand(0..5)], status: :Waitlist, requested_registration_at: FFaker::Time.between(Date.today - 365, Date.today), registration_update_at: Time.now)
+# end
