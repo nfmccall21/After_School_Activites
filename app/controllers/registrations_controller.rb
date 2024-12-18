@@ -84,9 +84,11 @@ class RegistrationsController < ApplicationController
 
 
     respond_to do |format|
-      turbo_stream.replace(dom_id(@activity, :current_enrollment)) do
-        render partial: "activities/current_enrollment", locals: { activity: @activity }
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace(dom_id(@activity, :current_enrollment),
+                                                  partial: "activities/current_enrollment", locals: { activity: @activity })
       end
+      format.html { redirect_to activity_path(@activity) }
     end
   end
 
