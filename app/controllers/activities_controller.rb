@@ -14,8 +14,11 @@ class ActivitiesController < ApplicationController
     end
 
     # Filter activities based on availability
-    if params[:available].present? && params[:available] == "1"
-      @activities = @activities.where("spots > 0")
+    if params[:avail].present? && params[:avail] == "1"
+      @activities = @activities.left_joins(:students)
+      .group('activities.id')
+      .having('activities.spots > COUNT(students.id)')
+      @filteravail = true
     end
 
     # Sort activities by availability

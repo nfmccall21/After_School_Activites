@@ -37,12 +37,27 @@ RSpec.describe "Index route", type: :system do
       @a2.update!(approval_status: :Approved)
       @a3 = Activity.create!(title: "test3", description: "test3", spots: 20, chaperone: "test3", time_start: DateTime.parse('3 am').to_time, time_end: DateTime.parse('4 am').to_time, day: "Wednesday")
       @a3.update!(approval_status: :Approved)
+      @a4 = Activity.create!(title: "full act", description: "test3", spots: 1, chaperone: "test3", time_start: DateTime.parse('3 am').to_time, time_end: DateTime.parse('4 am').to_time, day: "Wednesday")
+      @a4.update!(approval_status: :Approved)
+      
     end
-    it "should show all activities if no day filter is applied" do 
+    it "should show all activities if no day filter is applied" do
       visit activities_path
       expect(page).to have_content('test1')
       expect(page).to have_content('test2')
       expect(page).to have_content('test3')
+    end
+    it "should show activities that are full if spots filter is not applied" do
+      visit activities_path
+      expect(page).to have_content('full act')
+    end
+    it "should not show full activities if spots filter is applied" do
+      @s1 =  Student.create!(firstname: "fn", lastname: "ln", grade: 20, homeroom: "hr")
+      Registration.create!(student_id: @s1.id, activity_id: @a4.id, status: :Enrolled)
+      visit activities_path
+      check 'avail'
+      click_on 'Filter Availability'
+      expect(page).not_to have_content('full act')
     end
     it "should show Monday activities if Monday filter is applied" do
       visit activities_path
@@ -56,8 +71,26 @@ RSpec.describe "Index route", type: :system do
       check 'Monday'
       click_on 'Filter Days'
       expect(page).not_to have_content('test3')
+      expect(page).not_to have_checked_field('Wednesday')
     end
-    it "should show only activities that match the search string" do 
+    it "should show all activities if all days are checked" do
+      visit activities_path
+      check 'Monday'
+      check 'Tuesday'
+      check 'Wednesday'
+      check 'Thursday'
+      check 'Friday'
+      click_on 'Filter Days'
+      expect(page).to have_content('test1')
+      expect(page).to have_content('test2')
+      expect(page).to have_content('test3')
+      expect(page).to have_checked_field('Monday')
+      expect(page).to have_checked_field('Tuesday')
+      expect(page).to have_checked_field('Wednesday')
+      expect(page).to have_checked_field('Thursday')
+      expect(page).to have_checked_field('Friday')
+    end
+    it "should show only activities that match the search string" do
       visit activities_path
       fill_in 'query', with: 'test1'
       click_on 'Filter Activities'
@@ -106,5 +139,4 @@ RSpec.describe "Index route", type: :system do
       expect(page).not_to have_content('ln3')
     end
   end
-
 end

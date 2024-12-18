@@ -45,7 +45,7 @@
 
   <div class="third row">
     <%= form_with url: activities_path, method: :get do |form| %>
-      <%= form.check_box :avail %>
+      <%= form.check_box :avail, checked: @filteravail %>
       <%= form.label :avail, "Available? " %>
       <%= form.submit "Filter Availability" %>
     <% end %>
