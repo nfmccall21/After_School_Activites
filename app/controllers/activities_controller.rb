@@ -1,9 +1,10 @@
 class ActivitiesController < ApplicationController
-  before_action :authenticate_user!, only: %i[show register]
+
+  before_action :authenticate_user!, only: %i[index show register]
   before_action :set_activity, only: [ :register, :accept, :decline ]
 
   def index
-    if_clicked = false
+    # if_clicked = false
     @activities = Activity.all.order(:title)
     if params[:query].present? && params[:query].length > 2
       @activities = @activities.by_search_string(params[:query])
