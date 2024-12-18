@@ -10,13 +10,17 @@ RSpec.describe "User System Tests", type: :system do
       before (:each) do
         @user = User.create!(email: 'admin@colgate.edu', password: 'testing', role: :admin)
       end
-
-      it "should show the log in form from index page button" do
+      # this test was for old way
+      # it "should show the log in form from index page button" do
+      #     visit root_path
+      #     expect(page.current_path).to eq(root_path)
+      #     click_on "Log In"
+      #     expect(page.current_path).to eq(new_user_session_path)
+      #     expect(page).to have_content("Log in")
+      # end
+      it "should prompt user to log in" do
           visit root_path
-          expect(page.current_path).to eq(root_path)
-          click_on "Log In"
-          expect(page.current_path).to eq(new_user_session_path)
-          expect(page).to have_content("Log in")
+          expect(page).to have_content("You need to sign in or sign up before continuing.")
       end
       it "should re-render the page with error message if log in fails" do
           visit new_user_session_path
@@ -46,7 +50,7 @@ RSpec.describe "User System Tests", type: :system do
       it "should log out successfully" do
         visit root_path
         click_on "Log Out"
-        expect(page).to have_content("Signed out successfully.")
+        expect(page).to have_content("You need to sign in or sign up before continuing.")
       end
     end
 
@@ -90,6 +94,7 @@ RSpec.describe "User System Tests", type: :system do
       end
 
       it "a new activity should be unapproved" do
+        sign_in @parent
         visit activities_path
         expect(page).not_to have_content('I am an unapproved activity')
       end
