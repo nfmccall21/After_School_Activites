@@ -4,21 +4,24 @@
         <span>No associated students</span>
     <% else %>
         
-            <% user.students.each do |stu| %>
-                <li><%= link_to stu.full_name, student_path(stu) %></li>
-            <% end %>
+        <% user.students.each do |stu| %>
+            <li><%= link_to stu.full_name, student_path(stu) %></li>
+        <% end %>
         
     <% end %></td>
     <td><%= "#{user.role}"  %></td>
-    
-    <% if user.role != 'admin' %>
-        <td class="lastcols"><%=  button_to "Switch to Admin", user_make_admin_path(user.id) , data: { turbo_stream: true }, class: "btn btn-secondary"  %> </td>
-    <% end %>
-    <% if user.role != 'teacher' %>
-        <td class="lastcols"><%= button_to "Switch to Teacher", user_make_teacher_path(user.id) , data: { turbo_stream: true }, class: "btn btn-secondary" %></td>
-    <% end %>
-    <% if user.role != 'parent' %>
-        <td class="lastcols"><%= button_to "Switch to Parent", user_make_parent_path(user.id) , data: { turbo_stream: true }, class: "btn btn-secondary" %></td>
+    <% if user == @current_user %>
+        <td> You cannot change your own role. <td>
+    <% else %>
+        <% if user.role != 'admin' %>
+            <td class="lastcols"><%=  button_to "Switch to Admin", user_make_admin_path(user.id) , data: { turbo_stream: true }, class: "btn btn-secondary"  %> </td>
+        <% end %>
+        <% if user.role != 'teacher' %>
+            <td class="lastcols"><%= button_to "Switch to Teacher", user_make_teacher_path(user.id) , data: { turbo_stream: true }, class: "btn btn-secondary" %></td>
+        <% end %>
+        <% if user.role != 'parent' %>
+            <td class="lastcols"><%= button_to "Switch to Parent", user_make_parent_path(user.id) , data: { turbo_stream: true }, class: "btn btn-secondary" %></td>
+        <% end %>
     <% end %>
     
 </tr>

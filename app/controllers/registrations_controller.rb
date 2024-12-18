@@ -1,4 +1,5 @@
 class RegistrationsController < ApplicationController
+  include ActionView::RecordIdentifier
   before_action :set_activity
 
   def new
@@ -23,7 +24,10 @@ class RegistrationsController < ApplicationController
 
     if @registration.save
       flash[:notice] = "Successfully registered with status: #{@registration.status}!"
-      redirect_to activity_path(@activity)
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to activity_path(@activity) }
+      end
     else
       flash[:alert] = "There was an error with your registration."
       render :new
@@ -41,21 +45,52 @@ class RegistrationsController < ApplicationController
     end
   end
 
-def approve
+  def decline
     @registration = Registration.find(params[:id])
-    if @activity.enrolled_students.length < @activity.spots
-      @registration.status = 'Enrolled'
-      @registration.save
+    @activity = @registration.activity
+  
+    @registration.status = 'Denied'
+    
+    if @registration.save
+      flash[:notice] = "Registration has been declined."
     else
-      flash[:notice] = 'This activity is full'
+      @registration.destroy
+      flash[:notice] = 'Registration destroyed'
     end
+  
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove(@registration) }
       format.html do
-          redirect_to reviews_moderate_path
+        redirect_to student_path(@registration.student_id)
+
       end
     end
-end
+  end  
+
+  def approve
+    @registration = Registration.find(params[:id])
+    @activity = @registration.activity
+  
+    existing_enrollment = @activity.registrations.find_by(student_id: @registration.student.id, status: :Enrolled)
+  
+    if existing_enrollment
+      flash[:notice] = 'Student is already enrolled in this activity.'
+    elsif @activity.enrolled_students.count >= @activity.spots
+      flash[:notice] = 'This activity is full'
+    else
+      @registration.update!(status: :Enrolled)
+      flash[:notice] = 'Registration approved successfully.'
+    end
+
+
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace(dom_id(@activity, :current_enrollment),
+                                                  partial: "activities/current_enrollment", locals: { activity: @activity })
+      end
+      format.html { redirect_to activity_path(@activity) }
+    end
+  end
 
   private
 

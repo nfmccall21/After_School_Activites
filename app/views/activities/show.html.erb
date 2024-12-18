@@ -3,21 +3,14 @@
 
   <div class="activity-details">
     <p><strong>Description:</strong> <%= @activity.description %></p>
-    <p><strong>Spots Available:</strong> <%= @activity.spots %></p>
     <p><strong>Chaperone:</strong> <%= @activity.chaperone %></p>
     <p><strong>Day:</strong> <%= @activity.day %></p>
     <p><strong>Time:</strong> <%= @activity.time_start.strftime("%I:%M %p") %> - <%= @activity.time_end.strftime("%I:%M %p") %></p>
   </div>
+ 
+    <%= render partial: "activities/current_enrollment", locals: { activity: @activity } %>
 
-  <div class="student-list">
-    <% if !@activity.enrolled_students.empty? %>
-      <br>
-      <div class="bold"> <%= "Student(s) Enrolled:" %> </div>
-      <% @activity.enrolled_students.each do |s| %>
-        <div> <%= link_to "#{s.student.firstname} #{s.student.lastname}", student_path(s.student) %>  </div> 
-      <% end %>
-    <% end %>
-  </div>
+
 
   <div class="register-student">
     <h4>Register a Student</h4>
@@ -30,7 +23,7 @@
         </div>
         <div class="form-group">
           <%= hidden_field_tag :activity_id, @activity.id %>
-          <%= submit_tag "Register", class: "btn btn-info" %>
+          <%= submit_tag "Register", class: "btn btn-info"%>
         </div>
       <% end %>
     <% else %>

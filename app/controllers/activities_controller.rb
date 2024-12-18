@@ -1,4 +1,5 @@
 class ActivitiesController < ApplicationController
+
   before_action :authenticate_user!, only: %i[index show register]
   before_action :set_activity, only: [ :register, :accept, :decline ]
 
@@ -13,6 +14,13 @@ class ActivitiesController < ApplicationController
       @activities = @activities.where(day: selected_days)
     end
 
+    # Filter activities based on availability
+    if params[:available].present? && params[:available] == "1"
+      @activities = @activities.where("spots > 0")
+    end
+
+    # Sort activities by availability
+    @activities = @activities.order(spots: :desc)
     # I'm not sure if there is a less repeditive way to do this but I'm following the way we did it in lab
     if params[:Monday].present? && params[:Monday] == "1"
      @filtermonday = true
@@ -30,6 +38,7 @@ class ActivitiesController < ApplicationController
       @filterfriday = true
     end
   end
+
 
   def show
     @activity = Activity.find(params[:id])
@@ -102,17 +111,26 @@ class ActivitiesController < ApplicationController
     @student = Student.find(params[:student_id])
 
     existing_registration = @activity.registrations.find_by(student: @student)
-    if existing_registration
+    if existing_registration && (existing_registration.status == "Enrolled")
       flash[:alert] = "#{@student.firstname} #{@student.lastname} is already registered for this activity."
       redirect_to activity_path(@activity) and return
     end
 
-    @registration = @activity.registrations.new(student: @student, status: :Waitlist)
 
-    if @registration.save
-      flash[:notice] = "#{@student.firstname} #{@student.lastname} has been successfully registered for #{@activity.title}. Registration status is 'Pending'."
+    @registration = @activity.registrations.new(student: @student, status: :Waitlist)
+    if @activity.enrolled_students.count < @activity.spots
+      @registration.update(status: :Enrolled)
+      if @registration.save
+        flash[:notice] = "#{@student.firstname} #{@student.lastname} has been successfully registered for #{@activity.title}. Registration status is 'Enrolled'."
+      else
+        flash[:alert] = "There was an issue with registering #{@student.firstname} #{@student.lastname} for this activity."
+      end
     else
-      flash[:alert] = "There was an issue with registering #{@student.firstname} #{@student.lastname} for this activity."
+      if @registration.save
+        flash[:notice] = "#{@student.firstname} #{@student.lastname} has been successfully added to the waitlist for #{@activity.title}."
+      else
+        flash[:alert] = "There was an issue with registering #{@student.firstname} #{@student.lastname} for this activity."
+      end
     end
 
     redirect_to activity_path(@activity)

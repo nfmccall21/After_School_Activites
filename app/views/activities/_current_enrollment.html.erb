@@ -1,0 +1,18 @@
+<div id="<%= dom_id(@activity, :current_enrollment) %>">
+    <p><strong>Spots Available:</strong> 
+    <% if !@activity.enrolled_students.empty?  %>
+        <%= "#{@activity.spots - @activity.enrolled_students.size} out of #{@activity.spots} remaining" %></p>
+    <% else %>
+        <%= "#{@activity.spots} out of #{@activity.spots} remaining" %></p>
+    <% end %>
+    <div class="student-list">
+        <% if !@activity.enrolled_students.empty? %>
+        <br>
+        <div class="bold"> <%= "Student(s) Enrolled:" %> </div>
+        <% @activity.enrolled_students.each do |s| %>
+            <div> <%= link_to "#{s.student.firstname} #{s.student.lastname}", student_path(s.student) %>  </div> 
+        <% end %>
+        <% end %>
+    </div>
+</div>
+  
