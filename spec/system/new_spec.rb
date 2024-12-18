@@ -4,9 +4,12 @@ RSpec.describe "new/delete", type: :system do
     include Devise::Test::IntegrationHelpers
     before do
       driven_by(:rack_test)
+      @user = User.create!(email: 'admin@colgate.edu', password: 'testing', role: :admin)
+      sign_in @user
     end
 
     describe "create new activity" do
+        
         it "should show the new form from index page button" do
             visit activities_path
             expect(page.current_path).to eq(activities_path)
