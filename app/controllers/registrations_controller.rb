@@ -1,4 +1,5 @@
 class RegistrationsController < ApplicationController
+  include ActionView::RecordIdentifier
   before_action :set_activity
 
   def new
@@ -23,7 +24,10 @@ class RegistrationsController < ApplicationController
 
     if @registration.save
       flash[:notice] = "Successfully registered with status: #{@registration.status}!"
-      redirect_to activity_path(@activity)
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to activity_path(@activity) }
+      end
     else
       flash[:alert] = "There was an error with your registration."
       render :new
@@ -51,7 +55,7 @@ class RegistrationsController < ApplicationController
       flash[:notice] = "Registration has been declined."
     else
       @registration.destroy
-      flash[:notice] = 'This activity is full'
+      flash[:notice] = 'Registration destroyed'
     end
   
     respond_to do |format|
@@ -76,11 +80,13 @@ class RegistrationsController < ApplicationController
     else
       @registration.update!(status: :Enrolled)
       flash[:notice] = 'Registration approved successfully.'
-    end 
-  
+    end
+
+
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.remove(@registration) }
-      format.html { redirect_to activity_path(@activity) }
+      turbo_stream.replace(dom_id(@activity, :current_enrollment)) do
+        render partial: "activities/current_enrollment", locals: { activity: @activity }
+      end
     end
   end
 
