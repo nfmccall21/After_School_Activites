@@ -46,6 +46,7 @@ group :development, :test do
     gem "rspec-rails"
     gem "simplecov"
     gem "capybara"
+    gem "database_cleaner-active_record"
 end
 
 group :development do
