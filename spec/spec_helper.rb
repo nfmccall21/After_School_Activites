@@ -1,7 +1,7 @@
 require 'simplecov'
 SimpleCov.start 'rails' do
   add_filter 'app/models/user.rb'
-  add_filter 'app/controllers/users'
+  add_filter 'app/controllers/users/omniauth_callbacks_controller.rb'
   add_filter 'app/mailers/application_mailer.rb'
   add_filter 'app/jobs/application_job.rb'
   add_filter 'app/channels'
