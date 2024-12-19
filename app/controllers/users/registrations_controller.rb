@@ -11,6 +11,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     build_resource(sign_up_params)
+    Rails.logger.debug "Sign up params: #{sign_up_params.inspect}"
+    Rails.logger.debug "Resource valid? #{resource.valid?}"
+    Rails.logger.debug "Resource errors: #{resource.errors.full_messages.join(', ')}" unless resource.valid?
+    if resource.save
+      Rails.logger.debug "User saved successfully: #{resource.inspect}"
+    else
+      Rails.logger.debug "User save failed: #{resource.errors.full_messages.join(', ')}"
+    end
     yield resource if block_given?
     if resource.persisted?
       if resource.active_for_authentication?
@@ -25,6 +33,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     else
       clean_up_passwords resource
       set_minimum_password_length
+      Rails.logger.debug "Rendering new template due to validation errors"
       respond_with resource
     end
   end
@@ -45,25 +54,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   # GET /resource/cancel
-  # Forces the session data which is usually expired after sign
-  # in to be expired now. This is useful if the user wants to
-  # cancel oauth signing in/up in the middle of the process,
-  # removing all OAuth session data.
-  def cancel
-    super
-  end
+  #def cancel
+  #  super
+  #end
 
   protected
-
-  # If you have extra params to permit, append them to the sanitizer.
-  def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [ :email, :password, :password_confirmation ])
-  end
-
-  # If you have extra params to permit, append them to the sanitizer.
-  def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [ :email, :password, :password_confirmation ])
-  end
 
   # The path used after sign up.
   def after_sign_up_path_for(resource)
@@ -72,6 +67,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # The path used after sign up for inactive accounts.
   def after_inactive_sign_up_path_for(resource)
-    super(resource)
+    new_user_session_path
   end
 end
