@@ -1,5 +1,7 @@
 class StudentsController < ApplicationController
   before_action :authenticate_user!, only: %i[show index]
+
+
     def index
       @students = Student.all.order(:lastname)
       if current_user.role != "admin"
@@ -17,6 +19,10 @@ class StudentsController < ApplicationController
 
     def show
       @student = Student.find(params[:id])
+      if (current_user.role == "parent" && !current_user.students.include?(@student))
+        flash[:alert] = "You do not have permission to view this student"
+        redirect_to activities_path
+      end
       @registrations = Registration.where(student_id: @student.id)
     end
 
