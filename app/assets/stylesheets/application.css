@@ -14,7 +14,7 @@
  *= require_self
  */
 
- body{
+body{
     background-color: rgba(129, 150, 205, 0.364);
     font-family: 'Inter', 'Gill Sans';
     /* font-family: 'Palatino','Gill Sans', helvetica, arial, sans-serif; */
@@ -56,27 +56,38 @@
     width: 100%;
 }
 
+#usertableid tr:nth-child(even) td {
+    background-color: rgba(205, 205, 205, 0.47);
+}
 
 
 table#usertableid {
     width: 100%;
-    
     vertical-align: middle;
-    /* last two columns only 10% */
    
-
 }
+#usertableid th:nth-child(1), #usertableid td:nth-child(1){
+    width: 20%;
+}
+#usertableid th:nth-child(2), #usertableid td:nth-child(2){
+    width: 30%;
+}
+#usertableid th:nth-child(3), #usertableid td:nth-child(3){
+    width: 10%;
+}
+#usertableid th:nth-child(4), #usertableid td:nth-child(4){
+    width: 40%;
+}
+#usertableid .btn{
+    margin: 1px; 
+}
+
+  
 
 table#usertableid th{
     background-color: rgb(226, 226, 226);
-    
-
 }
 
-table#usertableid .lastcols{
-    width: 15%;
-
-}
 table#usertableid .btn{
     width: 90%;
     background-color: rgb(227, 109, 109);
@@ -167,6 +178,8 @@ input[type="submit"]:hover {
     background-color: rgba(68, 89, 252, 0.462);
     align-self: flex-end;
     width: 100%;
+    border: none;
+    transition: all 0.1s;
 }
 
 .activity .btn:hover {
@@ -174,11 +187,15 @@ input[type="submit"]:hover {
     color: white;
     align-self: flex-end;
     width: 100%;
-    
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
+
 .btn-info{
+    border: none;
     background-color: rgba(55, 72, 200, 0.728);
+    margin: 1px; 
 }
 
 .bold {

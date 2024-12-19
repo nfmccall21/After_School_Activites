@@ -11,17 +11,21 @@
     <% end %></td>
     <td><%= "#{user.role}"  %></td>
     <% if user == @current_user %>
-        <td> You cannot change your own role. <td>
+        <td> You cannot change your own role. </td>
+    
     <% else %>
+        <td>
         <% if user.role != 'admin' %>
-            <td class="lastcols"><%=  button_to "Switch to Admin", user_make_admin_path(user.id) , data: { turbo_stream: true }, class: "btn btn-secondary"  %> </td>
+            <%=  button_to "Switch to Admin", user_make_admin_path(user.id) , data: { turbo_stream: true }, class: "btn btn-secondary"  %> 
         <% end %>
         <% if user.role != 'teacher' %>
-            <td class="lastcols"><%= button_to "Switch to Teacher", user_make_teacher_path(user.id) , data: { turbo_stream: true }, class: "btn btn-secondary" %></td>
+            <%= button_to "Switch to Teacher", user_make_teacher_path(user.id) , data: { turbo_stream: true }, class: "btn btn-secondary" %>
         <% end %>
         <% if user.role != 'parent' %>
-            <td class="lastcols"><%= button_to "Switch to Parent", user_make_parent_path(user.id) , data: { turbo_stream: true }, class: "btn btn-secondary" %></td>
+            <%= button_to "Switch to Parent", user_make_parent_path(user.id) , data: { turbo_stream: true }, class: "btn btn-secondary" %>
         <% end %>
+        </td>
     <% end %>
+    
     
 </tr>
