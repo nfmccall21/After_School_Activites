@@ -76,6 +76,7 @@ RSpec.describe "new/delete", type: :system do
             @user.students << @student
             visit students_path
             expect(page).to have_content('test')
+            expect(@student.full_name).to eq('test test')
         end
         it "should show correct error message if save fails" do
             s = Student.new
@@ -126,6 +127,77 @@ RSpec.describe "new/delete", type: :system do
             expect(activity.waitlist_students[0].student_id).to eq(@student.id)
             expect(page).to have_content('testfn2 testln2')
         end
-        
+        it "should correctly identify denied students" do
+            @student = Student.create!(firstname: "testfn3", lastname: "testln3", grade: 4, homeroom: "test")
+            @activity = Activity.create!(title: 'testact', description: 'test description', spots: 1, chaperone: 'm', day: :Monday, time_start: DateTime.parse('3 pm').to_time, time_end: DateTime.parse('4 pm').to_time)
+            @registration = Registration.create!(student: @student, activity: @activity, status: :Denied, requested_registration_at: Time.now, registration_update_at: Time.now)
+            @registration.update!(status: :Denied)
+            expect(@activity.denied_students).to include(@registration) # note it adds the REGISTRATION and NOT the STUDENT
+        end
+    end
+
+    describe "registering from act show page" do
+      it "should allow an admin to register any child for an activity (if not already registered)" do
+        @student = Student.create!(firstname: "testfn4", lastname: "testln4", grade: 4, homeroom: "test")
+        @activity = Activity.create!(title: 'testact', description: 'test description', spots: 1, chaperone: 'm', day: :Monday, time_start: DateTime.parse('3 pm').to_time, time_end: DateTime.parse('4 pm').to_time)
+        @activity.update!(approval_status: :Approved)
+        visit activities_path
+        click_on 'testact'
+        select 'testfn4 testln4', from: 'student_id'
+        click_on 'Register'
+        expect(page).to have_content('has been successfully registered')
+      end
+      it "should not allow user register a student who is already registered" do
+        @student = Student.create!(firstname: "testfn5", lastname: "testln5", grade: 4, homeroom: "test")
+        @activity = Activity.create!(title: 'testact2', description: 'test description', spots: 1, chaperone: 'm', day: :Monday, time_start: DateTime.parse('3 pm').to_time, time_end: DateTime.parse('4 pm').to_time)
+        @activity.update!(approval_status: :Approved)
+        @registration = Registration.create!(student: @student, activity: @activity, status: :Enrolled, requested_registration_at: Time.now, registration_update_at: Time.now)
+        visit activities_path
+        click_on 'testact'
+        select 'testfn5 testln5', from: 'student_id'
+        click_on 'Register'
+        expect(page).to have_content('is already registered')
+      end
+      it "should add student to waitlist if activity is full" do
+        @student = Student.create!(firstname: "testfn6", lastname: "testln6", grade: 4, homeroom: "test")
+        @activity = Activity.create!(title: 'testact3', description: 'test description', spots: 1, chaperone: 'm', day: :Monday, time_start: DateTime.parse('3 pm').to_time, time_end: DateTime.parse('4 pm').to_time)
+        @activity.update!(approval_status: :Approved)
+        @student2 = Student.create!(firstname: "testfn7", lastname: "testln7", grade: 4, homeroom: "test")
+        @registration = Registration.create!(student: @student, activity: @activity, status: :Enrolled, requested_registration_at: Time.now, registration_update_at: Time.now)
+        visit activities_path
+        click_on 'testact'
+        select 'testfn7 testln7', from: 'student_id'
+        click_on 'Register'
+        expect(page).to have_content('has been successfully added to the waitlist')
+      end
+      it "cannot register a student (sad path -- spots available)" do
+        @student = Student.create!(firstname: "testfn8", lastname: "testln8", grade: 4, homeroom: "test")
+        @activity = Activity.create!(title: 'testact4', description: 'test description', spots: 1, chaperone: 'm', day: :Monday, time_start: DateTime.parse('3 pm').to_time, time_end: DateTime.parse('4 pm').to_time)
+        @activity.update!(approval_status: :Approved)
+        @reg = Registration.new
+        allow(Registration).to receive(:new).and_return(@reg)
+        allow(@reg).to receive(:save).and_return(false)
+        visit activities_path
+        click_on 'testact'
+        select 'testfn8 testln8', from: 'student_id'
+        click_on 'Register'
+        expect(page).to have_content('There was an issue with registering')
+      end
+      it "cannot register a student (sad path -- no spots available)" do
+        @student = Student.create!(firstname: "testfn8", lastname: "testln8", grade: 4, homeroom: "test")
+        @activity = Activity.create!(title: 'testact4', description: 'test description', spots: 1, chaperone: 'm', day: :Monday, time_start: DateTime.parse('3 pm').to_time, time_end: DateTime.parse('4 pm').to_time)
+        @activity.update!(approval_status: :Approved)
+        @student2 = Student.create!(firstname: "testfn7", lastname: "testln7", grade: 4, homeroom: "test")
+        @registration = Registration.create!(student: @student2, activity: @activity, status: :Enrolled, requested_registration_at: Time.now, registration_update_at: Time.now)
+        @reg = Registration.new
+        allow(Registration).to receive(:new).and_return(@reg)
+        allow(@reg).to receive(:save).and_return(false)
+        visit activities_path
+        click_on 'testact'
+        select 'testfn8 testln8', from: 'student_id'
+        click_on 'Register'
+        expect(page).to have_content('There was an issue with registering')
+      end
+
     end
 end
