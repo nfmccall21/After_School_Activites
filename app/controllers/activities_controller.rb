@@ -1,5 +1,4 @@
 class ActivitiesController < ApplicationController
-
   before_action :authenticate_user!, only: %i[index show register]
   before_action :set_activity, only: [ :register, :accept, :decline ]
 
@@ -22,11 +21,11 @@ class ActivitiesController < ApplicationController
     # Filter activities based on availability
     if params[:avail].present? && params[:avail] == "1"
       @activities = @activities.left_joins(:students)
-      .group('activities.id')
-      .having('activities.spots > COUNT(students.id)')
+      .group("activities.id")
+      .having("activities.spots > COUNT(students.id)")
       @filteravail = true
     end
-    
+
     # Sort activities by availability
     @activities = @activities.order(spots: :desc)
     # I'm not sure if there is a less repeditive way to do this but I'm following the way we did it in lab
@@ -49,8 +48,9 @@ class ActivitiesController < ApplicationController
 
 
   def show
+    @students = Student.all.order(:firstname)
+    @students = current_user.students if current_user.parent?
     @activity = Activity.find(params[:id])
-    @students = Student.all
     @registrations = @activity.registrations.includes(:student)
   end
 
