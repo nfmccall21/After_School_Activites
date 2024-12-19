@@ -41,7 +41,7 @@ RSpec.describe RegistrationsController, type: :controller do
       it 'does not approve the registration and shows a notice' do
         post :approve, params: { id: registration.id }
         registration.reload
-    
+
         expect(flash[:notice]).to eq('Student is already enrolled in this activity.')
         expect(registration.status).to eq('Enrolled')
       end
@@ -54,11 +54,11 @@ RSpec.describe RegistrationsController, type: :controller do
           Registration.create!(student_id: new_student.id, activity_id: activity.id, status: :Enrolled)
         end
       end
-    
+
       it 'does not approve the registration and shows a notice' do
         post :approve, params: { id: registration.id }
         registration.reload
-    
+
         expect(flash[:notice]).to eq('This activity is full')
         expect(registration.status).not_to eq('Enrolled')
       end
