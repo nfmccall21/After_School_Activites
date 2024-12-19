@@ -345,6 +345,28 @@ input[type="submit"]:hover {
     align-items: center;
 }
 
+.login-container3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+  
+.login-form3 {
+    width: 300px; /* Adjust the width as needed */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.head-container3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @media only screen and (max-width: 768px) {
     body, .card_title{
         font-size: 70%;
