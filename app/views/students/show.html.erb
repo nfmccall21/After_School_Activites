@@ -8,32 +8,39 @@
   </div>
 
   <div class="student-activties-list">
-    <%if @student.enrolled_activities != nil && @student.enrolled_activities.count != 0%>
-      <div class="act-status-list"> <%= "Enrolled Activties:" %> 
-      <% @student.enrolled_activities.each do |a| %>
-        <div class="listed-act"> <%= link_to a.activity.title, activity_path(a.activity) %>  </div> 
-      <% end %>
-      </div>
-    <% end %>
-    <%if @student.waitlisted_activities != nil && @student.waitlisted_activities.count != 0%>
-      <div class="act-status-list"> <%= "Waitlisted Activties:" %> 
-      <% @student.waitlisted_activities.each do |a| %>
-        <div class="listed-act" id="<%= dom_id(a) %>">
-          <%= link_to a.activity.title, activity_path(a.activity) %> 
-          <div>
-            <% if !current_user.nil? && (current_user.admin? || current_user.teacher?)%>
-              <%= button_to "Deny", registration_path(a.id), method: :delete, class: "btn btn-danger" %> 
-              <%= button_to "Approve", registration_approve_path(a.id), method: :put, class: "btn btn-info"%> 
-            <%end%>
-            <% if !current_user.nil? && current_user.parent? %>
-              <%= button_to "Cancel", registration_path(a.id), method: :delete,class: "btn btn-danger" %> 
-            <% end %>
-          </div> 
-        </div>
-      <% end %>
-      </div>
-    <% end %>
+  <%if @student.enrolled_activities != nil && @student.enrolled_activities.count != 0%>
+  <div class="act-status-list"> <%= "Enrolled Activties:" %> 
+  <% @student.enrolled_activities.each do |a| %>
+    <div class="listed-act"> 
+      <div class="actlink"> <%= link_to a.activity.title, activity_path(a.activity) %>  </div>
+      <div><%= button_to "Un-enroll", registration_path(a.id), method: :delete, data: {turbo_stream: true },class: "unenroll_button" %> </div>
+    </div> 
+    
+  <% end %>
   </div>
+<% end %>
+<%if @student.waitlisted_activities != nil && @student.waitlisted_activities.count != 0%>
+  <div class="act-status-list"> <%= "Waitlisted Activties:" %> 
+  <% @student.waitlisted_activities.each do |a| %>
+    <div class="listed-act" id="<%= dom_id(a) %>">
+      <div><%= link_to a.activity.title, activity_path(a.activity) %> </div>
+      
+        <% if !current_user.nil? && (current_user.admin? || current_user.teacher?)%>
+          <div>
+          <%= button_to "Deny", registration_path(a.id), method: :delete, data: {turbo_stream: true }, class: "unenroll_button" %> 
+          </div>
+          <div>
+          <%= button_to "Approve", registration_approve_path(a.id), method: :put, class: "approve_button"%> 
+          </div>
+        <%end%>
+        <% if !current_user.nil? && current_user.parent? %>
+          <%= button_to "Cancel", registration_path(a.id), method: :delete,class: "btn btn-danger" %> 
+        <% end %>
+      
+    </div>
+  <% end %>
+  </div>
+<% end %>
   <br>
 
   <%= button_to "Delete Student", @student, method: :delete, class: "btn btn-danger" %><br><br>
