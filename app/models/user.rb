@@ -20,4 +20,8 @@ class User < ApplicationRecord
     end
     user
   end
+
+  def self.by_search_string(search)
+    User.where("email LIKE ?", "%#{search}%")
+  end
 end

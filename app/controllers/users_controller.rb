@@ -2,8 +2,16 @@ class UsersController < ApplicationController
   before_action :verify_admin, only: %i[moderate make_admin make_teacher make_parent]
 
   def moderate
-    @users = User.all
+    @users = User.all.order(:email)
     @current_user = current_user
+    if params[:query].present? && params[:query].length > 2
+      @users = @users.by_search_string(params[:query])
+    end
+    if params[:query].present?
+      @querystr = "Current search: #{params[:query]}"
+    else
+      @querystr = "Search Users"
+    end
   end
 
   def make_admin

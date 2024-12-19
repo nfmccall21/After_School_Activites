@@ -27,6 +27,7 @@ body{
     font-weight: bold;
 }
 
+/* ******************** FOOTER STUFF ******************** */
 .footer {
     width: 100%;
     background-color: rgba(157,177,230,255);
@@ -46,6 +47,45 @@ body{
     max-height: 100px;
 }
 
+/* ******************** SEARCH STUFF ******************** */
+.searchdiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    width:100%
+}
+.searchbar{
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid rgb(0, 0, 0);
+    box-shadow: 5px 5px 5px rgba(184, 5, 255, 0.2);
+    padding: 5px;
+    margin-bottom: 10px;
+    outline: none;
+    border: none;
+}
+.searchbar-container {
+    flex-grow: 1; 
+}
+.clearsearch{
+    border: none; 
+}
+.clearsearch-container {
+    flex-shrink: 0; 
+}
+.clearsearch:hover{
+    color: rgba(184, 5, 255, 0.734);
+    cursor: pointer;
+}
+.clearsearch:active{
+    color: white;
+}
+.searchbar:focus{
+    outline: none;
+    border: none;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4);
+}
 
 .usercontrol{
     display: flex;
@@ -56,11 +96,11 @@ body{
     width: 100%;
 }
 
+
+/* ************ USER TABLE STUFF ************ */
 #usertableid tr:nth-child(even) td {
     background-color: rgba(205, 205, 205, 0.47);
 }
-
-
 table#usertableid {
     width: 100%;
     vertical-align: middle;
@@ -81,18 +121,13 @@ table#usertableid {
 #usertableid .btn{
     margin: 1px; 
 }
-
-  
-
 table#usertableid th{
     background-color: rgb(226, 226, 226);
 }
-
 table#usertableid .btn{
     width: 90%;
     background-color: rgb(227, 109, 109);
 }
-
 table#usertableid .btn:hover{
     background-color: rgb(83, 37, 37);
 }

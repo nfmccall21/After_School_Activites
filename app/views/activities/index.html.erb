@@ -15,15 +15,15 @@
       <h1>Activities</h1>
   </div>
 
-  
 
-  <div class="row">
-      <%= form_with url: activities_path, method: :get do |form| %>
-    <%= form.label :query, "Search for: " %>
-    <%= form.text_field :query %>
-    <%= form.submit "Filter Activities" %>
-    <% end %>
-  </div>
+
+<div class="searchdiv">
+    <div class="searchbar-container"><%= form_with url: activities_path, method: :get do |form| %>
+        <%= form.text_field :query, placeholder: @querystr, class: "searchbar" %>
+    <% end %></div>
+    <div class="clearsearch-container"><%= link_to "Clear Search", activities_path, class: "btn clearsearch" %></div>
+</div>
+
 
   <div class="next row">
     <%= form_with url: activities_path, method: :get do |form| %>
