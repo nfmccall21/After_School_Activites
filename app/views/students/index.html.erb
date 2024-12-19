@@ -51,29 +51,6 @@
     </div>
     <br><%= link_to "New Student", new_student_path, class: "btn btn-info" %>
     <br>
-    <br>
-    <div class="todo">
-      <%= 'TODO: table view -- do we want to use it somehow?'%> 
-    </div> 
-  <br>
-  <br>
-  <div>
-    <table class="table">
-        <thead>
-            <tr>
-            <th>Student</th>
-            <th>Homeroom</th>
-            <th>Enrolled Activities</th>
-        </tr>
-        </thead>
-        <tbody id="studenttable">
-        <% @students.each do |student| %>
-            <%= render partial: student %>
-        <% end %>
-        </tbody>
-    </table>
-    <div class="todo">
-      <%= 'TODO: table view -- render a registration partial when click on a waitlisted activity? i.e. to see when attempt to register'%> 
-  </div> 
+   
   </div>
 </div>
