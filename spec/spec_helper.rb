@@ -1,6 +1,7 @@
 require 'simplecov'
 SimpleCov.start 'rails' do
   add_filter 'app/models/user.rb'
+
   add_filter 'app/controllers/users/confirmations_controller.rb'
   add_filter 'app/controllers/users/omniauth_callbacks_controller.rb'
   add_filter 'app/controllers/users/OmniauthCallbacksController.rb'
