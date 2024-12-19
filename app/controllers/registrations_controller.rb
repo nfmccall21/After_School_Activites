@@ -20,10 +20,11 @@ class RegistrationsController < ApplicationController
       @registration.status = :Waitlist
     else
       @registration.status = :Denied
+      # flash[:notice] = "Successfully registered with status: #{@registration.status}!"
     end
 
     if @registration.save
-      flash[:notice] = "Successfully registered with status: #{@registration.status}!"
+      # flash[:notice] = "Successfully registered with status: #{@registration.status}!"
       respond_to do |format|
         format.turbo_stream
         format.html { redirect_to activity_path(@activity) }
