@@ -11,6 +11,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     build_resource(sign_up_params)
+    resource.role = "parent"
     if resource.save
       Rails.logger.debug "User saved successfully: #{resource.inspect}"
     else
