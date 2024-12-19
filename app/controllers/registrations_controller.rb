@@ -94,9 +94,14 @@ class RegistrationsController < ApplicationController
   private
 
   def set_activity
-    @registration = Registration.find(params[:id])
-    @activity = @registration.activity
+    if params[:id]
+      @registration = Registration.find(params[:id])
+      @activity = @registration.activity
+    elsif params[:activity_id]
+      @activity = Activity.find(params[:activity_id])
+    end
   end
+  
 
   def registration_params
     params.require(:registration).permit(:student_id)
