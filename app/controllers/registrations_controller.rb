@@ -3,11 +3,11 @@ class RegistrationsController < ApplicationController
   before_action :set_activity
 
   def new
-    if current_user && current_user.role == "parent"
+    if current_user
       @registration = Registration.new
       @students = current_user.students
     else
-      redirect_to root_path, alert: "You are not authorized to register students."
+      redirect_to root_path, alert: "You must be signed in to register."
     end
   end
 
@@ -81,7 +81,6 @@ class RegistrationsController < ApplicationController
       @registration.update!(status: :Enrolled)
       flash[:notice] = 'Registration approved successfully.'
     end
-
 
     respond_to do |format|
       format.turbo_stream do
