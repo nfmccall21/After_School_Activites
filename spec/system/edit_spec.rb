@@ -18,7 +18,6 @@ RSpec.describe "edit", type: :system do
                           time_start: DateTime.parse('3 pm').to_time,
                           time_end: DateTime.parse('4 pm').to_time)
             a.update!(approval_status: :Approved)
-            
         end
 
         it "should edit an activity" do
@@ -84,6 +83,28 @@ RSpec.describe "edit", type: :system do
         click_on "Switch to Admin"
         expect(page).to have_content("Role successfully updated")
         expect(@teacher.reload.role).to eq("admin")
+        expect(page).to have_content("Switch to teacher")
       end
+      it "should require user to be logged in (as admin) to have access to moderate page" do
+        sign_out @admin
+        visit moderate_users_path
+        expect(page).to have_content("You need to sign in or sign up before continuing.")
+        fill_in "Email", with: "admin@colgate.edu"
+        fill_in "Password", with: "testing"
+        click_on "Log in"
+        expect(page).to have_content("Moderate Users")
+      end
+      it "should redirect if non-admin tries to access moderate page" do
+        sign_out @admin
+        visit moderate_users_path
+        expect(page).to have_content("You need to sign in or sign up before continuing.")
+        @teacher = User.create!(email: "teacher@colgate.edu", password: "testing", role: "teacher")
+        fill_in "Email", with: "teacher@colgate.edu"
+        fill_in "Password", with: "testing"
+        click_on "Log in"
+        expect(page).to have_content("Only administrators allowed")
+        expect(page.current_path).to eq(activities_path)
+      end
+
     end
 end
