@@ -4,7 +4,7 @@ class StudentsController < ApplicationController
 
     def index
       @students = Student.all.order(:lastname)
-      if current_user.role != "admin"
+      if current_user.role == "parent"
         @students = current_user.students
       end
       if params[:query].present? && params[:query].length > 2
