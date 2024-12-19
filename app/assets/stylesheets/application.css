@@ -27,6 +27,7 @@ body{
     font-weight: bold;
 }
 
+/* ******************** FOOTER STUFF ******************** */
 .footer {
     width: 100%;
     background-color: rgba(157,177,230,255);
@@ -46,6 +47,91 @@ body{
     max-height: 100px;
 }
 
+/* ******************** SEARCH STUFF ******************** */
+.searchdiv :nth-child(1){
+    width: 100%;
+}
+
+.searchdiv {
+    flex-grow: 1;
+    gap: 10px; 
+    width: 100%; 
+}
+
+.searchbar-container {
+    transform: translateY(-5px);
+    display: flex;
+    align-items: center;
+    flex-grow: 1; 
+}
+
+.searchbar {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.search-icon {
+    transform: translateY(-3px); 
+    margin-left: 5px;
+    cursor: pointer;
+    width: 24px; 
+    height: 24px;
+    flex-shrink: 0; 
+    margin-left: 10px; 
+}
+
+.clearsearch {
+    transform: translateY(3px);
+    flex-shrink: 0; 
+    margin-left: 10px; 
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+}
+
+.searchdiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    width:100%
+}
+.searchbar{
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid rgb(0, 0, 0);
+    box-shadow: 5px 5px 5px rgba(184, 5, 255, 0.2);
+    padding: 5px;
+    margin-bottom: 10px;
+    outline: none;
+    border: none;
+}
+
+.clearsearch{
+    transform: translateY(-10px);
+    align-self: center;
+    border: none; 
+}
+.clearsearch-container {
+    flex-shrink: 0; 
+}
+.clearsearch:hover{
+    color: rgba(184, 5, 255, 0.734);
+    cursor: pointer;
+}
+.clearsearch:active{
+    color: white;
+}
+.searchbar:focus{
+    outline: none;
+    border: none;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4);
+}
 
 .usercontrol{
     display: flex;
@@ -56,11 +142,11 @@ body{
     width: 100%;
 }
 
+
+/* ************ USER TABLE STUFF ************ */
 #usertableid tr:nth-child(even) td {
     background-color: rgba(205, 205, 205, 0.47);
 }
-
-
 table#usertableid {
     width: 100%;
     vertical-align: middle;
@@ -81,18 +167,13 @@ table#usertableid {
 #usertableid .btn{
     margin: 1px; 
 }
-
-  
-
 table#usertableid th{
     background-color: rgb(226, 226, 226);
 }
-
 table#usertableid .btn{
     width: 90%;
     background-color: rgb(227, 109, 109);
 }
-
 table#usertableid .btn:hover{
     background-color: rgb(83, 37, 37);
 }

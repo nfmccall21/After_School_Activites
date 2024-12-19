@@ -96,7 +96,7 @@ RSpec.describe "Index route", type: :system do
     it "should show only activities that match the search string" do
       visit activities_path
       fill_in 'query', with: 'test1'
-      click_on 'Filter Activities'
+      find('input[alt="Search"]').click
       expect(page).to have_content('test1')
       expect(page).not_to have_content('test2')
       expect(page).not_to have_content('test3')
@@ -123,7 +123,7 @@ RSpec.describe "Index route", type: :system do
     it "should show ALL students that match the search string (fn only)" do
       visit students_path
       fill_in 'query', with: 'fn12'
-      click_on 'Filter Students'
+      find('input[alt="Search"]').click
       expect(page).to have_content('fn12')
       expect(page).to have_content('ln1')
       expect(page).to have_content('fn12')
@@ -134,7 +134,7 @@ RSpec.describe "Index route", type: :system do
     it "should show students that match the FULL string (fn and ln)" do
       visit students_path
       fill_in 'query', with: 'fn12 ln1'
-      click_on 'Filter Students'
+      find('input[alt="Search"]').click
       expect(page).to have_content('fn12')
       expect(page).to have_content('ln1')
       expect(page).not_to have_content('ln2')
