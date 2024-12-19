@@ -1,18 +1,21 @@
 <div class="container">
+    
+    <%= link_to "Back to Activities", activities_path, class: "btn btn-secondary" %>
+    <br><br>
+
     <div class="row">
         <h1>Students</h1>
     </div>
 
-    <div class="row">
-        <%= form_with url: students_path, method: :get do |form| %>
-        <%= form.label :query, "Search for: " %>
-        <%= form.text_field :query %>
-        <%= form.submit "Filter Students" %>
-        <% end %>
+    <div class="searchdiv">
+        <div class="searchbar-container"><%= form_with url: students_path, method: :get do |form| %>
+            <%= form.text_field :query, placeholder: @querystr, class: "searchbar" %>
+        <% end %></div>
+        <div class="clearsearch-container"><%= link_to "Clear Search", students_path, class: "btn clearsearch" %></div>
     </div>
 
-    <%= link_to "Back to Activities", activities_path, class: "btn btn-secondary" %>
-    <br><br>
+    <br>
+    
 
     <!--FROM index.html.erb FROM LAB 6-->
     <div class="studentview">

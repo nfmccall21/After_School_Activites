@@ -1,4 +1,12 @@
 <%= link_to "Back to Activities", activities_path, class: "btn btn-secondary backtoactivities" %> <br><br>
+
+<div class="searchdiv">
+    <div class="searchbar-container"><%= form_with url: moderate_users_path, method: :get do |form| %>
+        <%= form.text_field :query, placeholder: @querystr, class: "searchbar" %>
+    <% end %></div>
+    <div class="clearsearch-container"><%= link_to "Clear Search", moderate_users_path, class: "btn clearsearch" %></div>
+</div>
+
 <table id="usertableid" class="table">
     <thead>
         <th>Email</th>

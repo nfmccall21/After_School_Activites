@@ -9,6 +9,11 @@ class ActivitiesController < ApplicationController
     if params[:query].present? && params[:query].length > 2
       @activities = @activities.by_search_string(params[:query])
     end
+    if params[:query].present?
+      @querystr = "Current search: #{params[:query]}"
+    else
+      @querystr = "Search Activities"
+    end
     selected_days = Activity.days.keys.select { |day| params[day] == "1" }
     if selected_days.any?
       @activities = @activities.where(day: selected_days)
@@ -21,7 +26,7 @@ class ActivitiesController < ApplicationController
       .having('activities.spots > COUNT(students.id)')
       @filteravail = true
     end
-
+    
     # Sort activities by availability
     @activities = @activities.order(spots: :desc)
     # I'm not sure if there is a less repeditive way to do this but I'm following the way we did it in lab

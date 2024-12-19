@@ -8,6 +8,11 @@ class StudentsController < ApplicationController
       if params[:query].present? && params[:query].length > 2
         @students = @students.by_search_string(params[:query])
       end
+      if params[:query].present?
+        @querystr = "Current search: #{params[:query]}"
+      else
+        @querystr = "Search Students"
+      end
     end
 
     def show
