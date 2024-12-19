@@ -1,10 +1,12 @@
 <%= link_to "Back to Activities", activities_path, class: "btn btn-secondary backtoactivities" %> <br><br>
-
 <div class="searchdiv">
-    <div class="searchbar-container"><%= form_with url: moderate_users_path, method: :get do |form| %>
-        <%= form.text_field :query, placeholder: @querystr, class: "searchbar" %>
-    <% end %></div>
-    <div class="clearsearch-container"><%= link_to "Clear Search", moderate_users_path, class: "btn clearsearch" %></div>
+    <%= form_with url: moderate_users_path, method: :get, class: 'searchbar-form' do |form| %>
+        <div class="searchbar-container">
+            <%= form.text_field :query, placeholder: @querystr, class: "searchbar" %>
+            <%= image_submit_tag 'search.png', alt: 'Search', class: 'search-icon' %>
+        </div>
+    <% end %>
+    <%= link_to "Clear Search", moderate_users_path, class: "btn clearsearch" %>
 </div>
 
 <table id="usertableid" class="table">

@@ -7,12 +7,17 @@
         <h1>Students</h1>
     </div>
 
-    <div class="searchdiv">
-        <div class="searchbar-container"><%= form_with url: students_path, method: :get do |form| %>
+  <div class="searchdiv">
+    <%= form_with url: students_path, method: :get, class: 'searchbar-form' do |form| %>
+        <div class="searchbar-container">
             <%= form.text_field :query, placeholder: @querystr, class: "searchbar" %>
-        <% end %></div>
-        <div class="clearsearch-container"><%= link_to "Clear Search", students_path, class: "btn clearsearch" %></div>
-    </div>
+            <%= image_submit_tag 'search.png', alt: 'Search', class: 'search-icon' %>
+        </div>
+    <% end %>
+    <%= link_to "Clear Search", students_path, class: "btn clearsearch" %>
+  </div>
+
+
 
     <br>
     
