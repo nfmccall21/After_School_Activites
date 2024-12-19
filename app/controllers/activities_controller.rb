@@ -72,6 +72,9 @@ class ActivitiesController < ApplicationController
 
   def destroy # this should probably have permissions attached to it in some way eventually
     @activity = Activity.find(params[:id])
+    @activity.registrations.each do |reg|
+      reg.destroy
+    end
     @activity.destroy
     flash[:notice] = "activity removed"
     redirect_to activities_path
