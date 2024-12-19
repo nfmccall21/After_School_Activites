@@ -11,9 +11,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     build_resource(sign_up_params)
-    Rails.logger.debug "Sign up params: #{sign_up_params.inspect}"
-    Rails.logger.debug "Resource valid? #{resource.valid?}"
-    Rails.logger.debug "Resource errors: #{resource.errors.full_messages.join(', ')}" unless resource.valid?
     if resource.save
       Rails.logger.debug "User saved successfully: #{resource.inspect}"
     else

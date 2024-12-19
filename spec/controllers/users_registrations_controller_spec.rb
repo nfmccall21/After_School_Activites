@@ -118,7 +118,6 @@ RSpec.describe Users::RegistrationsController, type: :controller do
       it "updates the user" do
         put :update, params: { user: new_attributes }
         user.reload
-        puts response.body
         expect(user.email).to eq('test@example.com')
       end
     end
@@ -134,7 +133,6 @@ RSpec.describe Users::RegistrationsController, type: :controller do
       it "does not update the user" do
         put :update, params: { user: invalid_attributes }
         user.reload
-        puts response.body # Debugging: Print the response body
         expect(user.email).to eq('test@example.com')
       end
     end
