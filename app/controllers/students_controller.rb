@@ -38,6 +38,9 @@ class StudentsController < ApplicationController
 
     def destroy # this should probably have permissions attached to it in some way eventually
       @student = Student.find(params[:id])
+      @student.registrations.each do |reg|
+        reg.destroy
+      end
       @student.destroy
       flash[:notice] = "Student removed"
       redirect_to students_path
