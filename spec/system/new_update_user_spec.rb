@@ -76,6 +76,46 @@ RSpec.describe "User System Tests", type: :system do
         visit students_path
         expect(page).to have_content('firstname')
       end
+      it "should not let a parent see another student's details" do
+        sign_in @parent
+        @parent.students << @student
+        s2 = Student.create(firstname: "test2", lastname: "test2", grade: 20, homeroom: "test2")
+        @activity = Activity.create!(title: 'testAct',
+                          description: 'test description',
+                          spots: 10,
+                          chaperone: 'm',
+                          day: :Monday,
+                          time_start: DateTime.parse('3 pm').to_time,
+                          time_end: DateTime.parse('4 pm').to_time)
+        @activity.update!(approval_status: :Approved)
+        @activity.students<<s2
+        visit activities_path
+        click_on "testAct"
+        click_on "test2 test2"
+        expect(page).to have_content("You do not have permission to view this student")
+      end
+
+
+
+      it 'removes student from acitivity when unenrolled' do
+        sign_in @admin
+        s2 = Student.create(firstname: "test2", lastname: "test2", grade: 20, homeroom: "test2")
+        @activity = Activity.create!(title: 'testAct',
+                          description: 'test description',
+                          spots: 10,
+                          chaperone: 'm',
+                          day: :Monday,
+                          time_start: DateTime.parse('3 pm').to_time,
+                          time_end: DateTime.parse('4 pm').to_time)
+        @activity.update!(approval_status: :Approved)
+        @activity.students<<s2
+        visit students_path
+        click_on "test2 test2"
+        click_on "Un-enroll"
+        visit students_path
+        click_on "test2 test2"
+        expect(page).not_to have_content("testAct")
+      end
     end
 
     describe "Visibility of Approving" do
