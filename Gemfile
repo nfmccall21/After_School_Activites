@@ -66,3 +66,5 @@ gem "ffaker"
 gem "dockerfile-rails", ">= 1.6", :group => :development
 
 gem "aws-sdk-s3", "~> 1.171", :require => false
+
+gem "rails-controller-testing"

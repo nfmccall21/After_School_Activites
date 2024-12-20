@@ -20,10 +20,11 @@ class RegistrationsController < ApplicationController
       @registration.status = :Waitlist
     else
       @registration.status = :Denied
+      # flash[:notice] = "Successfully registered with status: #{@registration.status}!"
     end
 
     if @registration.save
-      flash[:notice] = "Successfully registered with status: #{@registration.status}!"
+      # flash[:notice] = "Successfully registered with status: #{@registration.status}!"
       respond_to do |format|
         format.turbo_stream
         format.html { redirect_to activity_path(@activity) }
@@ -94,9 +95,14 @@ class RegistrationsController < ApplicationController
   private
 
   def set_activity
-    @registration = Registration.find(params[:id])
-    @activity = @registration.activity
+    if params[:id]
+      @registration = Registration.find(params[:id])
+      @activity = @registration.activity
+    elsif params[:activity_id]
+      @activity = Activity.find(params[:activity_id])
+    end
   end
+  
 
   def registration_params
     params.require(:registration).permit(:student_id)
