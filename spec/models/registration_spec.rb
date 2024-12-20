@@ -64,6 +64,8 @@ RSpec.describe Registration, type: :model do
         
         expect(denied_registration.status).to eq("Waitlist")
       end
+
+      
     end
   end
 end
