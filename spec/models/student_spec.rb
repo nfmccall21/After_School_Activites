@@ -16,5 +16,6 @@ RSpec.describe Student, type: :model do
       expect(a.save).to be true
       expect(Student.all.count).to eq(1)
     end
+
   end
 end
