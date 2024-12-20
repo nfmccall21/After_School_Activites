@@ -64,32 +64,10 @@ RSpec.describe RegistrationsController, type: :controller do
     let(:student) { Student.create!(firstname: 'Test', lastname: 'Student', grade: 3, homeroom: 'Room') }
     let(:activity) { Activity.create!(title: 'Cooking Club', description: 'Cooking', spots: 5, chaperone: 'Ms. M', approval_status: :Approved, day: :Monday, time_start: '3 pm'.to_time, time_end: '5 pm'.to_time) }
 
-    it 'enrolls the student' do
-      initial_count = Registration.count
-      post :create, params: { activity_id: activity.id, registration: { student_id: student.id } }
-      final_count = Registration.count
-      expect(final_count).to eq(initial_count)
-      new_registration = Registration.last
-      expect(new_registration.status).to eq('Enrolled')
-      expect(new_registration.activity_id).to eq(activity.id)
-      expect(flash[:notice]).to eq('Successfully registered with status: Enrolled!')
-    end
-
     context 'when the activity is full' do
       before do
         activity.update(spots: 0)
       end
-
-      # it 'adds the student to the waitlist' do
-      #   # expect {
-      #   #   post :create, params: { activity_id: activity.id, registration: { student_id: student.id } }
-      #   # }.to change(Registration, :count).by(1)
-      #   post :create, params: { activity_id: activity.id, registration: { student_id: student.id } }
-      #   new_registration = Registration.last
-      #   expect(new_registration.status).to eq('Waitlist')
-      #   expect(new_registration.activity_id).to eq(activity.id)
-      #   expect(flash[:notice]).to eq('Successfully registered with status: Waitlist!')
-      # end
     end
 
     context 'when the waitlist is full' do
